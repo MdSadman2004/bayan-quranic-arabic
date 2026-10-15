@@ -4395,8 +4395,8 @@
     "bn": "হালাকা"
    },
    "note": {
-    "en": "Co-op streak study. This build keeps the circle entirely on your device: nominate up to four companions and the app tracks a shared lantern. Real cross-device circles need a sync service that is not part of this offline prototype.",
-    "bn": "সহপাঠী স্ট্রিক। এই সংস্করণে হালাকা সম্পূর্ণ আপনার ডিভাইসেই: চারজন সঙ্গী যোগ করা যায় এবং অ্যাপ একটি সাধারণ লণ্ঠন ট্র্যাক করে। সত্যিকারের ক্রস-ডিভাইস হালাকার জন্য সিঙ্ক সার্ভিস দরকার, যা এই অফলাইন প্রোটোটাইপে নেই।"
+    "en": "Co-op streak study. This build keeps the circle entirely on your device: nominate companions and the app tracks a shared lantern. Real cross-device circles need a sync service that is not part of this offline prototype.",
+    "bn": "সহপাঠী স্ট্রিক। এই সংস্করণে হালাকা সম্পূর্ণ আপনার ডিভাইসেই: সঙ্গী যোগ করুন এবং অ্যাপ একটি সাধারণ লণ্ঠন ট্র্যাক করে। সত্যিকারের ক্রস-ডিভাইস হালাকার জন্য সিঙ্ক সার্ভিস দরকার, যা এই অফলাইন প্রোটোটাইপে নেই।"
    },
    "maxMembers": 5
   },
@@ -4409,6 +4409,19 @@
     "en": "Every root you master lights the verses you can already read in this app's corpus. Coverage is counted from the bundled curriculum, not from the whole Mushaf.",
     "bn": "যে ধাতু আয়ত্ত করছেন, তা এই অ্যাপের সংকলিত আয়াতগুলো আলোকিত করে। হিসাব বান্ডল করা পাঠ্যক্রম থেকে, পুরো মুসহাফ থেকে নয়।"
    }
+  },
+  "placement": {
+   "name": {
+    "en": "Placement test",
+    "bn": "স্তর নির্ণয় পরীক্ষা"
+   },
+   "note": {
+    "en": "Already read Arabic? A short adaptive check finds the tier you can start from and marks the units below it as placed (never as XP). Whole run stays on this device and can be undone.",
+    "bn": "আগেই আরবি পড়তে জানেন? একটি ছোট অভিযোজিত পরীক্ষা আপনার শুরুর স্তর নির্ণয় করে এবং তার নিচের ইউনিটগুলো 'স্থাপিত' হিসেবে চিহ্নিত করে (XP নয়)। পুরোটাই আপনার ডিভাইসেই, আর যেকোনো সময় ফিরিয়ে নেওয়া যায়।"
+   },
+   "perTier": 4,
+   "sampleSize": 16,
+   "passRate": 0.75
   }
  }
 }

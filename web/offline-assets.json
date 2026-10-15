@@ -1,10 +1,10 @@
 {
- "version": "2c8326d67b40",
- "cache": "bayan-app-2c8326d67b40",
+ "version": "e30f9f8f7d0b",
+ "cache": "bayan-app-e30f9f8f7d0b",
  "files": [
   {
    "url": "css/style.css",
-   "integrity": "98709d8aad85d82fc64307dbd7ffb138d22471b61cece4844c11b3ba8fa02231"
+   "integrity": "4ff9927ed969ad2508a20cdae1bf83efe5691f35cd3ae5ca6372f55279375fc1"
   },
   {
    "url": "fonts/f1.woff2",
@@ -100,31 +100,31 @@
   },
   {
    "url": "js/app.js",
-   "integrity": "d7cd52220bc4dd71e1b5752f0d338074a8ca4929044a3a891f56bf1ff8adb449"
+   "integrity": "d330e5df1255f5735aba1800bc99a57ae04919da70bde85ddf9c8dc470a9ce32"
   },
   {
    "url": "js/audio.js",
-   "integrity": "9273686b0196089a9f9949967a9ea3c74ce2587d44fc9961134bb983e6f985e8"
+   "integrity": "284de74242897dff62d56f5ce8a96b336a57cc39d6d46591ac6a3f234b9f7f23"
   },
   {
    "url": "js/data.js",
-   "integrity": "70c125fca552868b1f07c219bca726cb1c6a6e2c1f7b3ca881298d88b64e493b"
+   "integrity": "5ba5693f18751b12e860b07022bdb6e929c20fb4fac06fb415377b1aa9656c76"
   },
   {
    "url": "js/engine.js",
-   "integrity": "6e5d6c5970aa3f36088ac70381f6e1e1471b81595a1e1b2432f1cc05176bac70"
+   "integrity": "3ba548d45f781f3cd778ed3ed6259bfa72fb57d09730bcbf0127b8648c8f8763"
   },
   {
    "url": "js/features-ui.js",
-   "integrity": "f5c2cca2ca2bef3cec58b561f20622af0672b31b9e91e766c4e58031c9915e71"
+   "integrity": "b22324a073c39b614d8972392d637f495e654f137a0879307e0aaf1a9245f509"
   },
   {
    "url": "js/features.js",
-   "integrity": "b29dc43948cf5feaa31929190681dc59c6be8ccd069bf857f7bddbb7522d85e7"
+   "integrity": "1dcb95e6e7e10d9080008b8a1c68a181cbb036116f2af7ecfb228b88131847f6"
   },
   {
    "url": "js/i18n.js",
-   "integrity": "85a6063dc3be317717a5530be521d89c38cd1cc127ae0390aca523a928fff881"
+   "integrity": "a303d9513ca9db93d0b3f76ba3574776b0b3c7752c5cb10645cebd592436d82a"
   },
   {
    "url": "js/loaders.js",
@@ -136,7 +136,7 @@
   },
   {
    "url": "js/storage.js",
-   "integrity": "b70109c1f355d7283f6b266aa1af9fb511ead91dbe42940031baac3ce8870ccb"
+   "integrity": "b48ed7e23c8dd29a43e0b29a8c6294599f1b065658a58336d1d462cab7e7928f"
   },
   {
    "url": "manifest.webmanifest",

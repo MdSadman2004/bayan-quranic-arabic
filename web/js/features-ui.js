@@ -357,11 +357,110 @@
     return html;
   }
 
+
+  /* ------------------------------------------------- placement test (25) */
+  /** Intro / question / result, driven by a session owned by app.js so the
+   * state survives renders. Placement marks lessons, so every action here is
+   * explicit and reversible. */
+  function placementBanner(api, state) {
+    const placed = state && state.placed;
+    const label = placed
+      ? t(api, "placement.existing", { n: (state.placedTier || 0) + 1 })
+      : t(api, "placement.banner");
+    return '<div class="placement-banner" data-nav="placement" role="button" tabindex="0">' +
+      '<div class="pb-text"><b>' + esc(label) + "</b>" +
+      '<span>' + esc(t(api, "placement.bannerCta")) + "</span></div>" +
+      '<span class="pb-arrow" aria-hidden="true">→</span></div>';
+  }
+
+  function placementView(api, session) {
+    if (!session) return placementIntro(api, api.state());
+    if (session.done) return placementResult(api, session);
+    return placementQuestionView(api, session);
+  }
+
+  function placementIntro(api, state) {
+    const placed = state && state.placed;
+    return '<div class="pane">' +
+      '<h1 class="display">' + esc(t(api, "placement.title")) + "</h1>" +
+      '<p class="muted">' + esc(t(api, "placement.note")) + "</p>" +
+      (placed ? '<p class="muted small">' + esc(t(api, "placement.existing", { n: (state.placedTier || 0) + 1 })) + "</p>" : "") +
+      '<div class="card-body"><p class="muted small">' + esc(t(api, "placement.why")) + "</p></div>" +
+      '<button class="btn btn-block btn-accent" data-fui="placement-start">' + esc(t(api, "placement.start")) + "</button>" +
+      (placed ? '<button class="btn btn-block btn-ghost" data-fui="placement-undo">' + esc(t(api, "placement.undo")) + "</button>" : "") +
+      '<button class="btn btn-block btn-ghost" data-fui="nav-home">' + esc(t(api, "placement.keep")) + "</button>" +
+      "</div>";
+  }
+
+  function placementQuestionView(api, session) {
+    const q = session.current;
+    if (!q) return placementResult(api, session);
+    const E = BAYAN.E;
+    const item = E.itemObject(q.itemId) || {};
+    const graded = session.graded;
+    const options = q.options.map((id, index) => {
+      const opt = E.itemObject(id) || {};
+      const ok = graded && index === q.answer;
+      const bad = graded && graded.picked === index && index !== q.answer;
+      return '<button class="opt ' + (ok ? "ok" : bad ? "bad" : "") + '" data-fui="placement-answer" data-index="' + index + '">' +
+        esc((opt.bi && (opt.bi[api.lang()] || opt.bi.en)) || "") + "</button>";
+    }).join("");
+    return '<div class="pane">' +
+      '<div class="hud"><span class="muted small">' + esc(t(api, "placement.progress", { n: session.total + 1 })) + "</span></div>" +
+      '<div class="card card-placement">' +
+      '<div class="q-label">' + esc(t(api, "placement.question")) + "</div>" +
+      '<div class="placement-ar ar" dir="rtl" lang="ar">' + esc(item.ar || "") + "</div>" +
+      '<div class="opts">' + options + "</div>" +
+      "</div>" +
+      (graded ? '<div class="foot feedback ' + (graded.ok ? "ok" : "bad") + '">' +
+        '<div class="fb-msg">' + esc(t(api, graded.ok ? "placement.correct" : "placement.wrong")) + "</div>" +
+        '<button class="btn btn-block btn-accent" data-fui="placement-next">' + esc(t(api, "lesson.continue")) + "</button></div>" : "") +
+      "</div>";
+  }
+
+  function placementResult(api, session) {
+    const result = session.result || F.placementResult(session);
+    const units = (BAYAN.E.CUR.units || []);
+    const atStart = !result.tier;
+    const planned = F.placementParams();
+    const skipped = countBelow(units, result.tier);
+    return '<div class="pane">' +
+      '<h1 class="display">' + esc(t(api, "placement.result")) + "</h1>" +
+      '<div class="placement-tier"><b>' + esc(t(api, "placement.tierLabel", { n: result.tier + 1 })) + "</b>" +
+      '<span class="muted">' + esc((units[result.tier] && pick(api, units[result.tier].title)) || "") + "</span></div>" +
+      '<p class="muted small">' + esc(t(api, "placement.score", { ok: result.correct, n: result.total })) + "</p>" +
+      (result.confident ? "" : '<p class="muted small">' + esc(t(api, "placement.unsure")) + "</p>") +
+      (atStart ? '<p class="muted small">' + esc(t(api, "placement.nothing")) + "</p>"
+        : '<p class="muted small">' + esc(t(api, "placement.placed", { n: skipped })) + "</p>") +
+      (api.state() && api.state().placed
+        ? '<p class="muted small">' + esc(t(api, "placement.existing", { n: (api.state().placedTier || 0) + 1 })) + "</p>" : "") +
+      '<button class="btn btn-block btn-accent" data-fui="placement-apply">' + esc(t(api, "placement.apply")) + "</button>" +
+      '<button class="btn btn-block btn-ghost" data-fui="placement-retake">' + esc(t(api, "placement.retake")) + "</button>" +
+      '<button class="btn btn-block btn-ghost" data-fui="placement-undo">' + esc(t(api, "placement.undo")) + "</button>" +
+      '<button class="btn btn-block btn-ghost" data-fui="nav-home">' + esc(t(api, "placement.keep")) + "</button>" +
+      '<p class="muted small">' + esc(planned.perTier ? t(api, "placement.why") : "") + "</p>" +
+      "</div>";
+  }
+
+  function countBelow(units, tier) {
+    let n = 0;
+    for (let i = 0; i < Math.max(0, Math.min(units.length, tier)); i++) {
+      n += (units[i].lessons || []).length;
+    }
+    return n;
+  }
+
+
   /* ------------------------------------------------------------- binding */
   function bind(api) {
     const screen = document.getElementById("screen");
     if (!screen || screen.dataset.fuiBound === "1") return;
     screen.dataset.fuiBound = "1";
+    screen.addEventListener("click", (event) => {
+      const nav = event.target.closest("[data-nav]");
+      if (!nav) return;
+      api.go(nav.dataset.nav);
+    });
     screen.addEventListener("click", (event) => {
       const node = event.target.closest("[data-fui]");
       if (!node) return;
@@ -373,6 +472,12 @@
       if (action === "nav-rites") { api.go("rites"); return; }
       if (action === "nav-circle") { api.go("circle"); return; }
       if (action === "forge-pick") { forgePick(api, api.currentCard(), node.textContent.trim()); return; }
+      if (action === "placement-start") { api.startPlacement(); return; }
+      if (action === "placement-answer") { api.answerPlacement(Number(node.dataset.index)); return; }
+      if (action === "placement-next") { api.advancePlacement(); return; }
+      if (action === "placement-apply") { api.applyPlacement(); return; }
+      if (action === "placement-retake") { api.startPlacement(); return; }
+      if (action === "placement-undo") { api.undoPlacement(); return; }
       if (action === "salah-go") { salahIndex = Number(node.dataset.index); api.render(); return; }
       if (action === "salah-step") {
         const steps = F.salahSteps();
@@ -444,6 +549,9 @@
     beginBoss: beginBoss,
     clearBoss: clearBoss,
     bossTick: bossTick,
+    placementView: placementView,
+    placementBanner: placementBanner,
+    placementQuestionView: placementQuestionView,
     lessonLoader: lessonLoader,
     completedExtras: completedExtras,
     resetSalah: () => { salahIndex = 0; },

@@ -19,18 +19,53 @@
   const dailyXp = () => (st.day === todayKey() ? st.dailyXp : 0);
 
   /* ================================================================ icons */
+  /* Bayan's own glyph family, drawn from the same 24x24 geometry as the
+     Android client (Glyphs.kt): a khatim star for the streak, a dīnār seal for
+     gems, a stair path, an echo loop, a mihrab arch, a ḥalaqah ring and a qalam
+     nib. Deliberately not stock fire/diamond/people marks. */
+  const G = (body, mark) => '<svg viewBox="0 0 24 24" class="g" data-mark="' + (mark || "") + '" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + body + "</svg>";
+  const GLYPH = {
+    star: G('<rect x="5.4" y="5.4" width="13.2" height="13.2" rx="1.2"/><rect x="5.4" y="5.4" width="13.2" height="13.2" rx="1.2" transform="rotate(45 12 12)"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>'),
+    seal: G('<circle cx="12" cy="12" r="8.4"/><path d="M12 7.6 16.4 12 12 16.4 7.6 12z"/><path d="M6.6 12h10.8"/>', "seal"),
+    path: '<svg viewBox="0 0 24 24" class="g" aria-hidden="true"><rect x="3.6" y="16.4" width="4.8" height="4.6" rx="1.4" fill="currentColor" opacity=".55"/><rect x="9.6" y="11.6" width="4.8" height="9.4" rx="1.4" fill="currentColor" opacity=".7"/><rect x="15.6" y="6.8" width="4.8" height="14.2" rx="1.4" fill="currentColor" opacity=".85"/></svg>',
+    echo: G('<path d="M12 4.4a7.6 7.6 0 1 0 7.6 7.6"/><circle cx="18.4" cy="6.2" r="1.9" fill="currentColor" stroke="none"/>'),
+    mihrab: G('<path d="M6.2 20.4V11.6c0-4 2.8-7.2 5.8-8.2 3 1 5.8 4.2 5.8 8.2v8.8"/><circle cx="12" cy="13.4" r="1.7" fill="currentColor" stroke="none"/>'),
+    ring: G('<circle cx="12" cy="12" r="8.2"/><circle cx="12" cy="8.4" r="1.5" fill="currentColor" stroke="none"/><circle cx="8.9" cy="13.8" r="1.5" fill="currentColor" stroke="none"/><circle cx="15.1" cy="13.8" r="1.5" fill="currentColor" stroke="none"/>'),
+    sprout: G('<path d="M12 21v-8"/><path d="M12 13c0-3.2 2.4-5.4 5.6-5.4 0 3.2-2.4 5.4-5.6 5.4z"/><path d="M12 15.2c0-2.6-2-4.4-4.6-4.4 0 2.6 2 4.4 4.6 4.4z"/>'),
+    spark: G('<path d="M13.4 2.6 6.2 13.4h4.2l-1.4 8 7.4-11h-4.4z"/>'),
+    lamp: G('<path d="M12 3.4c-3.4 0-6.2 2.8-6.2 6.2 0 2.6 1.7 4.9 4 5.7v2.4h4.4v-2.4c2.3-.8 4-3.1 4-5.7 0-3.4-2.8-6.2-6.2-6.2z"/><circle cx="12" cy="9.6" r="2.4" fill="currentColor" stroke="none"/><path d="M9.8 20.4h4.4"/>'),
+    scroll: G('<rect x="4.6" y="4.2" width="14.8" height="15.6" rx="2.2"/><path d="M8.4 9h7.2M8.4 12.4h7.2M8.4 15.8h4.4"/>'),
+    nib: G('<path d="M12 3.2 16.4 12 12 20.8 7.6 12z"/><path d="M12 9.4v6"/>')
+  };
+  /* Each achievement gets one of those marks instead of an emoji. */
+  const ACH_GLYPH = {
+    first_lesson: "sprout", lessons_10: "path", streak_3: "star", streak_7: "star",
+    xp_100: "spark", xp_500: "spark", perfect: "seal", unit1: "mihrab",
+    words_25: "sprout", words_50: "ring", review_1: "echo", halfway: "lamp"
+  };
+  const achMark = (a) => GLYPH[ACH_GLYPH[a && a.id] || "star"];
+
   const ICON = {
-    flame: '<svg viewBox="0 0 24 24" class="i"><path d="M12 2c1 4-3 5.5-3 9a3 3 0 0 0 6 0c0-1.2-.5-2-.5-3 2 1.5 3.5 3.6 3.5 6a6 6 0 1 1-12 0C6 9 10 7 12 2z"/></svg>',
-    gem: '<svg viewBox="0 0 24 24" class="i"><path d="M7 3h10l4 6-9 12L3 9l4-6z"/></svg>',
     heart: '<svg viewBox="0 0 24 24" class="i"><path d="M12 21C5 15.5 2 12.3 2 8.6 2 5.9 4 4 6.6 4c1.9 0 3.6 1 4.4 2.7C11.8 5 13.5 4 15.4 4 18 4 20 5.9 20 8.6c0 3.7-3 6.9-8 12.4z"/></svg>',
     lock: '<svg viewBox="0 0 24 24" class="i"><path d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h1zm2 0h6V8a3 3 0 0 0-6 0v2z"/></svg>',
-    play: '<svg viewBox="0 0 24 24" class="i"><path d="M8 5l12 7-12 7V5z"/></svg>',
-    review: '<svg viewBox="0 0 24 24" class="i"><path d="M12 4a8 8 0 1 1-7.6 5.5l-1.9-.5A10 10 0 1 0 12 2v2zm-1-2v6l5-3-5-3z"/></svg>',
-    star: '<svg viewBox="0 0 24 24" class="i"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>',
     check: '<svg viewBox="0 0 24 24" class="i"><path d="M9.5 16.2 5.3 12l-1.4 1.4 5.6 5.6 12-12-1.4-1.4z"/></svg>',
     speaker: '<svg viewBox="0 0 24 24" class="i"><path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg>'
   };
   const LAMP = '<svg viewBox="0 0 64 64" class="lamp"><path d="M32 8c-9.4 0-17 7.6-17 17 0 7.3 4.6 13.5 11.1 15.9L25 54h14l-1.1-13.1C44.4 38.5 49 32.3 49 25c0-9.4-7.6-17-17-17z" fill="#C2542B"/><circle cx="32" cy="25" r="7.5" fill="#F7F2E8"/><circle cx="32" cy="25" r="3.2" fill="#26231D"/><path d="M26 54h12l-1.5 6h-9z" fill="#26231D"/></svg>';
+
+  /* Tactile press: one click and one tiny vibration per press, anywhere in the
+     app, gated by the sound setting. Registered once, in the capture phase so
+     it runs before a handler can re-render or navigate. */
+  function installPressFeedback() {
+    const interactive = "button, [data-nav], [data-fui], [data-left], [data-right], [data-pick], [data-ret], [data-theme-set], .opt, .mleft, .mright, .tap, .clickable";
+    document.addEventListener("pointerdown", (event) => {
+      if (!st.sound) return;
+      const node = event.target && event.target.closest ? event.target.closest(interactive) : null;
+      if (!node) return;
+      A.beep("tap");
+      if (navigator.vibrate) { try { navigator.vibrate(8); } catch (ignored) { /* best effort */ } }
+    }, true);
+  }
 
   /* ================================================================ shell */
   function renderTabs() {
@@ -41,11 +76,11 @@
     const item = (name, label, icon) =>
       `<button class="tab ${view.name === name ? "active" : ""}" data-nav="${name}">${icon}<span>${esc(label)}</span></button>`;
     tabs.innerHTML =
-      item("home", t("nav.learn"), ICON.play) +
-      item("practice", t("nav.practice"), ICON.review) +
-      item("rites", t("nav.rites"), '<svg viewBox="0 0 24 24" class="i"><path d="M12 3c3 4 6 6.2 6 10a6 6 0 0 1-12 0c0-3.8 3-6 6-10z"/></svg>') +
-      item("circle", t("nav.circle"), '<svg viewBox="0 0 24 24" class="i"><path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm8 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 20c0-3 2.7-5 6-5s6 2 6 5zm12.5-4.6c2.6.3 4.5 2 4.5 4.6h-5"/></svg>') +
-      item("profile", t("nav.profile"), '<svg viewBox="0 0 24 24" class="i"><path d="M12 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM3 22v-3a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v3z"/></svg>');
+      item("home", t("nav.learn"), GLYPH.path) +
+      item("practice", t("nav.practice"), GLYPH.echo) +
+      item("rites", t("nav.rites"), GLYPH.mihrab) +
+      item("circle", t("nav.circle"), GLYPH.ring) +
+      item("profile", t("nav.profile"), GLYPH.nib);
     tabs.querySelectorAll("[data-nav]").forEach(b => b.addEventListener("click", () => go(b.dataset.nav)));
   }
   function renderTopbar() {
@@ -54,8 +89,8 @@
     bar.className = "topbar" + (show ? "" : " hidden");
     if (!show) { bar.innerHTML = ""; return; }
     bar.innerHTML =
-      `<div class="chip streak" title="${esc(t("profile.streak"))}">${ICON.flame}<b>${E.activeStreak(st)}</b></div>` +
-      `<div class="chip"><span class="gem">${ICON.gem}</span><b>${st.gems}</b></div>` +
+      `<div class="chip streak" title="${esc(t("profile.streak"))}">${GLYPH.star}<b>${E.activeStreak(st)}</b></div>` +
+      `<div class="chip" title="${esc(t("profile.gems"))}">${GLYPH.seal}<b>${st.gems}</b></div>` +
       `<div class="chip"><span class="xp">XP</span><b>${st.xp}</b></div>`;
   }
   function toast(msg) {
@@ -94,6 +129,12 @@
     canListen: () => A.canListen(),
     speak: (text) => { if (text) A.speak(text); },
     currentView: () => view.name,
+    startPlacement: () => startPlacement(),
+    answerPlacement: (index) => answerPlacement(index),
+    advancePlacement: () => advancePlacement(),
+    applyPlacement: () => applyPlacementNow(),
+    undoPlacement: () => undoPlacementNow(),
+    hasPlacementSession: () => !!placementSession,
     currentCard: () => cur(),
     record: (id, ok) => {
       if (!run) return;
@@ -122,8 +163,54 @@
   function viewCircle() { return window.Bayan.FUI.circleView(bayanApi, st); }
   function viewBoss() { return window.Bayan.FUI.bossView(bayanApi); }
 
+  /* ------------------------------------------------------- placement test */
+  let placementSession = null;
+  function viewPlacement() {
+    return '<div class="pane">' + window.Bayan.FUI.placementView(bayanApi, placementSession) + "</div>";
+  }
+  function startPlacement() {
+    placementSession = F.placementStart(E.CUR, st);
+    F.placementQuestion(placementSession, E.CUR, st);
+    go("placement");
+  }
+  function answerPlacement(index) {
+    const q = placementSession && placementSession.current;
+    if (!q || placementSession.graded) return;
+    const ok = index === q.answer;
+    placementSession.graded = { ok: ok, picked: index };
+    if (st.sound) A.beep(ok ? "ok" : "bad");
+    render();
+  }
+  function advancePlacement() {
+    if (!placementSession) return;
+    const ok = !!(placementSession.graded && placementSession.graded.ok);
+    placementSession.graded = null;
+    F.placementAnswer(placementSession, ok, E.CUR, st);
+    if (placementSession.done) placementSession.result = F.placementResult(placementSession);
+    else F.placementQuestion(placementSession, E.CUR, st);
+    render();
+  }
+  function applyPlacementNow() {
+    const tier = (placementSession && placementSession.result ? placementSession.result.tier : 0);
+    const out = F.applyPlacement(st, tier, E.CUR);
+    persist();
+    placementSession = null;
+    toast(t("placement.applied"));
+    go("home");
+    render();
+  }
+  function undoPlacementNow() {
+    F.undoPlacement(st, E.CUR);
+    persist();
+    placementSession = null;
+    toast(t("placement.undone"));
+    go("home");
+    render();
+  }
+
   function render() {
     document.documentElement.lang = st.lang;
+    document.documentElement.dataset.theme = st.theme || "auto";
     document.body.className = (st.lang === "bn" ? "lang-bn " : "") + (F && F.skyClass ? F.skyClass(new Date()) : "");
     const screen = $("#screen");
     if (view.name === "onboarding") screen.innerHTML = viewOnboarding();
@@ -132,6 +219,7 @@
     else if (view.name === "rites") screen.innerHTML = viewRites();
     else if (view.name === "circle") screen.innerHTML = viewCircle();
     else if (view.name === "boss") screen.innerHTML = viewBoss();
+    else if (view.name === "placement") screen.innerHTML = viewPlacement();
     else if (view.name === "profile") screen.innerHTML = viewProfile();
     else if (view.name === "lesson") screen.innerHTML = viewLesson();
     bind();
@@ -185,6 +273,7 @@
     const nextId = E.nextLessonId(st);
 
     let html = `<div class="home">
+      ${F ? window.Bayan.FUI.placementBanner(bayanApi, st) : ""}
       <div class="goal-card">
         <button class="ring-wrap" id="goal-ring" aria-label="${esc(t("goal.change"))}">
           <svg viewBox="0 0 64 64" class="ring">
@@ -199,7 +288,7 @@
         </div>
       </div>
       <button class="review-card ${seen === 0 ? "dim" : ""}" id="go-review">
-        <span class="rev-ico">${ICON.review}</span>
+        <span class="rev-ico">${GLYPH.echo}</span>
         <span class="rev-body"><b>${esc(t("home.review"))}</b><small>${esc(reviewSub)}</small></span>
         ${due > 0 ? `<span class="rev-badge">${due}</span>` : ""}
       </button>`;
@@ -228,7 +317,7 @@
         const cls = done ? "done" : !unlocked ? "locked" : current ? "current" : "open";
         html += `<div class="node-row ${i % 2 ? "alt" : ""}">
           <button class="node ${cls}" data-lesson="${lid}" ${unlocked ? "" : "disabled"}>
-            <span class="node-face">${done ? ICON.check : unlocked ? ICON.play : ICON.lock}</span>
+            <span class="node-face">${done ? ICON.check : unlocked ? GLYPH.path : ICON.lock}</span>
             ${current ? `<span class="bubble">${esc(t("home.start"))}</span>` : ""}
           </button>
           <span class="node-label">${esc(E.lessonObject(lid).title[st.lang] || E.lessonObject(lid).title.en)}</span>
@@ -250,7 +339,7 @@
     return `<div class="pane">
       <h1 class="display">${esc(t("practice.title"))}</h1>
       <div class="review-big">
-        <p class="big-ico">${ICON.review}</p>
+        <p class="big-ico">${GLYPH.echo}</p>
         <h3>${esc(seen === 0 ? t("practice.empty") : due > 0 ? t("practice.due", { n: due }) : t("home.practiceWeak"))}</h3>
         <p class="muted">${esc(t(seen === 0 ? "practice.emptyHint" : "practice.note"))}</p>
         ${seen ? `<button class="btn btn-accent btn-block" id="start-review">${esc(t("practice.start"))}</button>` : ""}
@@ -299,7 +388,7 @@
       <div class="ach-grid">${E.ACHIEVEMENTS.map(a => {
         const got = !!s.achievements[a.id];
         return `<div class="ach ${got ? "got" : "locked"}" title="${esc(a.desc[st.lang] || a.desc.en)}">
-          <span class="ach-ico">${a.icon}</span>
+          <span class="ach-ico">${achMark(a)}</span>
           <b>${esc(a.name[st.lang] || a.name.en)}</b>
           <small>${esc(a.desc[st.lang] || a.desc.en)}</small>
         </div>`;
@@ -319,6 +408,13 @@
         <p class="muted small">${A.canListen() ? esc(t("profile.ttsOn")) : esc(t("profile.ttsOff"))}</p>
         <p class="muted small">${esc(t("profile.aboutText"))}</p>
         <div class="set-row"><span></span><button class="btn btn-ghost" id="reset-progress">${esc(t("profile.reset"))}</button></div>
+      </div>
+      <h2 class="sect">${esc(t("profile.theme"))}</h2>
+      <div class="settings">
+        <p class="muted small">${esc(t("profile.themeNote"))}</p>
+        <div class="theme-row">
+          ${["auto", "light", "dark"].map(mode => `<button class="btn btn-ghost theme-choice ${(st.theme || "auto") === mode ? "btn-ink" : ""}" data-theme-set="${mode}">${esc(t("theme." + mode))}</button>`).join("")}
+        </div>
       </div>
       <h2 class="sect">${esc(t("backup.title"))}</h2>
       <div class="settings backup-settings">
@@ -558,11 +654,11 @@
         const r = lastResult || { xp: 0, acc: 0, perfect: false, newAch: [] };
         const ach = (r.newAch || []).map(id => {
           const a = E.ACHIEVEMENTS.find(x => x.id === id);
-          return a ? `<div class="ach-toast">${a.icon} <b>${esc(a.name[st.lang] || a.name.en)}</b> — ${esc(a.desc[st.lang] || a.desc.en)}</div>` : "";
+          return a ? `<div class="ach-toast"><span class="ach-ico">${achMark(a)}</span> <b>${esc(a.name[st.lang] || a.name.en)}</b> — ${esc(a.desc[st.lang] || a.desc.en)}</div>` : "";
         }).join("");
         const extras = F ? window.Bayan.FUI.completedExtras(bayanApi, st, r) : "";
         return `<div class="card card-complete">
-          <div class="done-badge">${ICON.star}</div>
+          <div class="done-badge">${GLYPH.star}</div>
           <h2 class="display">${r.perfect ? esc(t("lesson.perfect")) : esc(t("lesson.again"))}</h2>
           <div class="res-grid">
             <div class="res"><b>+${r.xp}</b><span>${esc(t("lesson.xpEarned"))}</span></div>
@@ -651,6 +747,8 @@
   /* ================================================================ bindings */
   function bind() {
     if (window.Bayan.FUI) window.Bayan.FUI.bind(bayanApi);
+    document.querySelectorAll("[data-theme-set]").forEach(b =>
+      b.addEventListener("click", () => { st.theme = b.dataset.themeSet; persist(); render(); }));
     if (view.name === "onboarding") {
       document.querySelectorAll("[data-lang]").forEach(b =>
         b.addEventListener("click", () => { view.langPref = b.dataset.lang; render(); }));
@@ -832,6 +930,8 @@
     get st() { return st; },
     get run() { return run; },
     get view() { return view; },
+    get placement() { return placementSession; },
+    startPlacement,
     card: () => (run ? run.cards[run.i] : null),
     startLesson, startReview, go,
     select: i => { const c = cur(); if (c && run.phase === "answer") gradeChoice(i); },
@@ -875,5 +975,6 @@
   };
 
   /* ================================================================ boot */
+  installPressFeedback();
   render();
 })();

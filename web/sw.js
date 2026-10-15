@@ -1,5 +1,5 @@
 /* Bayan — service worker TEMPLATE. Rendered into web/sw.js by
- * tools/build_offline.py, which substitutes 2c8326d67b40 and [
+ * tools/build_offline.py, which substitutes e30f9f8f7d0b and [
   "css/style.css",
   "fonts/f1.woff2",
   "fonts/f10.woff2",
@@ -40,7 +40,7 @@
  * aborts and the previous complete copy keeps serving, so the app never boots
  * into a half-populated offline state.
  */
-const VERSION = "2c8326d67b40";
+const VERSION = "e30f9f8f7d0b";
 const CACHE = "bayan-app-" + VERSION;
 const FILES = [
   "css/style.css",

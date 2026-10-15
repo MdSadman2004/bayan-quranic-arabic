@@ -75,6 +75,7 @@
       v: 1, onboarded: false, lang: "en", sound: true,
       xp: 0, gems: 0, streak: 0, day: null, dailyXp: 0, dailyGoal: 30,
       lessons: {}, unitsDone: {}, items: {}, achievements: {},
+      theme: "auto", placedTier: 0, placed: false,
       stats: { answered: 0, correct: 0, lessons: 0, reviews: 0, perfects: 0, maxComboEver: 0, timeSpentSec: 0 }
     };
   }

@@ -10,6 +10,15 @@
   const DAY = 86400000;
   const ARABIC_MARKS = /[\u064B-\u065F\u0670\u0640\u06D6-\u06ED]/g;
 
+  /* Seeded RNG / shuffle come from the engine (loaded first), so the same item
+   * and tier always produce the same question in both clients. */
+  function rng(seed) {
+    return BAYAN.E && BAYAN.E.rng ? BAYAN.E.rng(seed) : function () { return 0.5; };
+  }
+  function shuffle(arr, rand) {
+    return BAYAN.E && BAYAN.E.shuffle ? BAYAN.E.shuffle(arr, rand) : arr.slice();
+  }
+
   const loot = (F.chests && F.chests.loot) || [];
   const rarities = (F.chests && F.chests.rarities) || [];
   const combo = F.combo || { windowSec: 8, steps: [2, 3, 4, 5, 6, 8], semitones: [0, 2, 4, 5, 7, 9] };
@@ -305,8 +314,190 @@
   }
 
   /* -------------------------------------------------- 5. Ḥalaqah circle */
+  /* ------------------------------------- placement test (adaptive tiering) */
+
+  /** Units are the difficulty ladder: passing tier i means the learner already
+   * reads at unit i, so units below it can be marked as placed (skipped).
+   * The probe is a binary search over tiers with a fixed number of items per
+   * probe, so it converges in ~log2(units) rounds and never exceeds the
+   * question budget. Everything runs locally; no scoring leaves the device. */
+  function placementParams() {
+    const p = (F.placement || {});
+    const int = (v, lo, hi, fallback) => {
+      const n = Number(v);
+      if (!Number.isFinite(n)) return fallback;
+      return Math.max(lo, Math.min(hi, Math.round(n)));
+    };
+    const rate = Number(p.passRate);
+    return {
+      perTier: int(p.perTier, 1, 6, 4),
+      budget: int(p.sampleSize, 4, 40, 16),
+      passRate: Number.isFinite(rate) ? Math.max(0.5, Math.min(1, rate)) : 0.75,
+      maxTier: int(p.maxTier, 1, 40, 0)
+    };
+  }
+
+  function tierCount(cur) {
+    const n = cur && cur.units ? cur.units.length : 0;
+    return n > 0 ? n : 1;
+  }
+
+  /** Items of one tier — the ones taught in that unit, unseen ones first. */
+  /** Lesson ids of a unit: bundled curriculum uses objects, fixtures use ids. */
+  function unitLessonIds(unit) {
+    return (unit && unit.lessons ? unit.lessons : [])
+      .map((entry) => (typeof entry === "string" ? entry : (entry && entry.id) || ""))
+      .filter(Boolean);
+  }
+
+  function tierItems(cur, tier, state) {
+    const unit = cur && cur.units ? cur.units[tier] : null;
+    if (!unit) return [];
+    const ids = [];
+    (unit.lessons || []).forEach((entry) => {
+      // Bundled curriculum inlines lesson objects; fixtures use ids looked up
+      // on cur.lessons. Accept either so the sampler works against both.
+      const lesson = typeof entry === "string" ? (cur.lessons ? cur.lessons[entry] : null) : entry;
+      (lesson && lesson.items ? lesson.items : []).forEach((item) => {
+        // Items may be inline or a { ref } into the shared vocabulary list.
+        const id = item && (item.id || item.ref) ? (item.id || item.ref) : item;
+        if (id && ids.indexOf(id) < 0) ids.push(id);
+      });
+    });
+    const seen = (state && state.items) || {};
+    const unseen = ids.filter((id) => !seen[id] || !seen[id].seen);
+    return unseen.length >= 2 ? unseen : ids;
+  }
+
+  function placementStart(cur, state) {
+    const params = placementParams();
+    const tiers = tierCount(cur);
+    const session = {
+      lo: -1, hi: tiers, probe: Math.floor((tiers - 1) / 2),
+      asked: {}, answered: 0, correct: 0, total: 0,
+      tierCorrect: 0, tierWrong: 0, done: false, params: params, tiers: tiers,
+      result: null
+    };
+    return placementAdvance(session, cur, state);
+  }
+
+  /** Move to the next unjudged tier (or finish) and return the session. */
+  function placementAdvance(session, cur, state) {
+    if (!session || session.done) return session;
+    if (session.answered >= session.params.budget || session.hi - session.lo <= 1) {
+      session.done = true;
+      session.result = placementResult(session);
+      return session;
+    }
+    const probe = Math.max(0, Math.min(session.tiers - 1, Math.floor((session.lo + session.hi) / 2)));
+    // Only a change of tier starts a fresh tally; resetting on every call would
+    // make it impossible to accumulate enough answers to judge a tier.
+    if (probe !== session.probe) {
+      session.probe = probe;
+      session.tierCorrect = 0;
+      session.tierWrong = 0;
+    }
+    return session;
+  }
+
+  /** The next question: the answer index always points at the true meaning. */
+  function placementQuestion(session, cur, state) {
+    if (!session || session.done) return null;
+    const pool = tierItems(cur, session.probe, state)
+      .filter((id) => !session.asked[session.probe + ":" + id]);
+    const all = tierItems(cur, session.probe, state);
+    const itemId = (pool[0] || all[0]);
+    if (!itemId) { session.done = true; session.result = placementResult(session); return null; }
+    session.asked[session.probe + ":" + itemId] = true;
+    const poolIds = [];
+    for (let t = 0; t < session.tiers; t++) {
+      if (t === session.probe) continue;
+      tierItems(cur, t, state).forEach((id) => { if (poolIds.indexOf(id) < 0) poolIds.push(id); });
+    }
+    const rand = rng("placement:" + session.probe + ":" + itemId);
+    const options = shuffle([itemId].concat(shuffle(poolIds, rand).slice(0, 3)), rand);
+    session.current = {
+      tier: session.probe,
+      itemId: itemId,
+      options: options,
+      answer: options.indexOf(itemId)
+    };
+    return session.current;
+  }
+
+  function placementAnswer(session, correct, cur, state) {
+    if (!session || session.done) return session;
+    session.answered += 1;
+    session.total += 1;
+    if (correct) { session.correct += 1; session.tierCorrect += 1; } else { session.tierWrong += 1; }
+    const need = Math.max(1, Math.ceil(session.params.perTier * session.params.passRate));
+    const miss = session.params.perTier - need + 1;
+    if (session.tierCorrect >= need) session.lo = Math.max(session.lo, session.probe);
+    else if (session.tierWrong >= miss) session.hi = Math.min(session.hi, session.probe);
+    return placementAdvance(session, cur, state);
+  }
+
+  /** Highest tier the learner demonstrated; 0 = start at the very first unit. */
+  function placementResult(session) {
+    const tier = Math.max(0, Number.isFinite(session.lo) ? session.lo : -1);
+    const answered = session.total || 0;
+    return {
+      tier: tier,
+      unitIndex: tier,
+      correct: session.correct || 0,
+      total: answered,
+      accuracy: answered ? Math.round((100 * (session.correct || 0)) / answered) / 100 : 0,
+      confident: answered >= Math.min(6, session.params.budget)
+    };
+  }
+
+  /** Mark every unit below `tier` as placed. Never touches real completions and
+   * never rewrites an existing attempt — placed lessons carry `placed: true` so
+   * they can be removed again without a snapshot. */
+  function applyPlacement(state, tier, cur) {
+    if (!state || !cur || !cur.units) return { skipped: 0 };
+    const target = Math.max(0, Math.min(cur.units.length, Math.round(tier)));
+    let skipped = 0;
+    for (let i = 0; i < target; i++) {
+      const unit = cur.units[i];
+      unitLessonIds(unit).forEach((lessonId) => {
+        const existing = state.lessons[lessonId];
+        if (existing && existing.done && !existing.placed) return;
+        if (!existing || !existing.done) skipped += 1;
+        state.lessons[lessonId] = Object.assign({}, existing || {}, {
+          done: true, placed: true, attempts: 0, stars: 0, lastAt: 0
+        });
+      });
+      state.unitsDone = state.unitsDone || {};
+      state.unitsDone[unit.id] = true;
+    }
+    state.placedTier = target;
+    state.placed = target > 0;
+    return { skipped: skipped, tier: target };
+  }
+
+  /** Remove exactly the lessons this feature placed. */
+  function undoPlacement(state, cur) {
+    if (!state || !cur || !cur.units) return { removed: 0 };
+    let removed = 0;
+    for (let i = 0; i < cur.units.length; i++) {
+      const unit = cur.units[i];
+      unitLessonIds(unit).forEach((lessonId) => {
+        const rec = state.lessons[lessonId];
+        if (rec && rec.placed) { delete state.lessons[lessonId]; removed += 1; }
+      });
+      if (state.unitsDone && removed > 0) {
+        const stillDone = unitLessonIds(unit).every((l) => state.lessons[l] && state.lessons[l].done);
+        if (!stillDone) delete state.unitsDone[unit.id];
+      }
+    }
+    state.placedTier = 0;
+    state.placed = false;
+    return { removed: removed };
+  }
+
   function newCircle(maxMembers) {
-    const cap = Number.isFinite(maxMembers) ? maxMembers : (F.halaqah && F.halaqah.maxMembers) || 5;
+    const cap = Number.isFinite(maxMembers) ? maxMembers : (F.halaqah && F.halaqah.maxMembers) || 4;
     return { cap: cap, members: [], lantern: 0, lastHelped: null };
   }
   function circleAdd(circle, name) {
@@ -344,6 +535,9 @@
     salahSteps: salahSteps, waqtWindow: waqtWindow, jumuahOpen: jumuahOpen, jumuahPhrases: jumuahPhrases,
     wuduAdhanItems: wuduAdhanItems, zakatHajjItems: zakatHajjItems, sawmDrills: sawmDrills,
     illumination: illumination, knownRoots: knownRoots,
+    placementParams: placementParams, placementStart: placementStart, placementQuestion: placementQuestion,
+    placementAnswer: placementAnswer, placementResult: placementResult,
+    applyPlacement: applyPlacement, undoPlacement: undoPlacement,
     newCircle: newCircle, circleAdd: circleAdd, circleTick: circleTick, duaShield: duaShield
   };
   window.Bayan = BAYAN;

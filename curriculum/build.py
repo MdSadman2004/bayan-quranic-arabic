@@ -89,7 +89,8 @@ def validate_features(features, verse_ids: set[str]) -> list[str]:
     errors: list[str] = []
     if not isinstance(features, dict):
         return ["features: expected an object"]
-    for key in ("combo", "chests", "forge", "boss", "seeds", "rites", "whispers", "loaders", "halaqah", "illumination"):
+    for key in ("combo", "chests", "forge", "boss", "seeds", "rites", "whispers", "loaders",
+                "halaqah", "illumination", "placement"):
         if key not in features:
             errors.append(f"features.{key}: missing")
     if errors:
@@ -290,6 +291,22 @@ def validate_features(features, verse_ids: set[str]) -> list[str]:
         _bilingual(illumination.get("note"), "features.illumination.note", errors)
     else:
         errors.append("features.illumination: expected an object")
+
+    placement = features["placement"]
+    if isinstance(placement, dict):
+        _bilingual(placement.get("name"), "features.placement.name", errors)
+        _bilingual(placement.get("note"), "features.placement.note", errors)
+        per_tier = placement.get("perTier")
+        if type(per_tier) is not int or not 1 <= per_tier <= 6:
+            errors.append("features.placement.perTier: expected an integer between 1 and 6")
+        sample = placement.get("sampleSize")
+        if type(sample) is not int or not 4 <= sample <= 40:
+            errors.append("features.placement.sampleSize: expected an integer between 4 and 40")
+        rate = placement.get("passRate")
+        if type(rate) not in (int, float) or not 0.5 <= float(rate) <= 1.0:
+            errors.append("features.placement.passRate: expected a number between 0.5 and 1.0")
+    else:
+        errors.append("features.placement: expected an object")
     return errors
 
 

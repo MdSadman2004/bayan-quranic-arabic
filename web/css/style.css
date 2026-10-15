@@ -25,6 +25,79 @@
 }
 body.lang-bn { --font-body: "Noto Serif Bengali", system-ui, sans-serif; }
 
+/* Dark theme: the same warm world after maghrib — lamp-lit sand and ink,
+   terracotta lifted so it still reads on a dark ground. Applied when the
+   learner picks Dark, or when the device is dark and the setting is Auto. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #17140F;
+  --paper-deep: #120F0A;
+  --card: #221D16;
+  --ink: #F3ECE0;
+  --ink-soft: #C3B8A6;
+  --ink-faint: #8E8371;
+  --line: #372F26;
+  --accent: #E0703F;
+  --accent-deep: #F0916A;
+  --accent-tint: #2E2019;
+  --ok: #7FA06A;
+  --ok-deep: #A9C793;
+  --ok-bg: #1E2418;
+  --bad: #D8785F;
+  --bad-deep: #EBA08B;
+  --bad-bg: #2A1B16;
+  --brass: #D9AE55;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] {
+    color-scheme: dark;
+    --paper: #17140F;
+    --paper-deep: #120F0A;
+    --card: #221D16;
+    --ink: #F3ECE0;
+    --ink-soft: #C3B8A6;
+    --ink-faint: #8E8371;
+    --line: #372F26;
+    --accent: #E0703F;
+    --accent-deep: #F0916A;
+    --accent-tint: #2E2019;
+    --ok: #7FA06A;
+    --ok-deep: #A9C793;
+    --ok-bg: #1E2418;
+    --bad: #D8785F;
+    --bad-deep: #EBA08B;
+    --bad-bg: #2A1B16;
+    --brass: #D9AE55;
+  }
+}
+:root[data-theme="dark"] body.sky-dawn { background: linear-gradient(180deg, #3A2A22, var(--paper-deep) 42%); }
+:root[data-theme="dark"] body.sky-morning { background: linear-gradient(180deg, #332C1F, var(--paper-deep) 40%); }
+:root[data-theme="dark"] body.sky-noon { background: linear-gradient(180deg, #26301F, var(--paper-deep) 40%); }
+:root[data-theme="dark"] body.sky-afternoon { background: linear-gradient(180deg, #38301E, var(--paper-deep) 40%); }
+:root[data-theme="dark"] body.sky-dusk { background: linear-gradient(180deg, #3E281F, var(--paper-deep) 42%); }
+:root[data-theme="dark"] body.sky-night { background: linear-gradient(180deg, #1B1B22, var(--paper-deep) 44%); }
+:root[data-theme="dark"] .sky .sky-lantern { opacity: 0.75; }
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] body.sky-dawn { background: linear-gradient(180deg, #3A2A22, var(--paper-deep) 42%); }
+  :root[data-theme="auto"] body.sky-morning { background: linear-gradient(180deg, #332C1F, var(--paper-deep) 40%); }
+  :root[data-theme="auto"] body.sky-noon { background: linear-gradient(180deg, #26301F, var(--paper-deep) 40%); }
+  :root[data-theme="auto"] body.sky-afternoon { background: linear-gradient(180deg, #38301E, var(--paper-deep) 40%); }
+  :root[data-theme="auto"] body.sky-dusk { background: linear-gradient(180deg, #3E281F, var(--paper-deep) 42%); }
+  :root[data-theme="auto"] body.sky-night { background: linear-gradient(180deg, #1B1B22, var(--paper-deep) 44%); }
+}
+
+/* Bayan's own glyph family (stroke-drawn, tinted by the element's colour). */
+.g { width: 17px; height: 17px; color: inherit; display: block; }
+.topbar .chip .g { width: 15px; height: 15px; color: var(--accent); }
+.topbar .chip .g[data-mark="seal"] { color: var(--brass); }
+.tab .g { width: 21px; height: 21px; color: var(--ink-faint); }
+.tab.active .g { color: var(--accent); }
+.node-face .g, .rev-ico .g, .big-ico .g, .done-badge .g, .ach-ico .g { width: 20px; height: 20px; }
+.big-ico .g { width: 30px; height: 30px; }
+.ach-ico { display: inline-flex; }
+.theme-row { display: flex; gap: 6px; }
+.theme-choice { flex: 1; }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
 body {
@@ -111,7 +184,11 @@ b, strong { font-weight: 700; }
 .btn-block { width: 100%; display: block; }
 .btn-ink { background: var(--ink); color: var(--paper); border-bottom-color: #0e0c09; }
 .btn-accent { background: var(--accent); color: #FFF6EF; border-bottom-color: var(--accent-deep); }
-.btn-ghost { background: transparent; border: 2px solid var(--line); border-bottom-width: 3px; color: var(--ink-soft); }
+/* Secondary buttons carry the accent tint + an accent border so they read as
+   clearly as the primary ones instead of washing out against the paper. */
+.btn-ghost { background: var(--accent-tint); border: 2px solid var(--accent); border-bottom-width: 3px; color: var(--ink); }
+:root[data-theme="dark"] .btn-accent { color: #20130B; }
+:root[data-theme="dark"] .btn-ghost { background: var(--card); border-color: var(--accent); color: var(--ink); }
 .btn-danger { background: var(--bad); color: #FFF3EF; border-bottom-color: var(--bad-deep); }
 .btn-sm { padding: 9px 14px; font-size: 13.5px; border-radius: 11px; }
 .btn .i { width: 16px; height: 16px; fill: currentColor; vertical-align: -3px; margin-right: 6px; }

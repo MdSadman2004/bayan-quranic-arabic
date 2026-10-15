@@ -112,6 +112,12 @@
       out.lang = raw.lang;
     }
     if (own(raw, "day")) out.day = date(raw.day);
+    if (own(raw, "theme")) {
+      if (raw.theme !== "auto" && raw.theme !== "light" && raw.theme !== "dark") fail("Unsupported appearance setting.");
+      out.theme = raw.theme;
+    }
+    if (own(raw, "placed")) out.placed = boolean(raw.placed, "placed");
+    if (own(raw, "placedTier")) out.placedTier = number(raw.placedTier, "placedTier", 40);
     if (own(raw, "stats")) out.stats = fields(raw.stats, out.stats, "stats");
     const known = catalog();
     for (const key of ["items", "lessons"]) {
@@ -119,7 +125,9 @@
       record(raw[key], key);
       for (const id of Object.keys(raw[key])) {
         if (!known[key].has(id)) continue;
-        const defaults = key === "items" ? { lvl: 0, seen: 0, ok: 0, bad: 0, dueAt: 0, flag: false } : { done: false, attempts: 0, stars: 0, lastAt: 0 };
+        const defaults = key === "items"
+          ? { lvl: 0, seen: 0, ok: 0, bad: 0, dueAt: 0, flag: false }
+          : { done: false, attempts: 0, stars: 0, lastAt: 0, placed: false };
         const limits = key === "items" ? { lvl: 5 } : { stars: 3 };
         out[key][id] = fields(raw[key][id], Object.assign(defaults, out[key][id]), key + "." + id, limits);
       }

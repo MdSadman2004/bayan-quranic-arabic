@@ -67,8 +67,10 @@
       const shift = Math.pow(2, (Number.isFinite(semitones) ? semitones : 0) / 12);
       const g = c.createGain();
       g.connect(c.destination);
-      g.gain.value = 0.05;
-      const seq = kind === "ok" ? [[659, 0], [880, 0.075]]
+      const isTap = kind === "tap";
+      g.gain.value = isTap ? 0.028 : 0.05;
+      const seq = isTap ? [[1180, 0]]
+        : kind === "ok" ? [[659, 0], [880, 0.075]]
         : kind === "bad" ? [[196, 0], [147, 0.09]]
         : [[523, 0], [659, 0.09], [784, 0.18], [1046, 0.27]];
       for (const [f, t] of seq) {
@@ -77,7 +79,7 @@
         o.frequency.value = f * shift;
         o.connect(g);
         o.start(now + t);
-        o.stop(now + t + 0.11);
+        o.stop(now + t + (isTap ? 0.03 : 0.11));
       }
     } catch (e) { /* sound is best-effort */ }
   };
