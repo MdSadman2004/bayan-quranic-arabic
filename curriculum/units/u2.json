@@ -1,0 +1,96 @@
+{
+ "id": "u2",
+ "num": 2,
+ "title": {"en": "The Possessive Chain", "bn": "মালিকানার শৃঙ্খল"},
+ "subtitle": {"en": "Iḍāfa — X of Y, the engine of Quranic phrases", "bn": "ইদাফা — 'এক্স-এর ওয়াই', কুরআনি বাক্যের ইঞ্জিন"},
+ "lessons": [
+  {
+   "id": "u2l1",
+   "title": {"en": "Owner of the Day", "bn": "সেই দিনের মালিক"},
+   "teaches": [
+    {"id": "u2l1_t_idafa", "kind": "concept", "ar": "رَبُّ الْعَالَمِينَ", "en": "Lord of the worlds", "bn": "সকল জগতের রব", "note": {"en": "Arabic has no word for 'of'. Two nouns sit side by side and chain: يَوْم + الدِّين → يَوْمِ الدِّينِ, 'the Day of Judgment.' The first word loses its 'the'.", "bn": "আরবিতে 'of' শব্দটাই নেই। দুটি বিশেষ্য পাশে বসে শৃঙ্খল গড়ে: يَوْمِ الدِّينِ = বিচার দিন। প্রথম শব্দটি 'আল' হারায়।"}},
+    {"id": "u2l1_t_malik", "kind": "word", "ar": "مَالِكِ", "en": "Owner, Master", "bn": "মালিক", "note": {"en": "مَلِك is a king; مَالِك is the one who actually owns and controls. Root م-ل-ك.", "bn": "مَلِك = রাজা; مَالِك = যিনি সত্যিকার অর্থে মালিক ও নিয়ন্ত্রক। ধাতু م-ل-ক।"}}
+   ],
+   "items": [
+    {"id": "w_malik", "ar": "مَالِكِ", "en": "Owner", "bn": "মালিক", "root": "م ل ك"},
+    {"id": "w_din", "ar": "الدِّينِ", "en": "the judgment, the deen", "bn": "বিচার, দ্বীন", "root": "د ي ن", "note": {"en": "One word, three lives: judgment, recompense, and the way of life owed in return.", "bn": "এক শব্দ, তিন অর্থ: বিচার, প্রতিদান, আর বিনিময়ে পালনীয় জীবনব্যবস্থা।"}},
+    {"id": "w_dunya", "ar": "الدُّنْيَا", "en": "this world", "bn": "দুনিয়া", "root": "د ن و", "occ": 115},
+    {"id": "w_akhira", "ar": "الْآخِرَة", "en": "the Hereafter", "bn": "আখিরাত", "root": "أ خ ر", "occ": 155},
+    {"ref": "w_yawm"}
+   ],
+   "verses": [
+    {
+     "id": "v_fatiha4",
+     "ar": "مَالِكِ يَوْمِ الدِّينِ",
+     "tokens": ["مَالِكِ", "يَوْمِ", "الدِّينِ"],
+     "en": "Master of the Day of Judgment.",
+     "bn": "বিচার দিনের মালিক।",
+     "ref": "Al-Fātiḥah 1:4",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "Theme", "bn": "বিষয়বস্তু"},
+      "body": {"en": "One day, one Owner. The chain يَوْمِ الدِّينِ anchors the surah on accountability — after mercy, the reminder that mercy is not indifference.", "bn": "এক দিন, এক মালিক। يوم الدين-এর শৃঙ্খল সূরাটিকে জবাবদিহিতার ওপর দাঁড় করায় — রহমতের পর মনে করায়, রহমত মানে উদাসীনতা নয়।"}
+    }
+    }
+   ]
+  },
+  {
+   "id": "u2l2",
+   "title": {"en": "In the Name", "bn": "নামে শুরু"},
+   "teaches": [
+    {"id": "u2l2_t_bism", "kind": "phrase", "ar": "بِسْمِ اللَّهِ", "en": "In the name of Allah", "bn": "আল্লাহর নামে", "note": {"en": "بِـ ('with') + اسْم ('name'). It opens every surah except one, and it opens every serious act in a Muslim's day.", "bn": "بِـ (সহ/দিয়ে) + اسْم (নাম)। একটি ছাড়া সব সূরা এটি দিয়ে শুরু; দিনের প্রতিটি গুরুত্বপূর্ণ কাজও।"}}
+   ],
+   "items": [
+    {"id": "w_bism", "ar": "بِسْمِ", "en": "in the name of", "bn": "…-এর নামে", "root": "س م و"},
+    {"id": "w_ism", "ar": "اسْمٌ", "en": "name", "bn": "নাম", "root": "س م و"},
+    {"id": "w_sulayman", "ar": "سُلَيْمَانَ", "en": "Solomon", "bn": "সুলাইমান"},
+    {"id": "w_qawl", "ar": "قَوْلٌ", "en": "saying, word", "bn": "বাণী", "root": "ق و ل"},
+    {"id": "w_ayat", "ar": "آيَةٌ", "en": "sign; a verse", "bn": "নিদর্শন; আয়াত", "root": "أ ي ي", "occ": 382, "note": {"en": "One word with two lives: a sign in the world, and a verse of the Book.", "bn": "একই শব্দে দুই জীবন: জগতের নিদর্শন, আর কিতাবের আয়াত।"}}
+   ],
+   "verses": [
+    {
+     "id": "v_naml30",
+     "ar": "إِنَّهُ مِن سُلَيْمَانَ وَإِنَّهُ بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+     "tokens": ["إِنَّهُ", "مِن", "سُلَيْمَانَ", "وَإِنَّهُ", "بِسْمِ", "اللَّهِ", "الرَّحْمَٰنِ", "الرَّحِيمِ"],
+     "en": "Indeed, it is from Solomon, and indeed, it is: In the name of Allah, the Most Compassionate, the Most Merciful.",
+     "bn": "এটি সুলাইমানের পক্ষ থেকে; আর তা এই — আল্লাহর নামে, যিনি পরম দয়ালু, পরম করুনাময়।",
+     "ref": "An-Naml 27:30",
+     "context": {
+      "kind": "story",
+      "title": {"en": "The letter of Solomon", "bn": "সুলাইমানের চিঠি"},
+      "body": {"en": "A hoopoe bird carries Sulayman's letter to the Queen of Sheba. This is the only place in the Quran where 'In the name of Allah' appears inside a letter — a king opens his message with the Name.", "bn": "হুদহুদ পাখি সুলাইমানের চিঠি নিয়ে রানি বিলকিসের কাছে যায়। কুরআনে এটিই একমাত্র জায়গা, যেখানে চিঠির ভেতরে 'বিসমিল্লাহ' এসেছে — এক রাজা তাঁর বার্তা শুরু করেন সেই নামে।"}
+    }
+    }
+   ]
+  },
+  {
+   "id": "u2l3",
+   "title": {"en": "You Alone", "bn": "কেবল তোমাকে"},
+   "teaches": [
+    {"id": "u2l3_t_iyyaka", "kind": "concept", "ar": "إِيَّاكَ نَعْبُدُ", "en": "You alone we worship", "bn": "কেবল তোমারই ইবাদত করি", "note": {"en": "The object is placed BEFORE the verb: نَعْبُدُ ('we worship') becomes إِيَّاكَ نَعْبُدُ. Arabic front-loads whatever must be exclusive.", "bn": "কর্মপদটি ক্রিয়ার আগে বসে: نَعْبُدُ ('আমরা ইবাদত করি') হয়ে যায় إِيَّاكَ نَعْبُدُ। যা একচেটিয়া, আরবি তা-ই আগে আনে।"}}
+   ],
+   "items": [
+    {"id": "w_ibada", "ar": "عِبَادَةٌ", "en": "worship", "bn": "ইবাদত", "root": "ع ب د", "note": {"en": "From ع-ب-د, servanthood: worship grows out of being owned by the One you worship.", "bn": "দাসত্ব অর্থের ধাতু ع-ب-د: ইবাদত জন্মায় সেই সত্তার অধীনতা থেকে, যাঁর ইবাদত করা হয়।"}},
+    {"id": "w_nastain", "ar": "نَسْتَعِينُ", "en": "we ask for help", "bn": "আমরা সাহায্য চাই", "root": "ع و ن", "note": {"en": "Form X: the نَـ at the front means 'we'.", "bn": "দশম বাব: সামনের نَـ মানে 'আমরা'।"}},
+    {"id": "w_iyyaka", "ar": "إِيَّاكَ", "en": "You alone", "bn": "কেবল তোমাকে"},
+    {"id": "w_sirat", "ar": "صِرَاطٌ", "en": "path", "bn": "পথ", "root": "ص ر ط"},
+    {"id": "w_mustaqim", "ar": "مُسْتَقِيمٌ", "en": "straight", "bn": "সরল", "root": "ق و م"}
+   ],
+   "verses": [
+    {
+     "id": "v_fatiha5",
+     "ar": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+     "tokens": ["إِيَّاكَ", "نَعْبُدُ", "وَإِيَّاكَ", "نَسْتَعِينُ"],
+     "en": "You alone we worship, and You alone we ask for help.",
+     "bn": "কেবল তোমারই ইবাদত করি, আর কেবল তোমারই সাহায্য চাই।",
+     "ref": "Al-Fātiḥah 1:5",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "Theme", "bn": "বিষয়বস্তু"},
+      "body": {"en": "Devotion and dependence are both 'You alone.' The grammar itself locks the door to everything else — the whole prayer turns on one word repeated twice.", "bn": "ইবাদত আর নির্ভরতা — দুটোই 'কেবল তোমারই।' ব্যাকরণ নিজেই বাকি সব দরজা বন্ধ করে দেয়; গোটা নামাজ ঘোরে একই শব্দে, দুইবার।"}
+    }
+    }
+   ]
+  }
+ ]
+}

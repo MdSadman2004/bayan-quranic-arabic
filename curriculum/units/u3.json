@@ -1,0 +1,99 @@
+{
+ "id": "u3",
+ "num": 3,
+ "title": {"en": "He Said, They Said", "bn": "সে বলল, তারা বলল"},
+ "subtitle": {"en": "Past-tense verbs and their doers", "bn": "অতীতকালীন ক্রিয়া ও কর্তা"},
+ "lessons": [
+  {
+   "id": "u3l1",
+   "title": {"en": "They Believed and Did", "bn": "তারা ঈমান আনল ও আমল করল"},
+   "teaches": [
+    {"id": "u3l1_t_waw", "kind": "concept", "ar": "عَمِلُوا", "en": "they did", "bn": "তারা করল", "note": {"en": "Past verbs ending in ـُوا carry 'they' fused on the end: آمَنَ → آمَنُوا. One extra letter, a whole crowd.", "bn": "শেষে ـُوا থাকলে 'তারা' যুক্ত থাকে: آمَنَ → آمَنُوا। একটি বর্ধিত হরফ, গোটা দল।"}},
+    {"id": "u3l1_t_aminu", "kind": "word", "ar": "آمَنُوا", "en": "they believed", "bn": "তারা ঈমান আনল", "note": {"en": "Root أ-م-ن: safety. To believe is to put your weight down and be secure.", "bn": "ধাতু أ-م-ন: নিরাপত্তা। ঈমান আনা মানে ভরসার ভর দিয়ে নিরাপদ হওয়া।"}}
+   ],
+   "items": [
+    {"id": "w_amanu", "ar": "آمَنُوا", "en": "they believed", "bn": "তারা ঈমান আনল", "root": "أ م ن", "occ": 537, "fam": true},
+    {"id": "w_amilu", "ar": "عَمِلُوا", "en": "they did, worked", "bn": "তারা আমল করল", "root": "ع م ل", "occ": 276, "fam": true},
+    {"id": "w_salihat", "ar": "الصَّالِحَات", "en": "righteous deeds", "bn": "সৎকর্ম", "root": "ص ل ح"},
+    {"id": "w_kadhdhabu", "ar": "كَذَّبُوا", "en": "they denied", "bn": "তারা অস্বীকার করল", "root": "ك ذ ب", "occ": 176, "fam": true},
+    {"ref": "w_haqq"}
+   ],
+   "verses": [
+    {
+     "id": "v_asr3",
+     "ar": "إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ",
+     "tokens": ["إِلَّا", "الَّذِينَ", "آمَنُوا", "وَعَمِلُوا", "الصَّالِحَاتِ"],
+     "en": "Except those who believe and do righteous deeds.",
+     "bn": "তবে তারা ছাড়া, যারা ঈমান এনেছে ও সৎকর্ম করেছে।",
+     "ref": "Al-ʿAṣr 103:3 (beginning)",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "Theme", "bn": "বিষয়বস্তু"},
+      "body": {"en": "The rescue clause of humanity begins with belief and is immediately measured by deeds — faith and action arrive as one unit in the Quran.", "bn": "মানুষের মুক্তির বাক্য শুরু হয় ঈমান দিয়ে, আর সঙ্গে সঙ্গেই তা মাপা হয় আমলে — কুরআনে ঈমান ও কাজ অবিচ্ছেদ্য জোড়া।"}
+    }
+    }
+   ]
+  },
+  {
+   "id": "u3l2",
+   "title": {"en": "It Was / It Was Not", "bn": "ছিল / ছিল না"},
+   "teaches": [
+    {"id": "u3l2_t_kana", "kind": "word", "ar": "كَانَ", "en": "he / it was", "bn": "ছিল", "note": {"en": "A verb that only sets existence in place and time: was, used to be. Root ك-و-ن.", "bn": "যে ক্রিয়া কেবল অস্তিত্বকে কালে বসায়: ছিল, হয়ে ছিল। ধাতু ك-و-ন।"}},
+    {"id": "u3l2_t_lam", "kind": "word", "ar": "لَمْ", "en": "not", "bn": "না", "note": {"en": "لَمْ + present verb = past negative: لَمْ يَلِدْ, 'he did not beget.'", "bn": "لَمْ + নিকট-বর্তমান ক্রিয়া = অতীতের নেতিবাচক: لَمْ يَلِدْ = 'তিনি জন্ম দেননি'।"}}
+   ],
+   "items": [
+    {"id": "w_kana", "ar": "كَانَ", "en": "he / it was", "bn": "ছিল", "root": "ك و ن", "occ": 1358, "fam": true},
+    {"id": "w_lam", "ar": "لَمْ", "en": "did not", "bn": "নি (না)", "occ": 348},
+    {"id": "w_yalid", "ar": "يَلِدْ", "en": "he begets", "bn": "জন্ম দেন", "root": "و ل د"},
+    {"id": "w_yulad", "ar": "يُولَدْ", "en": "he is born", "bn": "জন্ম নেন", "root": "و ل د"},
+    {"id": "w_samad", "ar": "الصَّمَدُ", "en": "the Eternal Refuge", "bn": "চিরন্তন আশ্রয়", "root": "ص م د"},
+    {"id": "w_kufuwan", "ar": "كُفُوًا", "en": "an equal", "bn": "সমতুল্য", "root": "ك ف أ"}
+   ],
+   "verses": [
+    {
+     "id": "v_ikhlas34",
+     "ar": "لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",
+     "tokens": ["لَمْ", "يَلِدْ", "وَلَمْ", "يُولَدْ", "وَلَمْ", "يَكُن", "لَّهُ", "كُفُوًا", "أَحَدٌ"],
+     "en": "He neither begets nor is born, nor is there to Him any equal.",
+     "bn": "তিনি জন্ম দেননি, জন্ম নেননিও না, আর তাঁর সমতুল্য কেউ নেই।",
+     "ref": "Al-Ikhlāṣ 112:3–4",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "Theme", "bn": "বিষয়বস্তু"},
+      "body": {"en": "Four absolutes in a row strip away every human image of God: not begotten, not begetting, nothing comparable. The words hoard nothing; they empty the mind of idols.", "bn": "পরপর চারটি চূড়ান্ত কথা মানুষের বানানো ঈশ্বরের সব ছবি মুছে দেয়: জন্ম নেননি, জন্ম দেন না, সমতুল্য কেউ নেই। শব্দগুলো কিছু জমা রাখে না — মনের মূর্তিপূজা খালি করে।"}
+    }
+    }
+   ]
+  },
+  {
+   "id": "u3l3",
+   "title": {"en": "Success of the Believers", "bn": "মুমিনদের সফলতা"},
+   "teaches": [
+    {"id": "u3l3_t_qad", "kind": "word", "ar": "قَدْ", "en": "indeed, has", "bn": "নিশ্চয়ই", "note": {"en": "قَدْ + a past verb says: it HAS happened, no doubt about it.", "bn": "قَدْ + অতীত ক্রিয়া বোঝায়: তা হয়েই গেছে, সন্দেহ নেই।"}},
+    {"id": "u3l3_t_falah", "kind": "concept", "ar": "أَفْلَحَ", "en": "has succeeded", "bn": "সফল হয়েছে", "note": {"en": "Root ف-ل-ح is the root of fallāḥ — a farmer working land until it flourishes. Quranic success grows the same way: slowly, from the soil up.", "bn": "ধাতু ف-ل-ح থেকেই 'ফালাহ' — কৃষক জমি চষে ফসল তোলেন। কুরআনি সফলতাও তেমনি: ধীরে, মাটির গভীর থেকে।"}}
+   ],
+   "items": [
+    {"id": "w_qad", "ar": "قَدْ", "en": "indeed", "bn": "নিশ্চয়ই", "occ": 406},
+    {"id": "w_aflaha", "ar": "أَفْلَحَ", "en": "has succeeded", "bn": "সফল হয়েছে", "root": "ف ل ح"},
+    {"id": "w_muminun", "ar": "الْمُؤْمِنُونَ", "en": "the believers", "bn": "মুমিনগণ", "root": "أ م ن", "occ": 202},
+    {"id": "w_salat", "ar": "صَلَاةٌ", "en": "prayer", "bn": "সালাত", "root": "ص ل و"},
+    {"ref": "w_amanu"}
+   ],
+   "verses": [
+    {
+     "id": "v_muminun1",
+     "ar": "قَدْ أَفْلَحَ الْمُؤْمِنُونَ",
+     "tokens": ["قَدْ", "أَفْلَحَ", "الْمُؤْمِنُونَ"],
+     "en": "Successful indeed are the believers.",
+     "bn": "অবশ্যই সফল হয়েছে মুমিনগণ।",
+     "ref": "Al-Muʾminūn 23:1",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "Theme", "bn": "বিষয়বস্তু"},
+      "body": {"en": "The surah opens with success announced before any condition — then the next verses list the qualities that produced it: humility in prayer, charity, guarding chastity, keeping trusts.", "bn": "সূরা শুরু হয় কোনো শর্তের আগেই সফলতার ঘোষণায় — তারপরের আয়াতগুলো সেই গুণ গোনে: বিনয়ী সালাত, যাকাত, লজ্জা রক্ষা, আমানত রক্ষা।"}
+    }
+    }
+   ]
+  }
+ ]
+}

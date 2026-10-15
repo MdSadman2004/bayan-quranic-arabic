@@ -1,0 +1,13 @@
+{
+  "app": {
+    "name": "Bayan",
+    "nameAr": "بَيَان",
+    "tagline": {
+      "en": "Understand the Quran, in Arabic.",
+      "bn": "কুরআন বুঝুন, আরবি থেকেই।"
+    }
+  },
+  "version": 1,
+  "totalQuranWords": 77429,
+  "unitOrder": ["u1", "u2", "u3", "u4", "u5", "u6", "u7", "u8"]
+}

@@ -1,0 +1,104 @@
+{
+ "id": "u1",
+ "num": 1,
+ "title": {"en": "Foundations", "bn": "ভিত্তি"},
+ "subtitle": {"en": "The first sentences of the Quran", "bn": "কুরআনের প্রথম বাক্যগুলো"},
+ "lessons": [
+  {
+   "id": "u1l1",
+   "title": {"en": "This & That", "bn": "এটা ও সেটা"},
+   "teaches": [
+    {"id": "u1l1_t_hadha", "kind": "word", "ar": "هَذَا", "en": "this", "bn": "এটা", "note": {"en": "Points to something near you.", "bn": "কাছের কিছুকে দেখিয়ে বলা হয়।"}},
+    {"id": "u1l1_t_dhalika", "kind": "word", "ar": "ذَلِكَ", "en": "that", "bn": "সেটা", "note": {"en": "Points further away — and Arabic also uses it for something grand.", "bn": "দূরের কিছুকে বোঝায়; মহিমান্বিত কিছু বোঝাতেও ব্যবহৃত হয়।"}},
+    {"id": "u1l1_t_al", "kind": "concept", "ar": "الْـ", "en": "the", "bn": "নির্দিষ্টত্বের 'আল'", "note": {"en": "Add الْـ to the front of a word to make it definite: كِتَابٌ a book → الْكِتَابُ the Book.", "bn": "শব্দের সামনে الْـ বসালেই নিদিষ্ট হয়: কিতাবুন (একটি কিতাব) → আল-কিতাবু (সেই কিতাব)।"}}
+   ],
+   "items": [
+    {"id": "w_hadha", "ar": "هَذَا", "en": "this", "bn": "এটা", "occ": 1058, "fam": true, "note": {"en": "Counted with the 'dhā' stem (هَذَا، ذَلِكَ، أُولَٰئِكَ).", "bn": "'যা' ধাতুসহ গণনা (হা-যা, যালিকা…)।"}},
+    {"id": "w_dhalika", "ar": "ذَلِكَ", "en": "that", "bn": "সেটা"},
+    {"id": "w_kitab", "ar": "الْكِتَابُ", "en": "the Book", "bn": "কিতাব"},
+    {"id": "w_rasul", "ar": "الرَّسُولُ", "en": "the Messenger", "bn": "রাসূল", "root": "ر س ل", "occ": 332},
+    {"id": "w_qul", "ar": "قُلْ", "en": "Say!", "bn": "বলুন!", "root": "ق و ل", "occ": 1618, "fam": true, "note": {"en": "A command from ق-و-ل, 'to say' — the family appears ≈1,618×.", "bn": "ق-و-ল ধাতু থেকে আদেশ রূপ; এই ধাতুর শব্দ কুরআনে প্রায় ১৬১৮ বার।"}},
+    {"id": "w_huwa", "ar": "هُوَ", "en": "he / it", "bn": "তিনি / সেটি", "note": {"en": "A standalone pronoun. Verbs also hide it inside.", "bn": "স্বতন্ত্র সর্বনাম; ক্রিয়ার ভেতরেও এটি লুকানো থাকে।"}},
+    {"id": "w_allah", "ar": "اللَّهُ", "en": "Allah", "bn": "আল্লাহ", "root": "أ ل ه", "occ": 2699},
+    {"id": "w_ahad", "ar": "أَحَدٌ", "en": "One", "bn": "এক", "root": "أ ح د", "note": {"en": "The first of the four answers in Sūrat al-Ikhlāṣ.", "bn": "সূরা ইখলাসের চারটি উত্তরের প্রথমটি।"}}
+   ],
+   "verses": [
+    {
+     "id": "v_ikhlas1",
+     "ar": "قُلْ هُوَ اللَّهُ أَحَدٌ",
+     "tokens": ["قُلْ", "هُوَ", "اللَّهُ", "أَحَدٌ"],
+     "en": "Say: He is Allah, the One.",
+     "bn": "বলুন, তিনিই আল্লাহ, এক ও অদ্বিতীয়।",
+     "ref": "Al-Ikhlāṣ 112:1",
+     "context": {
+      "kind": "asbab",
+      "title": {"en": "Why it was revealed", "bn": "কেন নাজিল হলো"},
+      "body": {"en": "Classical reports say the Quraysh asked the Prophet ﷺ to describe his Lord's lineage, and this surah was the answer. Its name, al-Ikhlāṣ, means purity: a chapter stripped of everything except the One.", "bn": "ধর্মতত্ত্বের কিতাবগুলোতে আছে, কুরাইশরা নবী ﷺ-কে তাঁর রবের বংশপরিচয় বলতে বললে এই সূরাটিই উত্তর হয়েছিল। নাম 'আল-ইখলাস' মানে বিশুদ্ধতা — একমাত্র সত্তা ছাড়া বাকি সব বাদ দিয়ে দেওয়া একটি সূরা।"}
+    }
+    }
+   ]
+  },
+  {
+   "id": "u1l2",
+   "title": {"en": "All Praise", "bn": "সকল প্রশংসা"},
+   "teaches": [
+    {"id": "u1l2_t_hamd", "kind": "word", "ar": "الْحَمْدُ", "en": "the praise", "bn": "প্রশংসা", "note": {"en": "Root ح-م-د. الْـ here embraces all praise — there is no praise left outside it.", "bn": "ধাতু ح-ম-দ। এখানে الْـ সব প্রশংসাকে ঘিরে ধরে — বাইরে কিছু থাকে না।"}},
+    {"id": "u1l2_t_rabb", "kind": "word", "ar": "رَبّ", "en": "Lord, Sustainer", "bn": "রব", "note": {"en": "Root ر-ب-ب: to nurture and grow a thing, stage by stage. A rabb raises what it owns.", "bn": "ধাতু ر-ব-ব: ধাপে ধাপে লালন করা। রব তাঁর অধীন সবকিছুকে গড়ে তোলেন।"}}
+   ],
+   "items": [
+    {"id": "w_hamd", "ar": "الْحَمْدُ", "en": "the praise", "bn": "প্রশংসা", "root": "ح م د"},
+    {"id": "w_lillah", "ar": "لِلَّهِ", "en": "belongs to Allah", "bn": "আল্লাহরই", "note": {"en": "لِـ ('for, to') fused with اللّٰه.", "bn": "'জন্য' অর্থের لِـ সঙ্গে আল্লাহ যুক্ত।"}},
+    {"id": "w_rabb", "ar": "رَبّ", "en": "Lord", "bn": "রব", "root": "ر ب ب", "occ": 975},
+    {"id": "w_alamin", "ar": "الْعَالَمِينَ", "en": "the worlds", "bn": "সকল জগতের", "root": "ع ل م", "note": {"en": "From the root of knowing, ع-ل-م: the worlds are the known, ordered things.", "bn": "জ্ঞান অর্থের ধাতু ع-ل-م থেকে: জগতগুলো জানা ও সাজানো বস্তু।"}},
+    {"id": "w_nas", "ar": "النَّاس", "en": "the people", "bn": "মানুষ", "root": "ن و س", "occ": 241},
+    {"id": "w_haqq", "ar": "حَقّ", "en": "truth, right", "bn": "সত্য", "root": "ح ق ق", "occ": 247}
+   ],
+   "verses": [
+    {
+     "id": "v_fatiha2",
+     "ar": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+     "tokens": ["الْحَمْدُ", "لِلَّهِ", "رَبِّ", "الْعَالَمِينَ"],
+     "en": "All praise belongs to Allah, Lord of all the worlds.",
+     "bn": "সকল প্রশংসা আল্লাহর, যিনি সকল জগতের রব।",
+     "ref": "Al-Fātiḥah 1:2",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "Theme", "bn": "বিষয়বস্তু"},
+      "body": {"en": "The first lesson the Quran teaches is gratitude: every kind of praise returns to the Rabb who grows and sustains everything — a phrase so central it opens the Opening.", "bn": "কুরআনের প্রথম পাঠ কৃতজ্ঞতা: সব প্রশংসা ফিরে যায় সেই রবের কাছে, যিনি সবকিছু গড়ে তোলেন ও ধরে রাখেন।"}
+    }
+    }
+   ]
+  },
+  {
+   "id": "u1l3",
+   "title": {"en": "The Merciful", "bn": "পরম দয়াময়"},
+   "teaches": [
+    {"id": "u1l3_t_rahman", "kind": "word", "ar": "الرَّحْمَٰنُ", "en": "The Most Compassionate", "bn": "পরম দয়ালু", "note": {"en": "From the root ر-ح-م (womb, mercy): the mercy that creates and cares for what it made.", "bn": "ধাতু ر-ح-ম (জরায়ু, দয়া): যে দয়া সৃষ্টি করে, তারপর লালন করে।"}},
+    {"id": "u1l3_t_rahim", "kind": "word", "ar": "الرَّحِيمُ", "en": "The Most Merciful", "bn": "পরম করুনাময়", "note": {"en": "Same root, intensive pattern — mercy that keeps reaching the one who asks.", "bn": "একই ধাতুর গাঢ় রূপ — প্রার্থনাকারীর কাছে বারবার পৌঁছানো দয়া।"}}
+   ],
+   "items": [
+    {"id": "w_rahman", "ar": "الرَّحْمَٰنُ", "en": "The Most Compassionate", "bn": "পরম দয়ালু", "root": "ر ح م"},
+    {"id": "w_rahim", "ar": "الرَّحِيمُ", "en": "Most Merciful", "bn": "পরম করুনাময়", "root": "ر ح م", "occ": 116},
+    {"id": "w_rahma", "ar": "رَحْمَةٌ", "en": "mercy", "bn": "রহমত", "root": "ر ح م", "occ": 114},
+    {"id": "w_arham", "ar": "أَرْحَمُ", "en": "Most Merciful", "bn": "সর্বাধিক দয়ালু", "root": "ر ح م", "note": {"en": "As in أَرْحَمُ الرَّاحِمِينَ, 'the Most Merciful of the merciful.'", "bn": "যেমন أَرْحَمُ الرَّاحِمِينَ — 'দয়ালুদের মধ্যে সর্বাধিক দয়ালু'।"}},
+    {"id": "w_abd", "ar": "عَبْدٌ", "en": "servant", "bn": "বান্দা", "root": "ع ب د", "occ": 131},
+    {"id": "w_yawm", "ar": "يَوْمٌ", "en": "day", "bn": "দিন", "root": "ي و م", "occ": 475}
+   ],
+   "verses": [
+    {
+     "id": "v_fatiha3",
+     "ar": "الرَّحْمَٰنِ الرَّحِيمِ",
+     "tokens": ["الرَّحْمَٰنِ", "الرَّحِيمِ"],
+     "en": "The Most Compassionate, the Most Merciful.",
+     "bn": "যিনি পরম দয়ালু, পরম করুনাময়।",
+     "ref": "Al-Fātiḥah 1:3",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "Theme", "bn": "বিষয়বস্তু"},
+      "body": {"en": "These two names open nearly every surah. Mercy is the frame the whole Quran is read inside — even the warning surahs begin with them.", "bn": "প্রায় প্রতিটি সূরা এই দুই নাম দিয়ে শুরু। রহমতই সেই পরিধি, যার ভেতরে গোটা কুরআন পড়া হয় — ভয়ের সূরাগুলোও।"}
+    }
+    }
+   ]
+  }
+ ]
+}

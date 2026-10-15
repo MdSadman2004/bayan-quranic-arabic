@@ -1,0 +1,94 @@
+{
+ "id": "u7",
+ "num": 7,
+ "title": {"en": "Carrying the Message", "bn": "বার্তা বয়ে নেওয়া"},
+ "subtitle": {"en": "Pronouns, commands, and the sending", "bn": "সর্বনাম, আদেশ আর প্রেরণ"},
+ "lessons": [
+  {
+   "id": "u7l1",
+   "title": {"en": "Did We Not Expand?", "bn": "আমরা কি প্রশস্ত করিনি?"},
+   "teaches": [
+    {"id": "u7l1_t_alam", "kind": "concept", "ar": "أَلَمْ", "en": "did not …?", "bn": "কি না?", "note": {"en": "أَ ('is it not') + لَمْ ('not') = a rhetorical question that expects: yes, indeed it happened.", "bn": "أَ ('কি') + لَمْ ('না') = অলংকারিক প্রশ্ন, উত্তর ধরে নিয়েই: হ্যাঁ, তাই হয়েছেই।"}}
+   ],
+   "items": [
+    {"id": "w_sharaha", "ar": "نَشْرَحْ", "en": "We expand", "bn": "আমরা প্রশস্ত করি", "root": "ش ر ح"},
+    {"id": "w_sadr", "ar": "صَدْرَكَ", "en": "your chest", "bn": "তোমার বক্ষ", "root": "ص د ر"},
+    {"id": "w_usra", "ar": "الْعُسْر", "en": "the hardship", "bn": "কষ্ট", "root": "ع س ر"},
+    {"id": "w_yusra", "ar": "يُسْرًا", "en": "ease", "bn": "স্বস্তি", "root": "ي س ر"}
+   ],
+   "verses": [
+    {
+     "id": "v_sharh56",
+     "ar": "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا إِنَّ مَعَ الْعُسْرِ يُسْرًا",
+     "tokens": ["فَإِنَّ", "مَعَ", "الْعُسْرِ", "يُسْرًا", "إِنَّ", "مَعَ", "الْعُسْرِ", "يُسْرًا"],
+     "en": "For indeed, with hardship comes ease. Indeed, with hardship comes ease.",
+     "bn": "কাজেই নিশ্চয়ই কষ্টের সাথে স্বস্তি আছে। নিশ্চয়ই কষ্টের সাথে স্বস্তি আছে।",
+     "ref": "Ash-Sharḥ 94:5–6",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "One hardship, two eases", "bn": "এক কষ্ট, দুই স্বস্তি"},
+      "body": {"en": "Classical commentary notices the grammar: 'with hardship' is mentioned once, 'ease' twice — one hardship sitting between two eases, the one before it and the one after. The verse is repeated so you catch it the second time.", "bn": "ধ্রুপদী তাফসির ব্যাকরণেই খেয়াল করেন: 'কষ্ট' এসেছে একবার, 'স্বস্তি' দুইবার — এক কষ্টের মাঝখানে দুই স্বস্তি: আগেরটি আর পরেরটি। আয়াতটি দুইবার আসে, যাতে দ্বিতীয়বারে তা ধরা পড়ে।"}
+    }
+    }
+   ]
+  },
+  {
+   "id": "u7l2",
+   "title": {"en": "Remember Me", "bn": "আমাকে স্মরণ করো"},
+   "teaches": [
+    {"id": "u7l2_t_amr", "kind": "concept", "ar": "اِفْعَلْ", "en": "the command pattern", "bn": "আদেশের রূপ", "note": {"en": "Commands drop the prefix: يَذْكُرُ ('he remembers') → اذْكُرْ ('remember!'). فَـ and وَ can attach in front for flow.", "bn": "আদেশ রূপে সামনের হরফ ঝরে যায়: يَذْكُرُ → اذْكُرْ ('স্মরণ করো!')। প্রবাহের জন্য সামনে فَـ বা وَ যোগ হয়।"}}
+   ],
+   "items": [
+    {"id": "w_udhkur", "ar": "اذْكُرُوا", "en": "remember!", "bn": "স্মরণ করো", "root": "ذ ك ر"},
+    {"id": "w_dhikr", "ar": "ذِكْر", "en": "remembrance", "bn": "স্মরণ", "root": "ذ ك ر"},
+    {"id": "w_ashkur", "ar": "اشْكُرُوا", "en": "be grateful!", "bn": "কৃতজ্ঞ হও", "root": "ش ك ر"},
+    {"id": "w_adhkurkum", "ar": "أَذْكُرْكُمْ", "en": "I remember you", "bn": "আমি তোমাদের স্মরণ করি"},
+    {"id": "w_takfurun", "ar": "تَكْفُرُونِ", "en": "you deny", "bn": "অকৃতজ্ঞ হওয়া", "root": "ك ف ر"}
+   ],
+   "verses": [
+    {
+     "id": "v_baqara152",
+     "ar": "فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ",
+     "tokens": ["فَاذْكُرُونِي", "أَذْكُرْكُمْ", "وَاشْكُرُوا", "لِي", "وَلَا", "تَكْفُرُونِ"],
+     "en": "So remember Me, and I will remember you. Be grateful to Me and do not deny Me.",
+     "bn": "তোমরা আমাকে স্মরণ করো, আমিও তোমাদের স্মরণ করব; আমার প্রতি কৃতজ্ঞ থাকো, আর অকৃতজ্ঞ হয়ো না।",
+     "ref": "Al-Baqarah 2:152",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "Theme", "bn": "বিষয়বস্তু"},
+      "body": {"en": "The exchange is asymmetric: a moment of remembrance from you returns as Allah's remembrance of you. The verse pairs remembering with gratitude — and warns that the opposite of thanks is not forgetting but denying.", "bn": "লেনদেনটি অসম: তোমার এক মুহূর্তের স্মরণ ফিরে আসে আল্লাহর স্মরণ হয়ে। আয়াত স্মরণের সঙ্গে জোড়া দেয় কৃতজ্ঞতা — আর মনে করায়: কৃতজ্ঞতার বিপরীত ভুলে যাওয়া নয়, অস্বীকার করা।"}
+    }
+    }
+   ]
+  },
+  {
+   "id": "u7l3",
+   "title": {"en": "A Mercy to the Worlds", "bn": "সমগ্র জগতের রহমত"},
+   "teaches": [
+    {"id": "u7l3_t_arsalna", "kind": "word", "ar": "أَرْسَلْنَا", "en": "We sent", "bn": "আমরা পাঠিয়েছি", "note": {"en": "Form IV of ر-س-ل ('to send'), with نا ('we'): 'We sent.' The رَسُول is the one sent.", "bn": "ধাতু ر-س-ل-এর চতুর্থ বাব, সঙ্গে نا ('আমরা'): 'আমরা পাঠিয়েছি'। الرَّسُول মানে যে পাঠানো হয়েছে।"}}
+   ],
+   "items": [
+    {"id": "w_arsalna", "ar": "أَرْسَلْنَا", "en": "We sent", "bn": "আমরা পাঠিয়েছি", "root": "ر س ل", "occ": 130, "fam": true},
+    {"id": "w_mursalin", "ar": "الْمُرْسَلِينَ", "en": "the messengers", "bn": "রাসূলগণ", "root": "ر س ل"},
+    {"ref": "w_rahma"},
+    {"ref": "w_alamin"},
+    {"ref": "w_nas"}
+   ],
+   "verses": [
+    {
+     "id": "v_anbiya107",
+     "ar": "وَمَا أَرْسَلْنَاكَ إِلَّا رَحْمَةً لِّلْعَالَمِينَ",
+     "tokens": ["وَمَا", "أَرْسَلْنَاكَ", "إِلَّا", "رَحْمَةً", "لِّلْعَالَمِينَ"],
+     "en": "And We have not sent you except as a mercy to all the worlds.",
+     "bn": "আমরা তোমাকে সমগ্র জগতের জন্য রহমত হিসেবেই পাঠিয়েছি।",
+     "ref": "Al-Anbiyāʾ 21:107",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "Theme", "bn": "বিষয়বস্তু"},
+      "body": {"en": "The Quran never describes the sending except with رَحْمَةً — mercy, indefinite and unbounded — and لِّلْعَالَمِينَ: not for one nation, for the worlds. The frame you carry out of this course.", "bn": "কুরআন প্রেরণকে বর্ণনা করে একটিমাত্র শব্দে — رَحْمَةً: অনির্দিষ্ট, অসীম রহমত; আর لِّلْعَالَمِينَ: এক জাতির জন্য নয়, সমগ্র জগতের জন্য। এই কোর্স থেকে যে কাঠামো নিয়ে বেরোবেন।"}
+    }
+    }
+   ]
+  }
+ ]
+}

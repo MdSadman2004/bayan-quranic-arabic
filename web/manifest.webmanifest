@@ -1,0 +1,12 @@
+{
+  "name": "Bayan — Quranic Arabic",
+  "short_name": "Bayan",
+  "description": "Micro-learning Quranic Arabic: real Quranic verses, roots, spaced review. English / \u09ac\u09be\u0982\u09b2\u09be.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F7F2E8",
+  "theme_color": "#26231D",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

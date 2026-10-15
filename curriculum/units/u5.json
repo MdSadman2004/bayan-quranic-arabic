@@ -1,0 +1,99 @@
+{
+ "id": "u5",
+ "num": 5,
+ "title": {"en": "Roots & Families", "bn": "ধাতু ও পরিবার"},
+ "subtitle": {"en": "Three letters open whole families of meaning", "bn": "তিনটি হরফ খুলে দেয় অর্থের গোটা পরিবার"},
+ "lessons": [
+  {
+   "id": "u5l1",
+   "title": {"en": "Read! The First Word", "bn": "পড়ো! প্রথম শব্দ"},
+   "teaches": [
+    {"id": "u5l1_t_root", "kind": "concept", "ar": "ر ح م", "en": "one root, a whole family", "bn": "এক ধাতু, গোটা পরিবার", "note": {"en": "Almost every Arabic word grows from three letters. From ح-م-د: الْحَمْد، مَحْمَدَة، أَحْمَد… Learn the root once and the family unlocks.", "bn": "প্রায় প্রতিটি আরবি শব্দ তিনটি হরফ থেকে জন্মে। ধাতু একবার শিখলে পরিবার খুলে যায়।"}},
+    {"id": "u5l1_t_iqra", "kind": "word", "ar": "اقْرَأْ", "en": "Read!", "bn": "পড়ো!", "note": {"en": "The very first word of the Quran, revealed in the cave of Ḥirāʾ. Root ق-ر-أ.", "bn": "কুরআনের একেবারে প্রথম শব্দ, হেরা গুহায় অবতীর্ণ। ধাতু ق-ر-أ।"}}
+   ],
+   "items": [
+    {"id": "w_iqra", "ar": "اقْرَأْ", "en": "Read!", "bn": "পড়ো!", "root": "ق ر أ"},
+    {"id": "w_qalam", "ar": "الْقَلَم", "en": "the Pen", "bn": "কলম", "root": "ق ل م"},
+    {"id": "w_khalaqa", "ar": "خَلَقَ", "en": "He created", "bn": "সৃষ্টি করেছেন", "root": "خ ل ق", "occ": 184},
+    {"id": "w_alaq", "ar": "عَلَقٍ", "en": "a clinging clot", "bn": "জমাট বস্তু", "root": "ع ل ق"},
+    {"id": "w_akram", "ar": "الْأَكْرَم", "en": "the Most Generous", "bn": "মহা মহিমান্বিত", "root": "ك ر م"}
+   ],
+   "verses": [
+    {
+     "id": "v_alaq1",
+     "ar": "اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ",
+     "tokens": ["اقْرَأْ", "بِاسْمِ", "رَبِّكَ", "الَّذِي", "خَلَقَ"],
+     "en": "Read in the name of your Lord who created.",
+     "bn": "পড়ো, তোমার রবের নামে, যিনি সৃষ্টি করেছেন।",
+     "ref": "Al-ʿAlaq 96:1",
+     "context": {
+      "kind": "asbab",
+      "title": {"en": "The first revelation", "bn": "প্রথম ওহি"},
+      "body": {"en": "The first five verses of Sūrat al-ʿAlaq were the very first revelation: in the Cave of Ḥirāʾ, in Ramadan, the command came to read. The Quran's first word is not a rule but a command to read.", "bn": "সূরা আলাকের প্রথম পাঁচ আয়াতই ছিল সর্বপ্রথম ওহি: রমজান মাসে হেরা গুহায় পড়ার নির্দেশ এল। কুরআনের প্রথম শব্দটি নিয়ম নয় — পড়ার হুকুম।"}
+    }
+    }
+   ]
+  },
+  {
+   "id": "u5l2",
+   "title": {"en": "Written Upon Himself", "bn": "নিজের ওপর লিখে নিয়েছেন"},
+   "teaches": [
+    {"id": "u5l2_t_kataba", "kind": "word", "ar": "كَتَبَ", "en": "he wrote / decreed", "bn": "লিখেছেন / নির্ধারণ করেছেন", "note": {"en": "Root ك-ت-ب lives between writing and decreeing: what Allah writes is what happens — and الْكِتَاب is the writing.", "bn": "ধাতু ك-ت-ب: লেখা আর বিধান দুই-ই — আল্লাহ যা লেখেন তা-ই ঘটে; الْكِتَاب সেই লেখা।"}}
+   ],
+   "items": [
+    {"id": "w_kataba", "ar": "كَتَبَ", "en": "he wrote / decreed", "bn": "লিখেছেন", "root": "ك ت ب"},
+    {"id": "w_mubin", "ar": "مُبِين", "en": "clear", "bn": "স্পষ্ট", "root": "ب ي ن", "occ": 119},
+    {"id": "w_ghafur", "ar": "غَفُور", "en": "Forgiving", "bn": "ক্ষমাশীল", "root": "غ ف ر"},
+    {"id": "w_rahimin", "ar": "الرَّاحِمِينَ", "en": "the merciful ones", "bn": "দয়ালুদের", "root": "ر ح م"},
+    {"id": "w_nur", "ar": "نُور", "en": "light", "bn": "আলো", "root": "ن و ر"}
+   ],
+   "verses": [
+    {
+     "id": "v_anam12",
+     "ar": "كَتَبَ رَبُّكُمْ عَلَىٰ نَفْسِهِ الرَّحْمَةَ",
+     "tokens": ["كَتَبَ", "رَبُّكُمْ", "عَلَىٰ", "نَفْسِهِ", "الرَّحْمَةَ"],
+     "en": "Your Lord has written mercy upon Himself.",
+     "bn": "তোমাদের রব নিজের ওপর রহমত লিখে নিয়েছেন।",
+     "ref": "Al-Anʿām 6:12 (fragment)",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "Theme", "bn": "বিষয়বস্তু"},
+      "body": {"en": "Here mercy is not a mood but a commitment: كَتَبَ عَلَىٰ نَفْسِهِ — written upon Himself, with the same root as كِتَاب. Mercy is already in the Book before you open it.", "bn": "এখানে রহমত মুড নয়, অঙ্গীকার: كَتَبَ عَلَىٰ نَفْسِهِ — নিজের ওপর লিখে নেওয়া; ধাতু একই কিতাবের। কিতাব খোলার আগেই রহমত তার ভেতরে লেখা।"}
+    }
+    }
+   ]
+  },
+  {
+   "id": "u5l3",
+   "title": {"en": "The Two Journeys", "bn": "দুই কাফেলা"},
+   "teaches": [
+    {"id": "u5l3_t_fa", "kind": "word", "ar": "فَـ", "en": "so, then", "bn": "তাই, তবে", "note": {"en": "فَـ ties cause to result: blessings listed → فَلْيَعْبُدُوا, 'SO let them worship.'", "bn": "فَـ কারণ-ফল জোড়া দেয়: নিয়ামতের তালিকা → فَلْيَعْبُدُوا — 'তাই তারা ইবাদত করুক'।"}}
+   ],
+   "items": [
+    {"id": "w_quraysh", "ar": "قُرَيْش", "en": "Quraysh", "bn": "কুরাইশ"},
+    {"id": "w_ilaf", "ar": "إِيلَاف", "en": "accustomed safety", "bn": "অভ্যস্ত নিরাপত্তা"},
+    {"id": "w_shita", "ar": "الشِّتَاء", "en": "winter", "bn": "শীত", "root": "ش ت و"},
+    {"id": "w_sayf", "ar": "الصَّيْف", "en": "summer", "bn": "গ্রীষ্ম", "root": "ص ي ف"},
+    {"id": "w_bayt", "ar": "الْبَيْت", "en": "the House (the Kaaba)", "bn": "ঘর (কাবা)", "root": "ب ي ت"},
+    {"id": "w_khawf", "ar": "خَوْف", "en": "fear", "bn": "ভয়", "root": "خ و ف"},
+    {"id": "w_ju", "ar": "جُوع", "en": "hunger", "bn": "ক্ষুধা", "root": "ج و ع"},
+    {"id": "w_amanahum", "ar": "آمَنَهُم", "en": "gave them security", "bn": "নিরাপত্তা দিলেন", "root": "أ م ن"}
+   ],
+   "verses": [
+    {
+     "id": "v_quraysh34",
+     "ar": "فَلْيَعْبُدُوا رَبَّ هَٰذَا الْبَيْتِ الَّذِي أَطْعَمَهُم مِّن جُوعٍ وَآمَنَهُم مِّنْ خَوْفٍ",
+     "tokens": ["فَلْيَعْبُدُوا", "رَبَّ", "هَٰذَا", "الْبَيْتِ", "الَّذِي", "أَطْعَمَهُم", "مِّن", "جُوعٍ", "وَآمَنَهُم", "مِّنْ", "خَوْفٍ"],
+     "en": "So let them worship the Lord of this House — who has fed them against hunger and made them safe from fear.",
+     "bn": "তাই তারা এই ঘরের রবের ইবাদত করুক — যিনি ক্ষুধার পর তাদের খাওয়ালেন এবং ভয় থেকে নিরাপদ করেছেন।",
+     "ref": "Quraysh 106:3–4",
+     "context": {
+      "kind": "story",
+      "title": {"en": "The two caravans", "bn": "দুই কাফেলা"},
+      "body": {"en": "Quraysh's safe winter and summer trade journeys, and the sanctuary of the House — set after the Year of the Elephant, when Abraha's army was destroyed on its way to the Kaaba. The surah answers all of it in four words: فَلْيَعْبُدُوا رَبَّ هَٰذَا الْبَيْتِ.", "bn": "কুরাইশের নিরাপদ শীত-গ্রীষ্মের বাণিজ্য সফর আর এই ঘরের নিরাপত্তা — হাতির বছর অর্থাৎ কাবার পথে আবরাহার বাহিনী ধ্বংস হওয়ার পরের প্রেক্ষাপট। সূরাটি এর সব উত্তর দেয় চার শব্দে।"}
+    }
+    }
+   ]
+  }
+ ]
+}

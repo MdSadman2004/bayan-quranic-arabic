@@ -1,0 +1,125 @@
+{
+ "id": "u8",
+ "num": 8,
+ "title": {"en": "Reading the Message", "bn": "বার্তা পড়া"},
+ "subtitle": {"en": "Full surahs, read end to end", "bn": "পূর্ণ সূরা, শুরু থেকে শেষ"},
+ "lessons": [
+  {
+   "id": "u8l1",
+   "title": {"en": "The Opening, Verse by Verse", "bn": "সূচনা, আয়াতে আয়াতে"},
+   "teaches": [
+    {"id": "u8l1_t_umm", "kind": "concept", "ar": "أُمُّ الْكِتَاب", "en": "Umm al-Kitāb — the Mother of the Book", "bn": "উম্মুল কিতাব — কিতাবের মা", "note": {"en": "Seven verses recited in every unit of prayer, called in 15:87 'the seven oft-repeated.' Every theme of the Quran is seeded here.", "bn": "প্রতিটি রাকাতে পড়া সাতটি আয়াত; ১৫:৮৭-এ 'বারবার পঠিত সাতটি'। কুরআনের প্রতিটি বিষয় এখানে বীজ হয়ে আছে।"}}
+   ],
+   "items": [
+    {"id": "w_ihdina", "ar": "اهْدِنَا", "en": "guide us", "bn": "আমাদের পথ দেখাও", "root": "ه د ي"},
+    {"id": "w_anamta", "ar": "أَنْعَمْتَ", "en": "You favored", "bn": "তুমি অনুগ্রহ করেছ", "root": "ن ع م"},
+    {"id": "w_dallin", "ar": "الضَّالِّينَ", "en": "those astray", "bn": "পথভ্রষ্ট", "root": "ض ل ل"},
+    {"ref": "w_sirat"},
+    {"ref": "w_mustaqim"},
+    {"ref": "w_malik"},
+    {"ref": "w_din"},
+    {"ref": "w_hamd"}
+   ],
+   "verses": [
+    {
+     "id": "v_fatiha_a",
+     "ar": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+     "tokens": ["بِسْمِ", "اللَّهِ", "الرَّحْمَٰنِ", "الرَّحِيمِ", "الْحَمْدُ", "لِلَّهِ", "رَبِّ", "الْعَالَمِينَ"],
+     "en": "In the name of Allah, the Most Compassionate, the Most Merciful. All praise belongs to Allah, Lord of all the worlds.",
+     "bn": "আল্লাহর নামে, যিনি পরম দয়ালু, পরম করুনাময়। সমস্ত প্রশংসা আল্লাহর, যিনি সকল জগতের রব।",
+     "ref": "Al-Fātiḥah 1:1–2",
+     "context": {
+      "kind": "others",
+      "title": {"en": "The Mother of the Book", "bn": "কিতাবের মা"},
+      "body": {"en": "Umm al-Kitāb: recited in every unit of prayer, called 'the seven oft-repeated' (15:87). Everything the Quran will unfold hangs on this opening frame.", "bn": "উম্মুল কিতাব: প্রতিটি রাকাতে পঠিত; ১৫:৮৭-এ 'বারবার পড়া সাতটি আয়াত'। কুরআন যা কিছু খুলে দেখাবে, সব ঝোলে এই সূচনা-কাঠামোতে।"}
+    }
+    },
+    {
+     "id": "v_fatiha_b",
+     "ar": "الرَّحْمَٰنِ الرَّحِيمِ مَالِكِ يَوْمِ الدِّينِ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+     "tokens": ["الرَّحْمَٰنِ", "الرَّحِيمِ", "مَالِكِ", "يَوْمِ", "الدِّينِ", "إِيَّاكَ", "نَعْبُدُ", "وَإِيَّاكَ", "نَسْتَعِينُ"],
+     "en": "The Most Compassionate, the Most Merciful. Master of the Day of Judgment. You alone we worship, and You alone we ask for help.",
+     "bn": "যিনি পরম দয়ালু, পরম করুনাময়। বিচার দিনের মালিক। কেবল তোমারই ইবাদত করি, আর কেবল তোমারই সাহায্য চাই।",
+     "ref": "Al-Fātiḥah 1:3–5",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "Theme", "bn": "বিষয়বস্তু"},
+      "body": {"en": "Mercy, then accountability, then devotion — the emotional order of the Quran, in three verses.", "bn": "রহমত, তারপর জবাবদিহি, তারপর ইবাদত — তিন আয়াতে গোটা কুরআনের অনুভূতির ক্রম।"}
+    }
+    },
+    {
+     "id": "v_fatiha_c",
+     "ar": "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+     "tokens": ["اهْدِنَا", "الصِّرَاطَ", "الْمُسْتَقِيمَ", "صِرَاطَ", "الَّذِينَ", "أَنْعَمْتَ", "عَلَيْهِمْ", "غَيْرِ", "الْمَغْضُوبِ", "عَلَيْهِمْ", "وَلَا", "الضَّالِّينَ"],
+     "en": "Guide us to the straight path — the path of those You have favored, not of those who incurred wrath, nor of those astray.",
+     "bn": "আমাদেরকে সোজা পথ দেখাও — তাদের পথ, যাদের প্রতি তুমি অনুগ্রহ করেছ; তাদের পথ নয়, যারা ক্রোধভাজন, আর না পথভ্রষ্টদের।",
+     "ref": "Al-Fātiḥah 1:6–7",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "Theme", "bn": "বিষয়বস্তু"},
+      "body": {"en": "The prayer ends by asking for a road — and the road is defined by whose footprints are on it: the favored, not the angered, not the lost.", "bn": "নামাজ শেষ হয় রাস্তা চেয়ে — আর রাস্তা চেনা হয় কার পদচিহ্নে: যাদের প্রতি অনুগ্রহ হয়েছে; ক্রোধভাজনদের নয়, পথভ্রষ্টদের নয়।"}
+    }
+    }
+   ]
+  },
+  {
+   "id": "u8l2",
+   "title": {"en": "Loss & the Four Doors Out", "bn": "ক্ষতি ও বেরোনোর চার দরজা"},
+   "teaches": [
+    {"id": "u8l2_t_four", "kind": "concept", "ar": "وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ", "en": "and they counsel each other to truth, and to patience", "bn": "আর তারা পরস্পরকে সত্য ও ধৈর্যের উপদেশ দেয়", "note": {"en": "Al-ʿAṣr ends with community: belief, action, then truth and patience passed from person to person. The four conditions of success.", "bn": "সূরা আসর শেষ হয় সমাজ দিয়ে: ঈমান, আমল, তারপর সত্য আর ধৈর্য — মানুষে মানুষে চলে যাওয়া উপদেশ। সফলতার চার শর্ত।"}}
+   ],
+   "items": [
+    {"id": "w_tawasaw", "ar": "تَوَاصَوْا", "en": "they counseled each other", "bn": "পরস্পর উপদেশ দিল", "root": "و ص ي"},
+    {"id": "w_sabr", "ar": "الصَّبْر", "en": "patience", "bn": "ধৈর্য", "root": "ص ب ر"},
+    {"ref": "w_amanu"},
+    {"ref": "w_amilu"},
+    {"ref": "w_salihat"},
+    {"ref": "w_haqq"}
+   ],
+   "verses": [
+    {
+     "id": "v_asr_full",
+     "ar": "وَالْعَصْرِ إِنَّ الْإِنسَانَ لَفِي خُسْرٍ إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ",
+     "tokens": ["وَالْعَصْرِ", "إِنَّ", "الْإِنسَانَ", "لَفِي", "خُسْرٍ", "إِلَّا", "الَّذِينَ", "آمَنُوا", "وَعَمِلُوا", "الصَّالِحَاتِ", "وَتَوَاصَوْا", "بِالْحَقِّ", "وَتَوَاصَوْا", "بِالصَّبْرِ"],
+     "en": "By the time — indeed the human is in loss, except those who believe and do righteous deeds, and counsel each other to truth, and counsel each other to patience.",
+     "bn": "সময়ের শপথ — নিশ্চয়ই মানুষ ক্ষতির মধ্যে; তারা ছাড়া, যারা ঈমান এনেছে, সৎকর্ম করেছে, আর পরস্পরকে সত্যের উপদেশ দিয়েছে ও ধৈর্যের উপদেশ দিয়েছে।",
+     "ref": "Al-ʿAṣr 103:1–3",
+     "context": {
+      "kind": "others",
+      "title": {"en": "The surah that suffices", "bn": "যে সূরাটিই যথেষ্ট"},
+      "body": {"en": "It is reported that Imam ash-Shāfiʿī said: if Allah had sent down only this surah, it would have sufficed mankind. Al-ʿAṣr compresses the whole Quran into three verses: time, loss, and four doors out.", "bn": "কথিত আছে ইমাম শাফেয়ী বলেছেন: আল্লাহ যদি কেবল এই সূরাটিই নাজিল করতেন, মানুষের জন্য তা-ই যথেষ্ট হতো। সূরা আসর গোটা কুরআন সংহত করে তিন আয়াতে: সময়, ক্ষতি, আর বেরোনোর চারটি দরজা।"}
+    }
+    }
+   ]
+  },
+  {
+   "id": "u8l3",
+   "title": {"en": "The Greatest Verse", "bn": "সর্বশ্রেষ্ঠ আয়াত"},
+   "teaches": [
+    {"id": "u8l3_t_hayy", "kind": "concept", "ar": "الْحَيُّ الْقَيُّومُ", "en": "the Ever-Living, the Self-Sustaining", "bn": "চিরঞ্জীব, স্বয়ংস্থিত", "note": {"en": "Two names carry the whole verse: life that never ends, and the one who holds everything else up.", "bn": "দুটি নামই গোটা আয়াত বহন করে: যে জীবন কখনো শেষ হয় না, আর যিনি বাকি সবকিছু ধরে রাখেন।"}}
+   ],
+   "items": [
+    {"id": "w_ilaha", "ar": "إِلَٰه", "en": "a deity", "bn": "ইলাহ", "root": "أ ل ه", "occ": 147},
+    {"id": "w_hayy", "ar": "الْحَيُّ", "en": "the Ever-Living", "bn": "চিরঞ্জীব", "root": "ح ي ي"},
+    {"id": "w_qayyum", "ar": "الْقَيُّوم", "en": "the Self-Sustaining", "bn": "সর্বসত্তার ধারক", "root": "ق و م"},
+    {"ref": "w_la"},
+    {"ref": "w_huwa"}
+   ],
+   "verses": [
+    {
+     "id": "v_kursi",
+     "ar": "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ",
+     "tokens": ["اللَّهُ", "لَا", "إِلَٰهَ", "إِلَّا", "هُوَ", "الْحَيُّ", "الْقَيُّومُ"],
+     "en": "Allah — there is no deity except Him, the Ever-Living, the Self-Sustaining.",
+     "bn": "আল্লাহ — তিনি ছাড়া কোনো ইলাহ নেই; তিনিই চিরঞ্জীব, সর্বসত্তার ধারক।",
+     "ref": "Al-Baqarah 2:255 (opening of Āyat al-Kursī)",
+     "context": {
+      "kind": "others",
+      "title": {"en": "The greatest ayah", "bn": "সর্বশ্রেষ্ঠ আয়াত"},
+      "body": {"en": "Ubayy ibn Kaʿb was asked which verse of the Book was greatest; the answer reported in Ṣaḥīḥ Muslim was Āyat al-Kursī — the verse that begins with these seven words. You can now read its opening, word by word.", "bn": "উবাই ইবনে কা'বকে জিজ্ঞেস করা হলো কিতাবের শ্রেষ্ঠ আয়াত কোনটি; সহিহ মুসলিমে বর্ণিত উত্তর — আয়াতুল কুরসি। আপনি এখন এর সূচনা শব্দে শব্দে পড়তে পারেন।"}
+    }
+    }
+   ]
+  }
+ ]
+}

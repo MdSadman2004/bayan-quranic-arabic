@@ -1,0 +1,23 @@
+# Android build outputs
+android/.gradle/
+android/build/
+android/app/build/
+android/.kotlin/
+android/.idea/
+android/local.properties
+android/captures/
+*.apk
+*.aab
+*.jks
+*.keystore
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+hs_err_pid*.log

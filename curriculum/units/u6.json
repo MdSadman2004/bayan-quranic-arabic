@@ -1,0 +1,109 @@
+{
+ "id": "u6",
+ "num": 6,
+ "title": {"en": "Particles", "bn": "পার্টিকল"},
+ "subtitle": {"en": "The tiny words that bend meaning", "bn": "অর্থ মোচড়ানো ছোট ছোট শব্দ"},
+ "lessons": [
+  {
+   "id": "u6l1",
+   "title": {"en": "We Have Given You", "bn": "আমরা তোমাকে দান করেছি"},
+   "teaches": [
+    {"id": "u6l1_t_inna", "kind": "concept", "ar": "إِنَّا", "en": "indeed We", "bn": "নিশ্চয়ই আমরা", "note": {"en": "إِنَّ (emphasis) + نا ('we') fuse into one word. إِنَّ exists to remove doubt about what follows.", "bn": "إِنَّ (জোর) + نا ('আমরা') মিলে এক শব্দ। إِنَّ-র কাজ: পরের কথা নিয়ে সন্দেহ মুছে দেওয়া।"}}
+   ],
+   "items": [
+    {"id": "w_inna", "ar": "إِنَّ", "en": "indeed", "bn": "নিশ্চয়ই", "occ": 1682},
+    {"id": "w_aatayna", "ar": "أَعْطَيْنَاكَ", "en": "We gave you", "bn": "আমরা তোমাকে দান করেছি", "root": "ع ط و"},
+    {"id": "w_kawthar", "ar": "الْكَوْثَر", "en": "the Abundance", "bn": "প্রাচুর্য (কাউসার)", "root": "ك ث ر"},
+    {"id": "w_salli", "ar": "فَصَلِّ", "en": "so pray", "bn": "অতএব নামাজ পড়ো", "root": "ص ل و"},
+    {"id": "w_anhar", "ar": "وَانْحَر", "en": "and sacrifice", "bn": "ও কুরবানি করো", "root": "ن ح ر"},
+    {"id": "w_shani", "ar": "شَانِئَكَ", "en": "your hater", "bn": "তোমার শত্রু", "root": "ش ن أ"}
+   ],
+   "verses": [
+    {
+     "id": "v_kawthar123",
+     "ar": "إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ فَصَلِّ لِرَبِّكَ وَانْحَرْ إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ",
+     "tokens": ["إِنَّا", "أَعْطَيْنَاكَ", "الْكَوْثَرَ", "فَصَلِّ", "لِرَبِّكَ", "وَانْحَرْ", "إِنَّ", "شَانِئَكَ", "هُوَ", "الْأَبْتَرُ"],
+     "en": "Indeed, We have given you al-Kawthar. So pray to your Lord and sacrifice. Indeed, it is your hater who is cut off.",
+     "bn": "নিশ্চয়ই আমরা তোমাকে কাউসার দান করেছি। কাজেই তোমার রবের জন্য নামাজ পড়ো ও কুরবানি করো। নিশ্চয়ই তোমার শত্রুই নির্বংশ।",
+     "ref": "Al-Kawthar 108:1–3",
+     "context": {
+      "kind": "asbab",
+      "title": {"en": "Watch what you call cut off", "bn": "যাকে নির্বংশ বললে"},
+      "body": {"en": "Classical reports say that when the Prophet's ﷺ son passed away, opponents mocked him as abtar — 'cut off', a man with no line to carry his name. The surah answers: it is the mocker who is cut off; the Prophet is given al-Kawthar, abundance beyond counting.", "bn": "ধর্মতত্ত্বের সংকলনগুলোতে আছে, নবী ﷺ-এর পুত্র ইন্তেকাল করলে শত্রুরা তাঁকে 'আবতার' — নির্বংশ বলে খোঁচা দেয়। সূরাটি উত্তর দেয়: নির্বংশ সেই খোঁচাদাতা; নবীকে দেওয়া হয়েছে কাউসার — গণনার বাইরের প্রাচুর্য।"}
+    }
+    }
+   ]
+  },
+  {
+   "id": "u6l2",
+   "title": {"en": "By the Time", "bn": "সময়ের শপথ"},
+   "teaches": [
+    {"id": "u6l2_t_oath", "kind": "concept", "ar": "وَالْعَصْرِ", "en": "By the time!", "bn": "সময়ের শপথ!", "note": {"en": "An oath: وَ + a thing = 'By...!' Allah swears by time, dawn, the sky, the fig — whatever He swears by, He is pointing you to look at it.", "bn": "শপথ: وَ + বস্তু = 'শপথ সেই…'। আল্লাহ শপথ করেন সময়, ভোর, আকাশ, ডুমুরের — যার নামে শপথ, তার দিকে তাকাতে বলছেন।"}}
+   ],
+   "items": [
+    {"id": "w_asr", "ar": "الْعَصْر", "en": "the time, the afternoon", "bn": "সময়", "root": "ع ص ر"},
+    {"id": "w_khusr", "ar": "خُسْر", "en": "loss", "bn": "ক্ষতি", "root": "خ س ر"},
+    {"id": "w_illa", "ar": "إِلَّا", "en": "except", "bn": "ছাড়া", "occ": 659},
+    {"id": "w_in", "ar": "إِن", "en": "if", "bn": "যদি", "occ": 703},
+    {"id": "w_idha", "ar": "إِذَا", "en": "when", "bn": "যখন", "occ": 423}
+   ],
+   "verses": [
+    {
+     "id": "v_asr12",
+     "ar": "وَالْعَصْرِ إِنَّ الْإِنسَانَ لَفِي خُسْرٍ",
+     "tokens": ["وَالْعَصْرِ", "إِنَّ", "الْإِنسَانَ", "لَفِي", "خُسْرٍ"],
+     "en": "By the time — indeed the human is in loss.",
+     "bn": "সময়ের শপথ — নিশ্চয়ই মানুষ ক্ষতির মধ্যে।",
+     "ref": "Al-ʿAṣr 103:1–2",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "Theme", "bn": "বিষয়বস্তু"},
+      "body": {"en": "The human is 'in' loss — the preposition فِي makes loss a container, like water you sink into. The exception that follows is the only way out.", "bn": "মানুষ ক্ষতির 'ভেতরে' — فِي অব্যয় ক্ষতিকে আধার বানায়, যেন ডুবে যাওয়া পানি। পরের 'তবে তারা ছাড়া'-ই কেবল বেরোনোর পথ।"}
+    }
+    }
+   ]
+  },
+  {
+   "id": "u6l3",
+   "title": {"en": "What Else But Beauty?", "bn": "সৌন্দর্য ছাড়া আর কী?"},
+   "teaches": [
+    {"id": "u6l3_t_hal", "kind": "word", "ar": "هَلْ", "en": "is / does …?", "bn": "কি?", "note": {"en": "هَلْ opens a yes/no question; إِلَّا ('except') follows — together they build the Quran's most self-answering sentence.", "bn": "هَلْ হ্যাঁ/না প্রশ্ন খোলে; পরে আসে إِلَّا ('ছাড়া') — দুটো মিলে কুরআনের সবচেয়ে স্ব-উত্তরপ্রদ বাক্য গড়ে।"}}
+   ],
+   "items": [
+    {"id": "w_hal", "ar": "هَلْ", "en": "is / does …?", "bn": "কি?"},
+    {"id": "w_jaza", "ar": "جَزَاء", "en": "recompense", "bn": "প্রতিদান", "root": "ج ز ي"},
+    {"id": "w_ihsan", "ar": "الْإِحْسَان", "en": "excellence, kindness", "bn": "সদাচরণ", "root": "ح س ن"},
+    {"id": "w_abasa", "ar": "عَبَسَ", "en": "he frowned", "bn": "ভ্রুকুঞ্চিত করলেন", "root": "ع ب س"},
+    {"id": "w_ama", "ar": "الْأَعْمَى", "en": "the blind", "bn": "অন্ধ", "root": "ع م ي"}
+   ],
+   "verses": [
+    {
+     "id": "v_rahman60",
+     "ar": "هَلْ جَزَاءُ الْإِحْسَانِ إِلَّا الْإِحْسَانُ",
+     "tokens": ["هَلْ", "جَزَاءُ", "الْإِحْسَانِ", "إِلَّا", "الْإِحْسَانُ"],
+     "en": "Is the reward for excellence anything but excellence?",
+     "bn": "সদাচরণের প্রতিদান সদাচরণ ছাড়া আর কী?",
+     "ref": "Ar-Raḥmān 55:60",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "Theme", "bn": "বিষয়বস্তু"},
+      "body": {"en": "A question that answers itself. Sūrat ar-Raḥmān repeats its refrain thirty-one times — so which of your Lord's favors will you deny? This verse is the surah's engine: kindness summons kindness.", "bn": "প্রশ্নই উত্তর। সূরা আর-রাহমান তার ধুয়া ফেরায় একত্রিশবার — তবে রবের কোন নিয়ামত অস্বীকার করবে? এই আয়াত সূরার ইঞ্জিন: সদাচরণ ডাকে সদাচরণকে।"}
+    }
+    },
+    {
+     "id": "v_abasa12",
+     "ar": "عَبَسَ وَتَوَلَّىٰ أَن جَاءَهُ الْأَعْمَىٰ",
+     "tokens": ["عَبَسَ", "وَتَوَلَّىٰ", "أَن", "جَاءَهُ", "الْأَعْمَىٰ"],
+     "en": "He frowned and turned away — that the blind man came to him.",
+     "bn": "তিনি ভ্রুকুঞ্চিত করলেন ও মুখ ফিরিয়ে নিলেন — কারণ তাঁর কাছে অন্ধ ব্যক্তি এসেছিল।",
+     "ref": "ʿAbasa 80:1–2",
+     "context": {
+      "kind": "asbab",
+      "title": {"en": "The frowning", "bn": "ভ্রুকুঞ্চন"},
+      "body": {"en": "Classical tafsīrs report: a blind Companion, Ibn Umm Maktūm, came seeking guidance while the Prophet ﷺ was occupied with the leaders of Quraysh. The surah opens by correcting the frown — the seeker is never less important than the meeting.", "bn": "তাফসিরের কিতাবগুলোতে আছে: অন্ধ সাহাবি ইবনে উম্মে মাকতুম হেদায়েতের খোঁজে এলেন, তখন নবী ﷺ কুরাইশ নেতাদের সাথে ব্যস্ত। সূরা শুরুই হয় সেই ভ্রুকুঞ্চন সংশোধন করে — খোঁজা মানুষ কোনো মজলিসের চেয়ে কম নয়।"}
+    }
+    }
+   ]
+  }
+ ]
+}

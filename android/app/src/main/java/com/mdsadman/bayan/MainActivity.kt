@@ -1,0 +1,112 @@
+package com.mdsadman.bayan
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.delay
+
+class MainActivity : ComponentActivity() {
+
+    private lateinit var controller: AppController
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        controller = AppController(applicationContext)
+        controller.initTts(this)
+        handleIntent(intent)
+        setContent { BayanTheme { BayanApp(controller) } }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        handleIntent(intent)
+    }
+
+    override fun onDestroy() {
+        controller.shutdownTts()
+        super.onDestroy()
+    }
+
+    private fun handleIntent(intent: Intent?) {
+        val i = intent ?: return
+        when (i.getStringExtra("screen")) {
+            "lesson" -> {
+                controller.pendingLesson = i.getStringExtra("lesson") ?: "u1l1"
+                controller.pendingAuto = i.getBooleanExtra("auto", false)
+            }
+            "profile" -> controller.go("profile")
+            "practice" -> controller.go("practice")
+            "home" -> controller.go("home")
+        }
+    }
+}
+
+@Composable
+fun BayanApp(c: AppController) {
+    LaunchedEffect(Unit) {
+        c.processPendingIntent()
+    }
+    Box(Modifier.fillMaxSize().background(Paper)) {
+        when (c.route) {
+            "onboarding" -> OnboardingScreen(c)
+            "home" -> ScreensWithTabs(c) { HomeScreen(c) }
+            "practice" -> ScreensWithTabs(c) { PracticeScreen(c) }
+            "profile" -> ScreensWithTabs(c) { ProfileScreen(c) }
+            "lesson" -> LessonScreen(c)
+        }
+        ToastView(c)
+    }
+}
+
+@Composable
+private fun ScreensWithTabs(c: AppController, content: @Composable () -> Unit) {
+    Box(Modifier.fillMaxSize()) {
+        Box(Modifier.fillMaxSize().padding(bottom = 60.dp)) { content() }
+        TabBar(c, Modifier.align(Alignment.BottomCenter))
+    }
+}
+
+@Composable
+fun ToastView(c: AppController) {
+    val text = c.toast ?: return
+    LaunchedEffect(text) {
+        delay(2000)
+        c.toast = null
+    }
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .padding(bottom = 96.dp),
+        contentAlignment = Alignment.BottomCenter
+    ) {
+        Text(
+            text,
+            color = Paper,
+            fontSize = 13.5.sp,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .clip(RoundedCornerShape(999.dp))
+                .background(Ink)
+                .padding(horizontal = 20.dp, vertical = 10.dp)
+        )
+    }
+}

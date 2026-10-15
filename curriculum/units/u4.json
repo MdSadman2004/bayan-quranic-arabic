@@ -1,0 +1,96 @@
+{
+ "id": "u4",
+ "num": 4,
+ "title": {"en": "The Present", "bn": "বর্তমান কাল"},
+ "subtitle": {"en": "Verbs that keep happening — يَفْعَلُ", "bn": "যে কাজ চলতেই থাকে — يَفْعَلُ"},
+ "lessons": [
+  {
+   "id": "u4l1",
+   "title": {"en": "No Burden Beyond Capacity", "bn": "সামর্থ্যের বাইরে বোঝা নেই"},
+   "teaches": [
+    {"id": "u4l1_t_mudari", "kind": "concept", "ar": "يَفْعَلُ", "en": "he does / is doing", "bn": "সে করে / করছে", "note": {"en": "Present tense starts with one of أ، ن، ي، ت — the 'ana yatu' letters say WHO acts: يَفْعَلُ (he), تَفْعَلُ (you/she), نَفْعَلُ (we), أَفْعَلُ (I).", "bn": "বর্তমান কাল শুরু হয় أ، ن، ي، ت দিয়ে — এরা বলে দেয় কে করছে: يَ (সে), تَ (তুমি/তিনি), نَ (আমরা), أَ (আমি)।"}},
+    {"id": "u4l1_t_la", "kind": "word", "ar": "لَا", "en": "not", "bn": "না", "note": {"en": "لَا + present verb = 'does not' — now and always: لَا يُكَلِّفُ, 'He does not burden.'", "bn": "لَا + বর্তমান ক্রিয়া = 'করে না' — এখনও না, সবসময় না: لَا يُكَلِّفُ = 'তিনি বোঝা চাপান না'।"}}
+   ],
+   "items": [
+    {"id": "w_la", "ar": "لَا", "en": "no, not", "bn": "না", "occ": 1742},
+    {"id": "w_yukallifu", "ar": "يُكَلِّفُ", "en": "He burdens", "bn": "বোঝা চাপান", "root": "ك ل ف", "note": {"en": "From تَكْلِيف: a task laid on someone capable of carrying it.", "bn": "তাকলিফ থেকে: সামর্থ্যবানের কাঁধে রাখা দায়িত্ব।"}},
+    {"id": "w_nafs", "ar": "نَفْسٌ", "en": "soul, self", "bn": "আত্মা, নিজ", "root": "ن ف س", "occ": 295},
+    {"id": "w_wusa", "ar": "وُسْعَهَا", "en": "its capacity", "bn": "তার সামর্থ্য", "root": "و س ع"},
+    {"id": "w_shay", "ar": "شَيْءٌ", "en": "thing", "bn": "বস্তু, কিছু", "root": "ش ي أ", "occ": 283}
+   ],
+   "verses": [
+    {
+     "id": "v_baqara286",
+     "ar": "لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا",
+     "tokens": ["لَا", "يُكَلِّفُ", "اللَّهُ", "نَفْسًا", "إِلَّا", "وُسْعَهَا"],
+     "en": "Allah does not burden a soul beyond its capacity.",
+     "bn": "আল্লাহ কারও ওপর তার সামর্থ্যের বাইরে বোঝা চাপান না।",
+     "ref": "Al-Baqarah 2:286",
+     "context": {
+      "kind": "asbab",
+      "title": {"en": "Why it was revealed", "bn": "কেন নাজিল হলো"},
+      "body": {"en": "Reported in Ṣaḥīḥ Muslim: when the preceding verse descended, the Companions were alarmed — then this verse came as relief. It closes Sūrat al-Baqarah with a rule of mercy: no soul is asked beyond what it can carry.", "bn": "সহিহ মুসলিমে বর্ণিত: আগের আয়াতটি নাজিল হলে সাহাবারা দুশ্চিন্তায় পড়েন — এরপর এই আয়াত সান্ত্বনা হয়ে নামে। সূরা বাকারার শেষে রহমতের একটি নিয়ম রেখে যায়: কেউ সামর্থ্যের বাইরে কিছু পাবে না।"}
+    }
+    }
+   ]
+  },
+  {
+   "id": "u4l2",
+   "title": {"en": "Signs for the Mindful", "bn": "সচেতনদের জন্য নিদর্শন"},
+   "teaches": [
+    {"id": "u4l2_t_switch", "kind": "concept", "ar": "آمَنُوا ← يُؤْمِنُونَ", "en": "they believed ← they keep believing", "bn": "তারা ঈমান আনল ← তারা ঈমান আনে", "note": {"en": "Switching a verb from past to present shows continuity: not one moment of belief, but a life of it.", "bn": "ক্রিয়াকে অতীত থেকে বর্তমানে আনলে ধারাবাহিকতা প্রকাশ পায়: এক মুহূর্তের বিশ্বাস নয়, সারাজীবনের।"}}
+   ],
+   "items": [
+    {"id": "w_yuminun", "ar": "يُؤْمِنُونَ", "en": "they keep believing", "bn": "তারা ঈমান আনে", "root": "أ م ن"},
+    {"id": "w_ghayb", "ar": "الْغَيْب", "en": "the unseen", "bn": "অদৃশ্য", "root": "غ ي ب"},
+    {"id": "w_yunfiqun", "ar": "يُنفِقُونَ", "en": "they spend", "bn": "তারা ব্যয় করে", "root": "ن ف ق"},
+    {"id": "w_muttaqin", "ar": "الْمُتَّقِينَ", "en": "the mindful of God", "bn": "মুত্তাকী", "root": "و ق ي", "occ": 166, "note": {"en": "From و-ق-ي, to shield: the muttaqī puts a shield between himself and what harms.", "bn": "ধাতু و-ق-ي, ঢাল: মুত্তাকী নিজের আর ক্ষতির মাঝে ঢাল তোলে।"}},
+    {"id": "w_huda", "ar": "هُدًى", "en": "guidance", "bn": "হেদায়েত", "root": "ه د ي", "occ": 144}
+   ],
+   "verses": [
+    {
+     "id": "v_baqara2",
+     "ar": "ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ هُدًى لِّلْمُتَّقِينَ",
+     "tokens": ["ذَٰلِكَ", "الْكِتَابُ", "لَا", "رَيْبَ", "فِيهِ", "هُدًى", "لِّلْمُتَّقِينَ"],
+     "en": "This is the Book, there is no doubt in it — guidance for the mindful.",
+     "bn": "এই কিতাব, এতে কোনো সন্দেহ নেই; সচেতনদের জন্য হেদায়েত।",
+     "ref": "Al-Baqarah 2:2",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "Theme", "bn": "বিষয়বস্তু"},
+      "body": {"en": "The Book's first claim is not information but guidance — and it says guidance lands only in the mindful heart. The same word, التقوى, returns all through the Quran.", "bn": "কিতাবের প্রথম দাবি তথ্য নয়, হেদায়েত — আর তা পৌঁছায় কেবল সচেতন হৃদয়ে। সেই শব্দ 'তাকওয়া' ফিরে আসে গোটা কুরআনে।"}
+    }
+    }
+   ]
+  },
+  {
+   "id": "u4l3",
+   "title": {"en": "He Taught the Bayan", "bn": "তিনি শেখালেন বয়ান"},
+   "teaches": [
+    {"id": "u4l3_t_form2", "kind": "concept", "ar": "عَلِمَ → عَلَّمَ", "en": "he knew → He taught", "bn": "সে জানল → তিনি শেখালেন", "note": {"en": "Form II doubles the middle letter. The doubling turns knowing outward: عَلَّمَ is the knowledge that made itself teach.", "bn": "দ্বিতীয় বাবের কাজ — মাঝের হরফ দ্বিগুণ: জানা বেরিয়ে যায় বাইরে; عَلَّمَ মানে শেখানোর রূপ নেওয়া জ্ঞান।"}}
+   ],
+   "items": [
+    {"id": "w_allama", "ar": "عَلَّمَ", "en": "He taught", "bn": "তিনি শেখালেন", "root": "ع ل م"},
+    {"id": "w_bayan", "ar": "الْبَيَان", "en": "clear expression", "bn": "সুস্পষ্ট বর্ণনা", "root": "ب ي ن", "note": {"en": "From ب-ي-ن, 'to be clear' — and this app's name. Bayān: the clarity that makes meaning visible.", "bn": "ধাতু ب-ي-ن, 'স্পষ্ট হওয়া' — আর এই অ্যাপের নাম। বয়ান: যে স্বচ্ছতা অর্থকে দেখা যায়।"}},
+    {"id": "w_quran", "ar": "الْقُرْآن", "en": "the Quran", "bn": "কুরআন", "root": "ق ر أ", "note": {"en": "From ق-ر-أ, to read/recite: the Book that lives as recitation.", "bn": "ধাতু ق-ر-أ, পড়া: যে কিতাব তিলাওয়াত হিসেবেই বাঁচে।"}},
+    {"id": "w_insan", "ar": "الْإِنسَان", "en": "the human", "bn": "মানুষ", "root": "أ ن س"},
+    {"ref": "w_nafs"}
+   ],
+   "verses": [
+    {
+     "id": "v_rahman14",
+     "ar": "الرَّحْمَٰنُ عَلَّمَ الْقُرْآنَ خَلَقَ الْإِنسَانَ عَلَّمَهُ الْبَيَانَ",
+     "tokens": ["الرَّحْمَٰنُ", "عَلَّمَ", "الْقُرْآنَ", "خَلَقَ", "الْإِنسَانَ", "عَلَّمَهُ", "الْبَيَانَ"],
+     "en": "The Most Compassionate — He taught the Quran, created the human, and taught him clear expression.",
+     "bn": "পরম দয়াময় — তিনি শেখালেন কুরআন, সৃষ্টি করলেন মানুষ, আর শেখালেন সুস্পষ্ট বর্ণনা।",
+     "ref": "Ar-Raḥmān 55:1–4",
+     "context": {
+      "kind": "theme",
+      "title": {"en": "Theme", "bn": "বিষয়বস্তু"},
+      "body": {"en": "Sūrat ar-Raḥmān opens by counting favors: mercy taught the Quran, created the human, and taught him bayān — the ability to voice what is hidden inside. Teaching is the first gift listed, before food or wealth.", "bn": "সূরা আর-রাহমান শুরু হয় নিয়ামত গুনে: রাহমান শেখালেন কুরআন, সৃষ্টি করলেন মানুষ, শেখালেন বয়ান — ভেতরের কথা প্রকাশের ক্ষমতা। শিক্ষাই তালিকার প্রথম উপহার, খাদ্য বা সম্পদের আগে।"}
+    }
+    }
+   ]
+  }
+ ]
+}
