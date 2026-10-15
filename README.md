@@ -112,6 +112,24 @@ A second layer sits on top of the lesson loop, driven by `curriculum/features.js
   and feature works with no network at all. Listening exercises appear only when
   an offline Arabic TTS voice is installed.
 
+## Placement, appearance and feel
+
+- **Placement test** — a learner who already reads Arabic takes a ~2-minute adaptive
+  check (binary search over the ten tiers, four questions per probe). Units below the
+  tier the learner demonstrates are marked *placed*: they unlock the path without
+  granting XP or stars and never overwrite a lesson finished by hand. Undoable in one
+  tap; entirely on-device.
+- **Dark mode** — Auto (follows the device) / Light / Dark, stored with progress. The
+  dark palette is the same warm world after maghrib: lamp-lit ink and sand with a
+  lifted terracotta, plus night variants of the sky gradients.
+- **Our own glyph family** — no stock fire, gem, person or star icons and no emoji in
+  the UI. One 24×24 geometry is shared by both clients: khatim star (streak), dīnār
+  seal (gems), stair path (learn), echo loop (practice), mihrab arch (rites), ḥalaqah
+  ring (circle), qalam nib (profile), with sprout/spark/lamp/scroll marks for
+  achievements.
+- **Press feedback** — every press plays a short synthesized click (offline, no audio
+  assets) and a light haptic tick; both respect the sound setting.
+
 ## Sources
 
 - Vocabulary/frequency: Quranic Arabic Corpus (top-100 words ≈ 55% of the text;

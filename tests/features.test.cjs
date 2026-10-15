@@ -220,3 +220,131 @@ test('ḥalaqah respects the member cap and can lend a shield', () => {
   F.circleTick(circle, false);
   assert.ok(circle.lantern < 1, 'a missed day dims shared light');
 });
+
+/* ------------------------------------------------------------ placement test */
+
+function curriculum(cur) {
+  return cur || B.E.CUR;
+}
+
+/** Lesson id at `index` of a raw unit (lesson entries may be objects). */
+function unitId(unit, index) {
+  const entry = unit.lessons[index];
+  return typeof entry === 'string' ? entry : entry.id;
+}
+
+function playAll(session, cur, correct) {
+  let guard = 0;
+  while (!session.done && guard++ < 200) {
+    const q = F.placementQuestion(session, cur, {});
+    if (!q) break;
+    F.placementAnswer(session, correct ? true : false, cur, {});
+    if (session.done) break;
+  }
+  return session;
+}
+
+test('placement converges to the top tier when every answer is right', () => {
+  const cur = curriculum();
+  const session = F.placementStart(cur, {});
+  playAll(session, cur, true);
+  const result = F.placementResult(session);
+  assert.equal(session.done, true, 'the session finishes inside the budget');
+  assert.ok(session.total <= F.placementParams().budget, 'never exceeds the question budget');
+  assert.equal(result.tier, cur.units.length - 1, 'a perfect run reaches the top tier');
+  assert.equal(result.confident, true);
+});
+
+test('placement lands at the first tier when nothing is answered right', () => {
+  const cur = curriculum();
+  const session = F.placementStart(cur, {});
+  playAll(session, cur, false);
+  const result = F.placementResult(session);
+  assert.equal(result.tier, 0, 'no demonstrated tier means start at the beginning');
+  assert.equal(result.correct, 0);
+});
+
+test('placement stops at the highest tier actually answered correctly', () => {
+  const cur = curriculum();
+  const session = F.placementStart(cur, {});
+  const truth = 3; // learner really knows the first four units (index 0..3)
+  let guard = 0;
+  while (!session.done && guard++ < 200) {
+    const q = F.placementQuestion(session, cur, {});
+    if (!q) break;
+    F.placementAnswer(session, q.tier <= truth, cur, {});
+  }
+  const result = F.placementResult(session);
+  assert.ok(result.tier >= truth && result.tier <= truth + 1,
+    `expected the search to settle around tier ${truth}, got ${result.tier}`);
+  assert.ok(result.total >= 4, 'a judged search asks a meaningful number of questions');
+});
+
+test('every placement question offers four distinct options with the truth among them', () => {
+  const cur = curriculum();
+  const session = F.placementStart(cur, {});
+  for (let i = 0; i < 6 && !session.done; i++) {
+    const q = F.placementQuestion(session, cur, {});
+    assert.ok(q, 'a question is produced while the session runs');
+    assert.equal(q.options.length, 4);
+    assert.equal(new Set(q.options).size, 4, 'options are distinct');
+    assert.equal(q.options[q.answer], q.itemId, 'the answer points at the taught item');
+    assert.ok(session.probe >= 0 && session.probe < cur.units.length, 'the probe stays inside the ladder');
+    F.placementAnswer(session, i % 2 === 0, cur, {});
+  }
+});
+
+test('questions are deterministic for the same tier and item', () => {
+  const cur = curriculum();
+  const a = F.placementQuestion(F.placementStart(cur, {}), cur, {});
+  const b = F.placementQuestion(F.placementStart(cur, {}), cur, {});
+  assert.deepEqual(a, b, 'no hidden randomness between runs');
+});
+
+test('applying a placement skips the units below the tier without inventing XP', () => {
+  const cur = curriculum();
+  const state = B.E.newState();
+  const tier = 4;
+  const out = F.applyPlacement(state, tier, cur);
+  assert.equal(out.tier, tier);
+  assert.ok(out.skipped >= tier * 3, 'the lessons below the tier are marked');
+  for (let i = 0; i < tier; i++) {
+    const unit = cur.units[i];
+    const ids = unit.lessons.map((l) => (typeof l === 'string' ? l : l.id));
+    assert.equal(state.unitsDone[unit.id], true, `unit ${unit.id} counts as placed`);
+    ids.forEach((id) => {
+      assert.equal(state.lessons[id].done, true);
+      assert.equal(state.lessons[id].placed, true);
+      assert.equal(state.lessons[id].stars, 0, 'a placed lesson grants no stars');
+    });
+  }
+  const tierFirst = unitId(cur.units[tier], 0);
+  assert.equal(state.lessons[tierFirst], undefined, 'the placed tier itself stays untouched');
+  assert.equal(state.xp, 0, 'placing never grants XP');
+  assert.equal(state.placedTier, tier);
+});
+
+test('placing preserves real completions and undo removes only placed lessons', () => {
+  const cur = curriculum();
+  const state = B.E.newState();
+  const realLesson = unitId(cur.units[1], 0);
+  state.lessons[realLesson] = { done: true, attempts: 3, stars: 3, lastAt: 1234 };
+  F.applyPlacement(state, 4, cur);
+  assert.deepEqual(state.lessons[realLesson], { done: true, attempts: 3, stars: 3, lastAt: 1234 },
+    'a genuine completion is never rewritten');
+  const undone = F.undoPlacement(state, cur);
+  assert.ok(undone.removed >= 9);
+  assert.deepEqual(state.lessons[realLesson], { done: true, attempts: 3, stars: 3, lastAt: 1234 },
+    'undo leaves the real completion alone');
+  assert.equal(state.placed, false);
+  assert.equal(state.placedTier, 0);
+  assert.equal(state.unitsDone[cur.units[0].id], undefined, 'placed units are cleared again');
+});
+
+test('a placed tier is reachable: the first lesson of the tier unlocks', () => {
+  const cur = curriculum();
+  const state = B.E.newState();
+  F.applyPlacement(state, 5, cur);
+  const first = unitId(cur.units[5], 0);
+  assert.equal(B.E.isUnlocked(state, first), true, 'placement unlocks the tier the learner earned');
+});

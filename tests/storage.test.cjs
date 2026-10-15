@@ -31,7 +31,7 @@ function populated(Store) {
   const state = Store.load();
   Object.assign(state, { onboarded: true, lang: 'bn', xp: 42, gems: 3, day: '2026-10-15', streak: 2 });
   state.items.w_hadha = { lvl: 2, seen: 3, ok: 4, bad: 1, dueAt: 1792036800000, flag: false };
-  state.lessons.u1l1 = { done: true, attempts: 2, stars: 3, lastAt: 1792036800000 };
+  state.lessons.u1l1 = { done: true, attempts: 2, stars: 3, lastAt: 1792036800000, placed: false };
   state.unitsDone.u1 = true;
   state.achievements.first_lesson = 1792036800000;
   state.stats.answered = 12; state.stats.correct = 10;
@@ -49,7 +49,7 @@ test('partial state deeply merges required nested defaults without modifying its
   assert.equal(JSON.stringify(raw), before);
   assert.deepEqual(plain(state.stats), { answered: 5, correct: 0, lessons: 0, reviews: 0, perfects: 0, maxComboEver: 0, timeSpentSec: 0 });
   assert.deepEqual(plain(state.items.w_hadha), { lvl: 0, seen: 1, ok: 0, bad: 0, dueAt: 0, flag: false });
-  assert.deepEqual(plain(state.lessons.u1l1), { done: true, attempts: 0, stars: 0, lastAt: 0 });
+  assert.deepEqual(plain(state.lessons.u1l1), { done: true, attempts: 0, stars: 0, lastAt: 0, placed: false });
 });
 test('load accepts optional defaults and deeply merges partial disk state', () => {
   const { Store } = fixture({ [KEY]: JSON.stringify({ v: 1, stats: { answered: 8 } }) });
