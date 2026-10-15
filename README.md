@@ -16,6 +16,10 @@ One shared curriculum drives **two clients**: a dependency-free **web app** and 
 |---|---|---|
 | ![Home](docs/screens/web-home.png) | ![Teach](docs/screens/web-teach.png) | ![Build](docs/screens/web-build.png) |
 
+| Rites (ṣalāh simulator) | Ḥalaqah + illumination map | Whisper boss |
+|---|---|---|
+| ![Rites](docs/screens/web-rites.png) | ![Circle](docs/screens/web-circle.png) | ![Boss](docs/screens/web-boss.png) |
+
 ## Clients
 
 | Client | Path | Run |
@@ -49,9 +53,9 @@ Install (device connected): `adb install -r app-debug.apk`
 
 ## What's inside
 
-- `curriculum/` — the content: **8 units × 3 lessons**, ~115 vocabulary items,
-  27 fully vocalized Quranic verses with asbab al-nuzul / story / theme context cards,
-  76 root words. Units 1→8 go from THIS/THAT and nominal sentences to full-surah
+- `curriculum/` — the content: **10 units × 3 lessons**, 137 vocabulary items,
+  35 fully vocalized Quranic verses with asbab al-nuzul / story / theme context cards,
+  87 root words. Units 1→10 go from THIS/THAT and nominal sentences to full-surah
   reading (Al-Fātiḥah, Al-ʿAṣr, Āyat al-Kursī).
 - `web/` — static web client, no build step, `localStorage` persistence, Amiri +
   Fraunces + Noto Serif Bengali bundled locally. Arabic TTS via Web Speech API when an
@@ -70,6 +74,43 @@ interleaving — later lessons reference earlier items.
 Exercise types: teach cards, asbab/story/theme context cards, read cards with
 hidden translation, multiple choice both directions, tap-the-pairs, root
 identification, word-bank sentence building, fill-the-blank, and listen (TTS).
+
+## Gamified feature layer
+
+A second layer sits on top of the lesson loop, driven by `curriculum/features.json`
+(one payload → web + Android):
+
+- **Noor flow combo** — consecutive fast answers raise a 2×→8× XP multiplier and
+  step the synthesized feedback tone up a musical ladder.
+- **Barakah chests** — lessons can drop a chest (Root Relic / Poetry Scroll /
+  Streak Shield) with rarity tiers; loot is collectible.
+- **Sarf root-forge** — a crafting-table card inside lessons: drag a root onto a
+  mould (فَاعِل، مَفْعُول، فَعِيل) and pick the word it forges.
+- **Waswasah whisper boss** — a 45-second deflector round: false glosses descend,
+  tap the true meaning; a full clear drops a streak shield.
+- **Ṣalāh & rites** — a step-through prayer simulator, a 90-second pre-prayer
+  primer keyed to the approximate hour, wuḍūʾ/adhan terms, a Friday Surah-al-Kahf
+  exploration, ṣawm listening drills, and zakāh/ḥajj roots.
+- **Ḥalaqah circle** — a device-local study circle (up to four companions) whose
+  shared lantern dims on missed days and can be relit with a duʿāʾ shield.
+- **Illumination map** — every mastered root lights the collected verses that
+  carry it, showing how far a small root list reaches.
+- **Wisdom seeds** — etymology cards (dunyā, ʿaql, qalb, ṣabr, shukr…) surface
+  when their root is first mastered; noun-vs-verb permanence notes ride on
+  completion screens.
+- **Loaders & sky** — lesson-entry animations (root sprout, mushaf shimmer) and a
+  time-of-day sky gradient (dawn → night), plus optional breath-paced entry.
+
+## Offline & backup
+
+- **Web**: a service worker caches the whole shell, fonts, data and feature code
+  (hash-verified manifest from `python tools/build_offline.py`), so the app opens
+  and lessons run with the network fully off. Progress exports/imports as a
+  portable JSON file; the store keeps rotating backups and never overwrites a
+  corrupt primary with a fresh state.
+- **Android**: curriculum and features ship as assets — every reading, exercise
+  and feature works with no network at all. Listening exercises appear only when
+  an offline Arabic TTS voice is installed.
 
 ## Sources
 
