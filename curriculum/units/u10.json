@@ -1,0 +1,81 @@
+{
+ "id": "u10",
+ "num": 10,
+ "title": {"en": "Read, Recall, Connect", "bn": "পড়ি, মনে করি, মিলিয়ে দেখি"},
+ "subtitle": {"en": "Three short surahs with familiar reading tools", "bn": "চেনা গঠন দিয়ে তিনটি ছোট সূরা পড়ি"},
+ "lessons": [
+  {
+   "id": "u10l1",
+   "title": {"en": "Al-Ikhlas: From Words to a Passage", "bn": "ইখলাস: শব্দ থেকে পূর্ণ পাঠ"},
+   "teaches": [
+    {"id": "u10l1_t_recall", "kind": "concept", "ar": "هُوَ / لَمْ / لَهُ", "en": "He / did not / to Him", "bn": "তিনি / করেননি / তাঁর", "note": {"en": "Pedagogical note: before reading, recall the separate pronoun, the negative particle, and the attached pronoun. Read all four verses in order. A familiar word is a cue to meaning, not a substitute for reading the whole passage.", "bn": "শিক্ষামূলক টীকা: পড়ার আগে স্বতন্ত্র সর্বনাম, না-বোধক অব্যয় ও যুক্ত সর্বনাম মনে করুন। চারটি আয়াত ক্রমে পড়ুন। চেনা শব্দ অর্থের সূত্র; পুরো পাঠ পড়ার বিকল্প নয়।"}}
+   ],
+   "items": [
+    {"ref": "w_qul"},
+    {"ref": "w_huwa"},
+    {"ref": "w_allah"},
+    {"ref": "w_ahad"},
+    {"ref": "w_samad"},
+    {"ref": "w_lam"},
+    {"ref": "w_yalid"},
+    {"ref": "w_yulad"},
+    {"ref": "w_yakun"},
+    {"ref": "w_lahu"},
+    {"ref": "w_kufuwan"}
+   ],
+   "verses": [
+    {"id": "v_u10_ikhlas_full", "ar": "قُلْ هُوَ اللَّهُ أَحَدٌ اللَّهُ الصَّمَدُ لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ", "tokens": ["قُلْ", "هُوَ", "اللَّهُ", "أَحَدٌ", "اللَّهُ", "الصَّمَدُ", "لَمْ", "يَلِدْ", "وَلَمْ", "يُولَدْ", "وَلَمْ", "يَكُنْ", "لَهُ", "كُفُوًا", "أَحَدٌ"], "en": "Say: He is Allah, One. Allah, the One on whom all depend. He neither begets nor was born. And no one is comparable to Him.", "bn": "বলুন: তিনি আল্লাহ, এক। আল্লাহ, যাঁর ওপর সবাই নির্ভরশীল। তিনি কাউকে জন্ম দেননি, আর তাঁকেও জন্ম দেওয়া হয়নি। আর কেউ তাঁর সমতুল্য নয়।", "ref": "Al-Ikhlas 112:1–4", "context": {"kind": "theme", "title": {"en": "Pedagogical note: read in four steps", "bn": "শিক্ষামূলক টীকা: চার ধাপে পড়ুন"}, "body": {"en": "Read the four verses as four meaning units. Check what لَمْ negates, then find لَهُ near the end. This is a language-learning prompt, not an occasion-of-revelation narrative or a claim about the reward for reciting the surah.", "bn": "চারটি আয়াতকে অর্থের চারটি অংশ হিসেবে পড়ুন। لَمْ কী নাকচ করছে দেখুন, তারপর শেষের দিকে لَهُ খুঁজুন। এটি ভাষা শেখার নির্দেশনা; শানে নুযুলের বর্ণনা বা সূরা পাঠের সওয়াবের দাবি নয়।"}}}
+   ]
+  },
+  {
+   "id": "u10l2",
+   "title": {"en": "Al-Falaq: Follow the Repeated Link", "bn": "ফালাক: বারবার আসা সংযোগ অনুসরণ করি"},
+   "teaches": [
+    {"id": "u10l2_t_min", "kind": "phrase", "ar": "وَمِنْ شَرِّ", "en": "and from the evil of", "bn": "আর …-এর অনিষ্ট থেকে", "note": {"en": "Pedagogical note: retrieve مِنْ from unit 9. In the later verses وَمِنْ شَرِّ introduces another phrase. Notice إِذَا ('when') in verses 3 and 5, and فِي ('in') in verse 4.", "bn": "শিক্ষামূলক টীকা: নবম ইউনিটের مِنْ মনে করুন। পরের আয়াতগুলোতে وَمِنْ شَرِّ আরেকটি বাক্যাংশ শুরু করে। ৩ ও ৫ নম্বর আয়াতে إِذَا (‘যখন’), আর ৪ নম্বরে فِي (‘মধ্যে’) লক্ষ করুন।"}}
+   ],
+   "items": [
+    {"ref": "w_audhu"},
+    {"ref": "w_bi"},
+    {"ref": "w_min"},
+    {"ref": "w_sharr"},
+    {"ref": "w_falaq"},
+    {"id": "w_ghasiq", "ar": "غَاسِقٍ", "en": "darkness; the night", "bn": "অন্ধকার; রাত", "root": "غ س ق"},
+    {"id": "w_waqab", "ar": "وَقَبَ", "en": "it settles; grows dark", "bn": "তা নেমে আসে; অন্ধকার হয়", "root": "و ق ب"},
+    {"id": "w_naffathat", "ar": "النَّفَّاثَاتِ", "en": "those who blow (onto knots)", "bn": "গিঁটে ফুঁদানকারিণীরা", "root": "ن ف ث"},
+    {"id": "w_uqad", "ar": "الْعُقَدِ", "en": "the knots", "bn": "গিঁটসমূহ", "root": "ع ق د"},
+    {"id": "w_hasid", "ar": "حَاسِدٍ", "en": "an envier", "bn": "হিংসুক", "root": "ح س د"},
+    {"id": "w_hasad", "ar": "حَسَدَ", "en": "he envies", "bn": "সে হিংসা করে", "root": "ح س د"},
+    {"ref": "w_idha"},
+    {"ref": "w_khalaqa"}
+   ],
+   "verses": [
+    {"id": "v_u10_falaq_full", "ar": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ مِنْ شَرِّ مَا خَلَقَ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ", "tokens": ["قُلْ", "أَعُوذُ", "بِرَبِّ", "الْفَلَقِ", "مِنْ", "شَرِّ", "مَا", "خَلَقَ", "وَمِنْ", "شَرِّ", "غَاسِقٍ", "إِذَا", "وَقَبَ", "وَمِنْ", "شَرِّ", "النَّفَّاثَاتِ", "فِي", "الْعُقَدِ", "وَمِنْ", "شَرِّ", "حَاسِدٍ", "إِذَا", "حَسَدَ"], "en": "Say: I seek refuge in the Lord of daybreak, from the evil of what He created, and from the evil of the night when it grows dark, and from the evil of those who blow onto knots, and from the evil of an envier when he envies.", "bn": "বলুন: আমি ভোরের রবের কাছে আশ্রয় চাই, তিনি যা সৃষ্টি করেছেন তার অনিষ্ট থেকে, আর রাতের অনিষ্ট থেকে যখন তা অন্ধকার হয়ে আসে, আর গিঁটে ফুঁদানকারিণীদের অনিষ্ট থেকে, আর হিংসুকের অনিষ্ট থেকে যখন সে হিংসা করে।", "ref": "Al-Falaq 113:1–5", "context": {"kind": "theme", "title": {"en": "Pedagogical note: repeated structure", "bn": "শিক্ষামূলক টীকা: পুনরাবৃত্ত গঠন"}, "body": {"en": "Use the repeated مِنْ شَرِّ / وَمِنْ شَرِّ to follow the passage. Compare حَاسِدٍ (an envier) with حَسَدَ (he envies). This note describes the words and their pattern; it does not identify people or assert a historical cause of revelation.", "bn": "বারবার আসা مِنْ شَرِّ / وَمِنْ شَرِّ ধরে পাঠটি বুঝুন। حَاسِدٍ (হিংসুক)-এর সঙ্গে حَسَدَ (সে হিংসা করে) তুলনা করুন। টীকাটি শব্দ ও গঠন বোঝায়; কাউকে চিহ্নিত করে না, নাযিলের ঐতিহাসিক কারণও দাবি করে না।"}}}
+   ]
+  },
+  {
+   "id": "u10l3",
+   "title": {"en": "An-Nas: Carry the Pattern Forward", "bn": "নাস: চেনা গঠন নতুন পাঠে"},
+   "teaches": [
+    {"id": "u10l3_t_transfer", "kind": "phrase", "ar": "بِرَبِّ النَّاسِ / فِي صُدُورِ النَّاسِ", "en": "in the Lord of humankind / in the breasts of humankind", "bn": "মানুষের রবের কাছে / মানুষের অন্তরসমূহে", "note": {"en": "Pedagogical note: recall أَعُوذُ بِرَبِّ from Al-Falaq. Here the next noun is النَّاسِ. Find فِي later in the passage; صُدُورِ is the plural of صَدْر, met earlier as صَدْرَكَ. The same reading tools work in a different surah.", "bn": "শিক্ষামূলক টীকা: ফালাকের أَعُوذُ بِرَبِّ মনে করুন। এখানে পরের বিশেষ্য النَّاسِ। পাঠের পরে فِي খুঁজুন; صُدُورِ হলো صَدْر-এর বহুবচন, যা আগে صَدْرَكَ রূপে এসেছে। একই গঠন ভিন্ন সূরাতেও কাজে লাগে।"}},
+    {"id": "u10l3_t_malik", "kind": "word", "ar": "مَلِكِ", "en": "King", "bn": "অধিপতি", "note": {"en": "Pedagogical note: distinguish مَلِكِ ('King') here from مَالِكِ ('Owner, Master') in Al-Fatihah 1:4. Notice the long alif in مَالِكِ, not in مَلِكِ.", "bn": "শিক্ষামূলক টীকা: এখানকার مَلِكِ (‘অধিপতি’)-কে ফাতিহা ১:৪-এর مَالِكِ (‘মালিক’)-থেকে আলাদা করুন। مَالِكِ-তে দীর্ঘ আলিফ আছে, مَلِكِ-তে নেই।"}}
+   ],
+   "items": [
+    {"ref": "w_audhu"},
+    {"ref": "w_rabb"},
+    {"ref": "w_nas"},
+    {"id": "w_malik_nas", "ar": "مَلِكِ", "en": "King", "bn": "অধিপতি", "root": "م ل ك"},
+    {"ref": "w_ilaha"},
+    {"ref": "w_min"},
+    {"ref": "w_sharr"},
+    {"id": "w_waswas", "ar": "الْوَسْوَاسِ", "en": "the whisperer", "bn": "কুমন্ত্রণাদাতা"},
+    {"id": "w_khannas", "ar": "الْخَنَّاسِ", "en": "the one who withdraws", "bn": "আত্মগোপনকারী", "root": "خ ن س"},
+    {"id": "w_yuwaswisu", "ar": "يُوَسْوِسُ", "en": "he whispers", "bn": "সে কুমন্ত্রণা দেয়"},
+    {"id": "w_sudur", "ar": "صُدُورِ", "en": "breasts; hearts", "bn": "বক্ষসমূহ; অন্তরসমূহ", "root": "ص د ر"},
+    {"id": "w_jinna", "ar": "الْجِنَّةِ", "en": "the jinn", "bn": "জিনসমূহ", "root": "ج ن ن"}
+   ],
+   "verses": [
+    {"id": "v_u10_nas_full", "ar": "قُلْ أَعُوذُ بِرَبِّ النَّاسِ مَلِكِ النَّاسِ إِلَٰهِ النَّاسِ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ مِنَ الْجِنَّةِ وَالنَّاسِ", "tokens": ["قُلْ", "أَعُوذُ", "بِرَبِّ", "النَّاسِ", "مَلِكِ", "النَّاسِ", "إِلَٰهِ", "النَّاسِ", "مِنْ", "شَرِّ", "الْوَسْوَاسِ", "الْخَنَّاسِ", "الَّذِي", "يُوَسْوِسُ", "فِي", "صُدُورِ", "النَّاسِ", "مِنَ", "الْجِنَّةِ", "وَالنَّاسِ"], "en": "Say: I seek refuge in the Lord of humankind, the King of humankind, the God of humankind, from the evil of the retreating whisperer, who whispers into the hearts of humankind, from among jinn and humankind.", "bn": "বলুন: আমি মানুষের রবের কাছে আশ্রয় চাই, মানুষের অধিপতির কাছে, মানুষের ইলাহর কাছে, আত্মগোপনকারী কুমন্ত্রণাদাতার অনিষ্ট থেকে, যে মানুষের অন্তরে কুমন্ত্রণা দেয়, জিন ও মানুষের মধ্য থেকে।", "ref": "An-Nas 114:1–6", "context": {"kind": "theme", "title": {"en": "Pedagogical note: compare the passages", "bn": "শিক্ষামূলক টীকা: পাঠ দুটি তুলনা করুন"}, "body": {"en": "Compare the opening with 113:1: قُلْ أَعُوذُ بِرَبِّ stays familiar, while the following noun changes. Then identify مِنْ شَرِّ and فِي صُدُورِ. These are prompts for transfer and recall, not historical reports.", "bn": "১১৩:১-এর সূচনার সঙ্গে তুলনা করুন: قُلْ أَعُوذُ بِرَبِّ চেনা থাকে, পরের বিশেষ্য বদলায়। তারপর مِنْ شَرِّ ও فِي صُدُورِ চিহ্নিত করুন। এগুলো চেনা গঠন প্রয়োগ ও মনে করার নির্দেশনা, ঐতিহাসিক বর্ণনা নয়।"}}}
+   ]
+  }
+ ]
+}

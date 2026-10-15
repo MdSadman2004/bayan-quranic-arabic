@@ -1,0 +1,75 @@
+{
+ "id": "u9",
+ "num": 9,
+ "title": {"en": "Small Words, Familiar Patterns", "bn": "ছোট শব্দ, চেনা গঠন"},
+ "subtitle": {"en": "Retrieve pronouns, prepositions, and this / that", "bn": "সর্বনাম, অব্যয় ও এটা / সেটা মনে করি"},
+ "lessons": [
+  {
+   "id": "u9l1",
+   "title": {"en": "He, and to Him", "bn": "তিনি ও তাঁর"},
+   "teaches": [
+    {"id": "u9l1_t_pronoun", "kind": "concept", "ar": "هُوَ / لَهُ", "en": "He / to Him", "bn": "তিনি / তাঁর", "note": {"en": "Pedagogical note: recall هُوَ before reading. In لَهُ, لِـ joins the pronoun ending ـهُ and is pronounced lahu. The ending refers to Him; in 112:4, the phrase means that no one is comparable to Him.", "bn": "শিক্ষামূলক টীকা: পড়ার আগে هُوَ-এর অর্থ মনে করুন। لَهُ-তে لِـ-এর সঙ্গে ـهُ সর্বনাম যুক্ত হয়ে ‘লাহু’ হয়। শেষাংশটি তাঁকে বোঝায়; ১১২:৪-এ অর্থ, কেউ তাঁর সমতুল্য নয়।"}},
+    {"id": "u9l1_t_lam", "kind": "phrase", "ar": "وَلَمْ يَكُنْ لَهُ", "en": "and there is not, comparable to Him…", "bn": "আর তাঁর সমতুল্য নেই…", "note": {"en": "Pedagogical note: retrieve لَمْ from unit 3. Notice يَكُنْ after it; do not translate يَكُنْ alone as a complete sentence. Read through to كُفُوًا أَحَدٌ.", "bn": "শিক্ষামূলক টীকা: তৃতীয় ইউনিটের لَمْ মনে করুন। এর পরে يَكُنْ লক্ষ করুন; শুধু يَكُنْ-কে সম্পূর্ণ বাক্য ধরে অনুবাদ করবেন না। كُفُوًا أَحَدٌ পর্যন্ত পড়ুন।"}}
+   ],
+   "items": [
+    {"ref": "w_huwa"},
+    {"id": "w_lahu", "ar": "لَهُ", "en": "to Him; for him", "bn": "তাঁর; তার জন্য"},
+    {"id": "w_yakun", "ar": "يَكُنْ", "en": "be (after lam)", "bn": "হওয়া (লাম-এর পরে)", "root": "ك و ن"},
+    {"ref": "w_lam"},
+    {"ref": "w_kufuwan"},
+    {"ref": "w_ahad"},
+    {"ref": "w_qul"},
+    {"ref": "w_allah"}
+   ],
+   "verses": [
+    {"id": "v_u9_ikhlas1", "ar": "قُلْ هُوَ اللَّهُ أَحَدٌ", "tokens": ["قُلْ", "هُوَ", "اللَّهُ", "أَحَدٌ"], "en": "Say: He is Allah, One.", "bn": "বলুন: তিনি আল্লাহ, এক।", "ref": "Al-Ikhlas 112:1", "context": {"kind": "theme", "title": {"en": "Pedagogical note: retrieve first", "bn": "শিক্ষামূলক টীকা: আগে মনে করুন"}, "body": {"en": "Cover the meaning and identify هُوَ. Then read the whole verse before checking the translation. This is a reading exercise, not a report about the occasion of revelation.", "bn": "অর্থ ঢেকে هُوَ চিহ্নিত করুন। তারপর অনুবাদ দেখার আগে পুরো আয়াত পড়ুন। এটি পড়ার অনুশীলন, শানে নুযুলের বর্ণনা নয়।"}}},
+    {"id": "v_u9_ikhlas4", "ar": "وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ", "tokens": ["وَلَمْ", "يَكُنْ", "لَهُ", "كُفُوًا", "أَحَدٌ"], "en": "And no one is comparable to Him.", "bn": "আর কেউ তাঁর সমতুল্য নয়।", "ref": "Al-Ikhlas 112:4", "context": {"kind": "theme", "title": {"en": "Pedagogical note: find the ending", "bn": "শিক্ষামূলক টীকা: শেষাংশ খুঁজুন"}, "body": {"en": "Compare the separate pronoun هُوَ in 112:1 with the attached ـهُ in لَهُ here. Both refer to Allah in these verses; the words have different grammatical roles.", "bn": "১১২:১-এর স্বতন্ত্র সর্বনাম هُوَ-এর সঙ্গে এখানে لَهُ-এর যুক্ত ـهُ তুলনা করুন। এই আয়াতগুলোতে উভয়ই আল্লাহকে বোঝায়, তবে ব্যাকরণগত ভূমিকা ভিন্ন।"}}}
+   ]
+  },
+  {
+   "id": "u9l2",
+   "title": {"en": "Seek Refuge: In and From", "bn": "আশ্রয় চাই: কার কাছে, কী থেকে"},
+   "teaches": [
+    {"id": "u9l2_t_prepositions", "kind": "concept", "ar": "بِـ / مِنْ / فِي", "en": "in / from / in, within", "bn": "কাছে / থেকে / মধ্যে", "note": {"en": "Pedagogical note: prepositions depend on context. In أَعُوذُ بِرَبِّ, بِـ links seeking refuge to the Lord; مِنْ شَرِّ introduces what refuge is sought from. Later, فِي صُدُورِ means 'in the breasts'. بِـ attaches to the next word; مِنْ and فِي are written separately.", "bn": "শিক্ষামূলক টীকা: অব্যয়ের অর্থ প্রসঙ্গনির্ভর। أَعُوذُ بِرَبِّ-তে بِـ রবের কাছে আশ্রয় চাওয়া বোঝায়; مِنْ شَرِّ জানায়, কোন অনিষ্ট থেকে। পরে فِي صُدُورِ অর্থ ‘অন্তরসমূহে’। بِـ পরের শব্দের সঙ্গে যুক্ত হয়; مِنْ ও فِي আলাদা লেখা হয়।"}}
+   ],
+   "items": [
+    {"id": "w_audhu", "ar": "أَعُوذُ", "en": "I seek refuge", "bn": "আমি আশ্রয় চাই", "root": "ع و ذ"},
+    {"id": "w_bi", "ar": "بِـ", "en": "in; with; by (attached)", "bn": "কাছে; সঙ্গে; দ্বারা (যুক্ত অব্যয়)"},
+    {"id": "w_min", "ar": "مِنْ", "en": "from", "bn": "থেকে"},
+    {"id": "w_sharr", "ar": "شَرِّ", "en": "evil; harm", "bn": "অনিষ্ট; ক্ষতি", "root": "ش ر ر"},
+    {"id": "w_falaq", "ar": "الْفَلَقِ", "en": "the daybreak", "bn": "ভোর", "root": "ف ل ق"},
+    {"ref": "w_qul"},
+    {"ref": "w_rabb"},
+    {"ref": "w_khalaqa"}
+   ],
+   "verses": [
+    {"id": "v_u9_falaq12", "ar": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ مِنْ شَرِّ مَا خَلَقَ", "tokens": ["قُلْ", "أَعُوذُ", "بِرَبِّ", "الْفَلَقِ", "مِنْ", "شَرِّ", "مَا", "خَلَقَ"], "en": "Say: I seek refuge in the Lord of daybreak, from the evil of what He created.", "bn": "বলুন: আমি ভোরের রবের কাছে আশ্রয় চাই, তিনি যা সৃষ্টি করেছেন তার অনিষ্ট থেকে।", "ref": "Al-Falaq 113:1–2", "context": {"kind": "theme", "title": {"en": "Pedagogical note: two links", "bn": "শিক্ষামূলক টীকা: দুটি সংযোগ"}, "body": {"en": "Find بِـ in بِرَبِّ and مِنْ before شَرِّ. Ask two reading questions: whose refuge is sought, and from what? The note explains the wording only; it makes no claim about a historical incident.", "bn": "بِرَبِّ-তে بِـ এবং شَرِّ-এর আগে مِنْ খুঁজুন। পড়ার সময় দুটি প্রশ্ন করুন: কার কাছে আশ্রয় চাওয়া হচ্ছে, আর কী থেকে? টীকাটি শুধু বাক্যের অর্থ শেখায়; কোনো ঐতিহাসিক ঘটনার দাবি করে না।"}}}
+   ]
+  },
+  {
+   "id": "u9l3",
+   "title": {"en": "This House, That Book", "bn": "এই ঘর, সেই কিতাব"},
+   "teaches": [
+    {"id": "u9l3_t_pointing", "kind": "concept", "ar": "هَٰذَا الْبَيْتِ / ذَٰلِكَ الْكِتَابُ", "en": "this House / that Book", "bn": "এই ঘর / সেই কিতাব", "note": {"en": "Pedagogical note: retrieve هَذَا and ذَلِكَ from unit 1. Compare their Quranic spellings هَٰذَا and ذَٰلِكَ. هَٰذَا الْبَيْتِ is inside 'the Lord of this House'; ذَٰلِكَ الْكِتَابُ opens a different sentence. Case endings depend on the surrounding construction.", "bn": "শিক্ষামূলক টীকা: প্রথম ইউনিটের هَذَا ও ذَلِكَ মনে করুন। কুরআনি বানান هَٰذَا ও ذَٰلِكَ-এর সঙ্গে তুলনা করুন। هَٰذَا الْبَيْتِ আছে ‘এই ঘরের রব’ গঠনের মধ্যে; ذَٰلِكَ الْكِتَابُ ভিন্ন বাক্যের সূচনা। শেষের হরকত আশপাশের গঠনের ওপর নির্ভর করে।"}},
+    {"id": "u9l3_t_fihi", "kind": "phrase", "ar": "لَا رَيْبَ فِيهِ", "en": "no doubt in it", "bn": "এতে কোনো সন্দেহ নেই", "note": {"en": "Pedagogical note: فِيهِ combines فِي with an attached pronoun, ـهِ ('it/him'). In 2:2, it refers to the Book. The pronoun ending has a kasrah here; compare لَهُ from the first lesson.", "bn": "শিক্ষামূলক টীকা: فِيهِ গঠিত فِي ও যুক্ত সর্বনাম ـهِ (‘এটি/তিনি’) দিয়ে। ২:২-এ এটি কিতাবকে বোঝায়। এখানে সর্বনামের শেষাংশে কাসরা; প্রথম পাঠের لَهُ-এর সঙ্গে তুলনা করুন।"}}
+   ],
+   "items": [
+    {"ref": "w_hadha"},
+    {"ref": "w_dhalika"},
+    {"ref": "w_kitab"},
+    {"ref": "w_bayt"},
+    {"ref": "w_rabb"},
+    {"id": "w_falyabudu", "ar": "فَلْيَعْبُدُوا", "en": "so let them worship", "bn": "তাই তারা যেন ইবাদত করে", "root": "ع ب د"},
+    {"id": "w_rayb", "ar": "رَيْبَ", "en": "doubt", "bn": "সন্দেহ", "root": "ر ي ب"},
+    {"id": "w_fihi", "ar": "فِيهِ", "en": "in it", "bn": "এতে"},
+    {"ref": "w_la"},
+    {"ref": "w_huda"},
+    {"ref": "w_muttaqin"}
+   ],
+   "verses": [
+    {"id": "v_u9_quraysh3", "ar": "فَلْيَعْبُدُوا رَبَّ هَٰذَا الْبَيْتِ", "tokens": ["فَلْيَعْبُدُوا", "رَبَّ", "هَٰذَا", "الْبَيْتِ"], "en": "So let them worship the Lord of this House.", "bn": "তাই তারা যেন এই ঘরের রবের ইবাদত করে।", "ref": "Quraysh 106:3", "context": {"kind": "theme", "title": {"en": "Pedagogical note: read the phrase", "bn": "শিক্ষামূলক টীকা: বাক্যাংশ পড়ুন"}, "body": {"en": "Recall 'this' without a prompt. Then read رَبَّ هَٰذَا الْبَيْتِ as one phrase, 'the Lord of this House', rather than treating every adjacent noun as a new sentence.", "bn": "সাহায্য ছাড়া ‘এই’ শব্দটি মনে করুন। তারপর رَبَّ هَٰذَا الْبَيْتِ-কে একসঙ্গে ‘এই ঘরের রব’ হিসেবে পড়ুন; পাশাপাশি প্রতিটি বিশেষ্যকে নতুন বাক্য ধরবেন না।"}}},
+    {"id": "v_u9_baqarah2", "ar": "ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ هُدًى لِلْمُتَّقِينَ", "tokens": ["ذَٰلِكَ", "الْكِتَابُ", "لَا", "رَيْبَ", "فِيهِ", "هُدًى", "لِلْمُتَّقِينَ"], "en": "That is the Book, with no doubt in it, a guidance for those mindful of Allah.", "bn": "সেই কিতাব, এতে কোনো সন্দেহ নেই; আল্লাহ-সচেতনদের জন্য পথনির্দেশ।", "ref": "Al-Baqarah 2:2", "context": {"kind": "theme", "title": {"en": "Pedagogical note: transfer the pattern", "bn": "শিক্ষামূলক টীকা: চেনা গঠন প্রয়োগ করুন"}, "body": {"en": "Identify ذَٰلِكَ, then the noun الْكِتَابُ, then فِيهِ. The gloss 'that' highlights the demonstrative form; natural English translations can say 'this is the Book'. Read the complete verse before checking its meaning.", "bn": "আগে ذَٰلِكَ, তারপর বিশেষ্য الْكِتَابُ, এরপর فِيهِ চিহ্নিত করুন। ‘সেই’ অর্থটি নির্দেশক সর্বনামের রূপ বোঝায়; সাবলীল অনুবাদে ‘এই সেই কিতাব’ও বলা যায়। অর্থ মেলানোর আগে পুরো আয়াত পড়ুন।"}}}
+   ]
+  }
+ ]
+}

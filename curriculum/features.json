@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "scope": "Game, wisdom, rite and loader content shared by both Bayan clients. Every Arabic item is a real Quranic or classical form; notes are pedagogical, not reports of revelation history. Verify scholarly content before wider release.",
+  "combo": {
+    "windowSec": 8,
+    "steps": [2, 3, 4, 5, 6, 8],
+    "semitones": [0, 2, 4, 5, 7, 9],
+    "note": {
+      "en": "Flow: consecutive fast correct answers raise the multiplier (2x to 8x) and lift the feedback pitch by musical intervals.",
+      "bn": "ফ্লো: দ্রুত পরপর সঠিক উত্তরে গুণক বাড়ে (২x থেকে ৮x) এবং প্রতিক্রিয়ার সুর উপরে ওঠে।"
+    }
+  },
+  "chests": {
+    "chance": 0.55,
+    "rarities": [
+      { "id": "common", "weight": 6, "label": { "en": "Common", "bn": "সাধারণ" } },
+      { "id": "fine", "weight": 3, "label": { "en": "Fine", "bn": "উত্তম" } },
+      { "id": "rare", "weight": 1, "label": { "en": "Rare", "bn": "দুর্লভ" } }
+    ],
+    "kinds": [
+      { "id": "relic", "label": { "en": "Root relic", "bn": "ধাতু-স্মারক" } },
+      { "id": "scroll", "label": { "en": "Study scroll", "bn": "পাঠ-স্ক্রল" } },
+      { "id": "shield", "label": { "en": "Streak shield", "bn": "স্ট্রিক ঢাল" } }
+    ],
+    "loot": [
+      { "id": "relic_rahm", "kind": "relic", "rarity": "fine", "root": "ر ح م", "title": { "en": "The womb-root", "bn": "গর্ভ-ধাতু" }, "body": { "en": "ر ح م gives رَحْمَة (mercy) and رَحِم (womb) — mercy named from the nearest, most tender kinship.", "bn": "ر ح م থেকে রাহমাহ (দয়া) ও রাহিম (গর্ভ) — দয়া নামকরণ সবচেয়ে নিকট আত্মীয়তা থেকে।" } },
+      { "id": "relic_ilm", "kind": "relic", "rarity": "common", "root": "ع ل م", "title": { "en": "Knowledge and sign", "bn": "জ্ঞান ও নিদর্শন" }, "body": { "en": "ع ل م yields عِلْم (knowledge), عَلَم (a landmark) and عَلِيم (knowing) — knowledge is what marks a thing out.", "bn": "ع ل م থেকে ইলম (জ্ঞান), আলাম (চিহ্ন) ও আলীম — জ্ঞানই কোনো বস্তুকে চিহ্নিত করে।" } },
+      { "id": "relic_ktb", "kind": "relic", "rarity": "common", "root": "ك ت ب", "title": { "en": "Writing and decree", "bn": "লেখা ও বিধান" }, "body": { "en": "ك ت ب gives كِتَاب (book), كَاتِب (writer) and كُتِبَ (it was written/ordained).", "bn": "ك ت ب থেকে কিতাব (বই), কাতিব (লেখক) ও কুতিবা (লেখা হয়েছিল/নির্ধারিত)।" } },
+      { "id": "relic_sabr", "kind": "relic", "rarity": "rare", "root": "ص ب ر", "title": { "en": "Patience as binding", "bn": "ধৈর্য মানে বেঁধে রাখা" }, "body": { "en": "ص ب ر in classical usage is to tie or hobble — ṣabr is self-restraint, not passive waiting.", "bn": "ধ্রুপদী ব্যবহারে ص ب ر মানে বেঁধে রাখা — সবর হলো নিজেকে সংযত রাখা, নিষ্ক্রিয় অপেক্ষা নয়।" } },
+      { "id": "scroll_rahman", "kind": "scroll", "rarity": "fine", "verse": "v_fatiha3", "title": { "en": "Two mercy-forms in one line", "bn": "এক লাইনে দুই দয়ার রূপ" }, "body": { "en": "الرَّحْمَٰنِ is the vast, all-embracing form; الرَّحِيمِ the constant, near form. Same root, two moulds.", "bn": "الرَّحْمَٰنِ — ব্যাপক দয়া; الرَّحِيمِ — নিকট ও অব্যাহত দয়া। একই ধাতু, দুই ছাঁচ।" } },
+      { "id": "scroll_malik", "kind": "scroll", "rarity": "fine", "verse": "v_fatiha4", "title": { "en": "The possessor of the Day", "bn": "সেই দিনের মালিক" }, "body": { "en": "مَالِكِ يَوْمِ الدِّينِ — an iḍāfa chain: Owner of the Day of Judgement. Possession here is total.", "bn": "مَالِكِ يَوْمِ الدِّينِ — ইদাফা শৃঙ্খল: বিচার দিনের মালিক। এখানে মালিকানা সম্পূর্ণ।" } },
+      { "id": "scroll_sharh", "kind": "scroll", "rarity": "rare", "verse": "v_sharh56", "title": { "en": "With hardship, ease", "bn": "কষ্টের সাথেই স্বস্তি" }, "body": { "en": "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا — مَعَ means together with: ease is placed alongside, not only after.", "bn": "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا — مَعَ মানে সাথে: স্বস্তি পাশে রাখা, কেবল পরে নয়।" } },
+      { "id": "shield_streak", "kind": "shield", "rarity": "common", "title": { "en": "Streak shield", "bn": "স্ট্রিক ঢাল" }, "body": { "en": "Covers one missed day so a streak survives real life.", "bn": "এক দিন বাদ পড়লে স্ট্রিক টিকে থাকে।" } }
+    ]
+  },
+  "forge": {
+    "name": { "en": "Root-Craft Forge", "bn": "ধাতু-গড়ার কারখানা" },
+    "note": {
+      "en": "Drop a three-letter root into a mould to forge a Quranic word. Moulds are patterns, not translations.",
+      "bn": "তিন অক্ষরের ধাতু ছাঁচে ফেলে কুরআনি শব্দ গড়ুন। ছাঁচ মানে গঠন-নকশা, অনুবাদ নয়।"
+    },
+    "moulds": [
+      {
+        "id": "fail", "pattern": "فَاعِل", "role": { "en": "the doer", "bn": "কর্তা" },
+        "examples": [
+          { "root": "ع ل م", "word": "عَالِم", "meaning": { "en": "one who knows", "bn": "জ্ঞানী" } },
+          { "root": "ك ت ب", "word": "كَاتِب", "meaning": { "en": "writer", "bn": "লেখক" } },
+          { "root": "ص ل ح", "word": "صَالِح", "meaning": { "en": "righteous", "bn": "সৎকর্মী" } }
+        ]
+      },
+      {
+        "id": "maful", "pattern": "مَفْعُول", "role": { "en": "the one acted upon", "bn": "কর্মের লক্ষ্য" },
+        "examples": [
+          { "root": "ع ل م", "word": "مَعْلُوم", "meaning": { "en": "known", "bn": "জ্ঞাত" } },
+          { "root": "ك ت ب", "word": "مَكْتُوب", "meaning": { "en": "written", "bn": "লিখিত" } },
+          { "root": "ذ ك ر", "word": "مَذْكُور", "meaning": { "en": "mentioned", "bn": "উল্লিখিত" } }
+        ]
+      },
+      {
+        "id": "faIl", "pattern": "فَعِيل", "role": { "en": "intensive quality", "bn": "গভীর গুণ" },
+        "examples": [
+          { "root": "ر ح م", "word": "رَحِيم", "meaning": { "en": "ever-merciful", "bn": "পরম দয়ালু" } },
+          { "root": "ع ل م", "word": "عَلِيم", "meaning": { "en": "all-knowing", "bn": "সর্বজ্ঞ" } },
+          { "root": "ق د ر", "word": "قَدِير", "meaning": { "en": "all-capable", "bn": "সর্বশক্তিমান" } }
+        ]
+      }
+    ]
+  },
+  "boss": {
+    "name": { "en": "Whisper Deflector", "bn": "কুমন্ত্রণা প্রতিরোধ" },
+    "seconds": 45,
+    "note": {
+      "en": "False glosses descend; tap the true root or meaning to shatter each whisper before it lands.",
+      "bn": "ভুল অর্থ নেমে আসে; প্রতিটি কুমন্ত্রণা আঘাত করার আগে সঠিক ধাতু বা অর্থে ট্যাপ করুন।"
+    },
+    "waves": [
+      { "id": "w1", "trap": { "en": "الْحَمْدُ لِلَّهِ = praise is from Allah", "bn": "الْحَمْدُ لِلَّهِ = প্রশংসা আল্লাহ থেকে এসেছে" }, "options": [{ "en": "All praise belongs to Allah", "bn": "সব প্রশংসা আল্লাহরই" }, { "en": "Praise is from Allah", "bn": "প্রশংসা আল্লাহ থেকে" }], "answer": 0, "note": { "en": "لِـ marks belonging, not origin.", "bn": "لِـ সম্পর্ক বোঝায়, উৎস নয়।" } },
+      { "id": "w2", "trap": { "en": "مَا وَدَّعَكَ = your Lord bid you farewell", "bn": "مَا وَدَّعَكَ = তোমার রব বিদায় দিয়েছেন" }, "options": [{ "en": "your Lord has not forsaken you", "bn": "তোমার রব তোমাকে পরিত্যাগ করেননি" }, { "en": "your Lord bid you farewell", "bn": "তোমার রব বিদায় দিয়েছেন" }], "answer": 0, "note": { "en": "مَا negates the whole verb.", "bn": "مَا পুরো ক্রিয়াকে নিষেধ করে।" } },
+      { "id": "w3", "trap": { "en": "يَعْلَمُونَ grows from ع ن م", "bn": "يَعْلَمُونَ ধাতু ع ن م" }, "options": [{ "en": "root ع ل م — they know", "bn": "ধাতু ع ل م — তারা জানে" }, { "en": "root ع ن م", "bn": "ধাতু ع ن م" }], "answer": 0, "note": { "en": "يَـ marks present tense; the root carries the meaning.", "bn": "يَـ বর্তমান কাল; অর্থ ধাতুতে।" } },
+      { "id": "w4", "trap": { "en": "خُلِقَ الْإِنسَانُ ضَعِيفًا = man created weakness", "bn": "خُلِقَ الْإِنسَانُ ضَعِيفًا = মানুষ দুর্বলতা সৃষ্টি করেছে" }, "options": [{ "en": "man was created weak", "bn": "মানুষ দুর্বলভাবে সৃষ্ট" }, { "en": "man created weakness", "bn": "মানুষ দুর্বলতা সৃষ্টি করেছে" }], "answer": 0, "note": { "en": "خُلِقَ is passive: the doer is left unnamed on purpose.", "bn": "خُلِقَ কর্মবাচ্য: কর্তা ইচ্ছাকৃতভাবে অকথিত।" } },
+      { "id": "w5", "trap": { "en": "لَا يَعْقِلُونَ = they do not hear", "bn": "لَا يَعْقِلُونَ = তারা শোনে না" }, "options": [{ "en": "they do not reason", "bn": "তারা বোঝে না" }, { "en": "they do not hear", "bn": "তারা শোনে না" }], "answer": 0, "note": { "en": "ع ق ل is to tether — to hold a thought still.", "bn": "ع ق ل মানে বেঁধে রাখা — চিন্তা ধরে রাখা।" } },
+      { "id": "w6", "trap": { "en": "إِيَّاكَ نَعْبُدُ reads as a plain word order with no emphasis", "bn": "إِيَّاكَ نَعْبُدُ সাধারণ ক্রম, কোনো জোর নেই" }, "options": [{ "en": "The object is fronted: it is You alone we worship", "bn": "কর্ম আগে: শুধু আপনাকেই আমরা ইবাদত করি" }, { "en": "Plain word order, no emphasis", "bn": "সাধারণ ক্রম, জোর নেই" }], "answer": 0, "note": { "en": "Fronting the object restricts the act to Allah alone.", "bn": "কর্ম আগে বসলে কাজটি কেবল আল্লাহর জন্য সীমিত হয়।" } },
+      { "id": "w7", "trap": { "en": "صِرَاطَ الَّذِينَ = the path which", "bn": "صِرَاطَ الَّذِينَ = যে পথ" }, "options": [{ "en": "the path of those people", "bn": "তাদের পথ (ব্যক্তিরা)" }, { "en": "the path which", "bn": "যে পথ" }], "answer": 0, "note": { "en": "الَّذِينَ is for people; الَّذِي alone serves things.", "bn": "الَّذِينَ মানুষের জন্য; বস্তুর জন্য الَّذِي।" } },
+      { "id": "w8", "trap": { "en": "الرَّحْمَٰن and الرَّحِيم carry identical force", "bn": "الرَّحْمَٰن ও الرَّحِيم একই শক্তি বহন করে" }, "options": [{ "en": "Different moulds: vast mercy and constant mercy", "bn": "ভিন্ন ছাঁচ: ব্যাপক দয়া ও অব্যাহত দয়া" }, { "en": "Identical force", "bn": "একই শক্তি" }], "answer": 0, "note": { "en": "Same root, two patterns — meaning shifts with the pattern.", "bn": "একই ধাতু, দুই ছাঁচ — ছাঁচে অর্থ বদলায়।" } }
+    ]
+  },
+  "seeds": {
+    "name": { "en": "Wisdom seeds", "bn": "প্রজ্ঞার বীজ" },
+    "note": {
+      "en": "Short etymological notes that travel with the words you unlock. These are classical senses of the roots, offered as reflection — not as rulings.",
+      "bn": "যে শব্দগুলো শিখছেন তার সাথে ছোট ব্যুৎপত্তি-টীকা। এগুলো ধাতুর ধ্রুপদী অর্থ — ভাবনার জন্য, ফতোয়া নয়।"
+    },
+    "items": [
+      { "id": "s_dunya", "kind": "etymology", "root": "د ن و", "word": "دُنْيَا", "title": { "en": "Dunyā — the nearer", "bn": "দুনিয়া — নিকটতর" }, "body": { "en": "From د ن و (to be near, low): dunyā is the nearer, lower life — named for closeness in time, not for worth.", "bn": "د ن و (নিকট, নিম্ন) থেকে: দুনিয়া মানে নিকটতর, নিম্নতর জীবন — সময়ে নিকট, মূল্যে নয়।" } },
+      { "id": "s_aql", "kind": "etymology", "root": "ع ق ل", "word": "الْعَقْل", "title": { "en": "ʿAql — the tether", "bn": "আকল — রশি" }, "body": { "en": "Classical usage: عَقَلَ is to hobble a camel. Reason is named as the faculty that restrains impulse.", "bn": "ধ্রুপদী ব্যবহার: عَقَلَ মানে উট বেঁধে রাখা। বুদ্ধি সেই শক্তি যা ইচ্ছাকে সংযত করে।" } },
+      { "id": "s_qalb", "kind": "etymology", "root": "ق ل ب", "word": "قَلْب", "title": { "en": "Qalb — the turning one", "bn": "কলব — যা ঘুরে" }, "body": { "en": "From ق ل ب (to turn): the heart is named for its constant turning between states.", "bn": "ق ل ب (ঘুরানো) থেকে: হৃদয়ের নাম এমন, কারণ তা অবস্থার মধ্যে ফিরতে থাকে।" } },
+      { "id": "s_sabr", "kind": "tazkiyah", "root": "ص ب ر", "word": "صَبْر", "title": { "en": "Ṣabr — self-binding", "bn": "সবর — নিজেকে বাঁধা" }, "body": { "en": "Ṣabr is binding the self so it does not lash out. One tap: where did restraint cost you most this week?", "bn": "সবর মানে নিজেকে বেঁধে রাখা, যাতে সে ছুটে না যায়। ভাবুন: এই সপ্তাহে সংযত থাকা কোথায় সবচেয়ে কঠিন ছিল?" } },
+      { "id": "s_shukr", "kind": "tazkiyah", "root": "ش ك ر", "word": "شُكْر", "title": { "en": "Shukr — acknowledgement", "bn": "শোকর — স্বীকৃতি" }, "body": { "en": "ش ك ر is to acknowledge a favour outwardly, not merely to feel pleased. One tap: name one favour you have not yet acknowledged.", "bn": "ش ك ر মানে অনুগ্রহ প্রকাশ্যে স্বীকার করা, কেবল খুশি হওয়া নয়। ভাবুন: যে অনুগ্রহ এখনো স্বীকার করেননি তার একটি নাম নিন।" } },
+      { "id": "s_hilm", "kind": "tazkiyah", "root": "ح ل م", "word": "حِلْم", "title": { "en": "Ḥilm — patient forbearance", "bn": "হিলম — সহনশীলতা" }, "body": { "en": "Ḥilm is the calm that holds back anger while it is still yours to spend.", "bn": "হিলম মানে ক্রোধ ধরে রাখার সেই শান্তি, যখন তা খরচ করাও সম্ভব।" } },
+      { "id": "s_agency", "kind": "agency", "root": "خ ل ق", "word": "خُلِقَ الْإِنسَانُ ضَعِيفًا", "verse": "An-Nisāʾ 4:28", "title": { "en": "The unnamed doer", "bn": "অনামা কর্তা" }, "body": { "en": "The passive خُلِقَ hides the doer and keeps the focus on the created state — human weakness is a description, and the creating agency stays with Allah.", "bn": "কর্মবাচ্য خُلِقَ কর্তাকে গোপন রাখে, মনোযোগ থাকে সৃষ্ট অবস্থার দিকে — মানুষের দুর্বলতা বর্ণনা, সৃষ্টির কর্তৃত্ব আল্লাহরই।" } },
+      { "id": "s_isniyyah", "kind": "permanence", "root": "ح م د", "word": "الْحَمْدُ لِلَّهِ", "verse": "v_fatiha2", "title": { "en": "The permanent sentence", "bn": "স্থায়ী বাক্য" }, "body": { "en": "A nominal sentence (مُبْتَدَأ + خَبَر) states what simply is — no clock attached. Verb sentences narrate what happened; noun sentences state what remains.", "bn": "নাম-বাক্য (মুবতাদা + খবর) বলে দেয় কী আছে — সময় যুক্ত নয়। ক্রিয়া-বাক্য বলে কী ঘটল; নাম-বাক্য বলে কী থাকে।" } },
+      { "id": "s_pairs_hope", "kind": "pairs", "root": "ر ج و", "word": "رَجَاء ↔ خَوْف", "title": { "en": "Hope and awe together", "bn": "আশা ও ভয় একসাথে" }, "body": { "en": "This Book rarely teaches one alone: رَجَاء (hope) is held with خَوْف (awe) so neither becomes recklessness nor despair.", "bn": "এই কিতাব একটিকে একা শেখায় না: رَجَاء (আশা) ও خَوْف (ভয়) একসাথে — যাতে কোনোটি বেপরোয়া বা হতাশায় না বদলায়।" } },
+      { "id": "s_pairs_time", "kind": "pairs", "root": "أ خ ر", "word": "دُنْيَا ↔ آخِرَة", "title": { "en": "Nearer and later", "bn": "নিকটতর ও পরবর্তী" }, "body": { "en": "دُنْيَا (nearer) is taught against آخِرَة (later) as a matter of distance in time, not of two separate worlds.", "bn": "دُنْيَا (নিকটতর) ও آخِرَة (পরবর্তী) — সময়ের দূরত্বের প্রশ্ন, দুই আলাদা জগতের নয়।" } },
+      { "id": "s_pairs_dawn", "kind": "pairs", "root": "ض ح و", "word": "وَالضُّحَىٰ ↔ وَاللَّيْلِ", "title": { "en": "Dawn light and settled night", "bn": "প্রভাত ও স্থির রাত" }, "body": { "en": "Sūrah 93 opens with the two halves of the day: the widening light and the night when it settles — the same rhythm the sūrah then applies to hardship and relief.", "bn": "সূরা ৯৩-এর শুরু দিনের দুই অংশে: বিস্তৃত আলো ও থেমে যাওয়া রাত — সেই ছন্দই পরে কষ্ট ও প্রশস্তিতে প্রয়োগ হয়।" } },
+      { "id": "s_silence", "kind": "silence", "root": "ق ل و", "word": "وَمَا قَلَىٰ", "verse": "Al-Ḍuḥā 93:3", "title": { "en": "What was left unsaid", "bn": "যা বলা হয়নি" }, "body": { "en": "In وَمَا قَلَىٰ the object pronoun is not attached, though grammar allows it. Classical readers noted the omission as honour: the word of abandonment is not completed with the Messenger's name.", "bn": "وَمَا قَلَىٰ-তে কর্মসর্বনাম যুক্ত করা হয়নি, যদিও ব্যাকরণে সম্ভব। ধ্রুপদী পাঠে এই বাদ দেওয়া সম্মান হিসেবে দেখা হয়েছে: ত্যাগের শব্দ রাসূলের নাম দিয়ে পূর্ণ করা হয়নি।" } }
+    ]
+  },
+  "rites": {
+    "salah": {
+      "name": { "en": "Ṣalāh posture by posture", "bn": "নামাজ ধাপে ধাপে" },
+      "note": {
+        "en": "The same handful of Arabic sentences, seventeen times a day. This traces what each one actually says.",
+        "bn": "একই কয়েকটি আরবি বাক্য, দিনে সতেরোবার। এখানে দেখা হয় প্রতিটি আসলে কী বলে।"
+      },
+      "steps": [
+        { "id": "takbir", "posture": { "en": "Takbīr — opening", "bn": "তাকবির — শুরু" }, "ar": "اللَّهُ أَكْبَر", "en": "Allah is greater", "bn": "আল্লাহ সর্বশ্রেষ্ঠ", "grammar": { "en": "أَفْعَل pattern of ك ب ر: comparative, not merely \"big\".", "bn": "ك ب ر-এর أَفْعَل ছাঁচ: তুলনামূলক, কেবল \"বড়\" নয়।" } },
+        { "id": "qiyam", "posture": { "en": "Qiyām — standing", "bn": "কিয়াম — দাঁড়ানো" }, "ar": "إِيَّاكَ نَعْبُدُ", "en": "It is You we worship", "bn": "শুধু আপনাকেই আমরা ইবাদত করি", "grammar": { "en": "The object is fronted before the verb for exclusivity.", "bn": "স্বাতন্ত্র্য বোঝাতে কর্ম ক্রিয়ার আগে।" } },
+        { "id": "ruku", "posture": { "en": "Rukūʿ — bowing", "bn": "রুকু" }, "ar": "سُبْحَانَ رَبِّيَ الْعَظِيمِ", "en": "Glory to my Lord, the Mighty", "bn": "মহিমা আমার রবের, যিনি মহান", "grammar": { "en": "سُبْحَانَ is a noun of glorification; رَبِّيَ is iḍāfa with the -ī pronoun.", "bn": "سُبْحَانَ — পবিত্রতার বিশেষ্য; رَبِّيَ — -ي সর্বনামসহ ইদাফা।" } },
+        { "id": "qawmah", "posture": { "en": "Qawmah — rising", "bn": "কাওমা — ওঠা" }, "ar": "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ", "en": "Allah hears the one who praises Him", "bn": "আল্লাহ শোনেন সেই ব্যক্তির, যে তাঁর প্রশংসা করে", "grammar": { "en": "لِـ on لِمَنْ means for/to — acceptance, not mere hearing.", "bn": "لِمَنْ-এর لِـ মানে জন্য/প্রতি — কেবল শোনা নয়, গ্রহণ।" } },
+        { "id": "sujud", "posture": { "en": "Sujūd — prostration", "bn": "সিজদা" }, "ar": "سُبْحَانَ رَبِّيَ الْأَعْلَى", "en": "Glory to my Lord, the Most High", "bn": "মহিমা আমার রবের, যিনি সর্বোচ্চ", "grammar": { "en": "Same sentence pattern as rukūʿ; only the final attribute rises.", "bn": "রুকুর মতোই গঠন; কেবল শেষ গুণটি উপরে ওঠে।" } },
+        { "id": "jalsa", "posture": { "en": "Jalsah — sitting", "bn": "জালসা — বসা" }, "ar": "رَبِّ اغْفِرْ لِي", "en": "My Lord, forgive me", "bn": "আমার রব, আমাকে ক্ষমা করুন", "grammar": { "en": "رَبِّ is the vocative with the -ī dropped; اغْفِرْ is a command form.", "bn": "رَبِّ সম্বোধনে -ي লুপ্ত; اغْفِرْ আদেশসূচক রূপ।" } },
+        { "id": "taslim", "posture": { "en": "Taslīm — closing", "bn": "তাসলিম — সমাপ্তি" }, "ar": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ", "en": "Peace be upon you, and the mercy of Allah", "bn": "আপনাদের উপর শান্তি ও আল্লাহর দয়া", "grammar": { "en": "عَلَيْكُمْ takes the plural pronoun — the greeting turns outward to both sides.", "bn": "عَلَيْكُمْ বহুবচন সর্বনাম নেয় — সালাম দুই দিকে ছড়ায়।" } }
+      ]
+    },
+    "waqt": {
+      "name": { "en": "Pre-Ṣalāh 90-second primer", "bn": "নামাজের আগে ৯০ সেকেন্ড" },
+      "note": {
+        "en": "A 90-second review of a short passage, matched to the prayer you are about to stand in.",
+        "bn": "যে নামাজে দাঁড়াবেন, তার সাথে মিলিয়ে ছোট একটি অংশের ৯০ সেকেন্ড রিভিউ।"
+      },
+      "windows": [
+        { "id": "fajr", "name": { "en": "Fajr", "bn": "ফজর" }, "window": "dawn", "verse": "v_u10_falaq_full", "focus": { "en": "Al-Falaq — the cleaving dawn; refuge sought every morning.", "bn": "আল-ফালাক — বিদীর্ণ প্রভাত; প্রতিদিন সকালে আশ্রয় প্রার্থনা।" } },
+        { "id": "dhuhr", "name": { "en": "Ẓuhr", "bn": "যোহর" }, "window": "noon", "verse": "v_u10_ikhlas_full", "focus": { "en": "Al-Ikhlāṣ — four lines answering \"what is He?\"", "bn": "আল-ইখলাস — চার লাইনে উত্তর \"তিনি কে?\"" } },
+        { "id": "asr", "name": { "en": "ʿAṣr", "bn": "আসর" }, "window": "afternoon", "verse": "v_asr_full", "focus": { "en": "Al-ʿAṣr — the sūrah named for this hour: time itself swears.", "bn": "আল-আসর — এই সময়ের নামে সূরা: সময় নিজেই কসম খায়।" } },
+        { "id": "maghrib", "name": { "en": "Maghrib", "bn": "মাগরিব" }, "window": "dusk", "verse": "v_u10_nas_full", "focus": { "en": "An-Nās — refuge from the whisperer as the day closes.", "bn": "আন-নাস — দিনের শেষে কুমন্ত্রণাকারীর থেকে আশ্রয়।" } },
+        { "id": "isha", "name": { "en": "ʿIshāʾ", "bn": "ইশা" }, "window": "night", "verse": "v_kursi", "focus": { "en": "Āyat al-Kursī — the longest single verse on His standing over all.", "bn": "আয়াতুল কুরসি — সবচেয়ে দীর্ঘ আয়াত, তাঁর সর্বোপরি অবস্থানের বর্ণনা।" } }
+      ]
+    },
+    "wuduAdhan": {
+      "name": { "en": "Water and call", "bn": "পানি ও আহ্বান" },
+      "note": { "en": "The words of preparation, read from their roots.", "bn": "প্রস্তুতির শব্দগুলো, ধাতু থেকে পড়া।" },
+      "items": [
+        { "id": "wudu", "term": "الْوُضُوء", "root": "و ض أ", "title": { "en": "Wuḍūʾ — radiance", "bn": "উযু — উজ্জ্বলতা" }, "body": { "en": "The root carries brightness: preparation for prayer is described as making something shine, not merely clean.", "bn": "ধাতুতে উজ্জ্বলতার ভাব: নামাজের প্রস্তুতিকে কেবল পরিষ্কার নয়, দীপ্তিমান করা বলা হয়।" } },
+        { "id": "adhan", "term": "الْأَذَان", "root": "أ ذ ن", "title": { "en": "Adhān — to announce", "bn": "আজান — ঘোষণা" }, "body": { "en": "أ ذ ن is to give ear, then to announce: the call makes the whole neighbourhood hear.", "bn": "أ ذ ن মানে কান দেওয়া, পরে ঘোষণা করা: আহ্বান পাড়াকে শোনায়।" } },
+        { "id": "falah", "term": "حَيَّ عَلَى الْفَلَاح", "root": "ف ل ح", "title": { "en": "Falāḥ — the tilled field", "bn": "ফালাহ — চষা জমি" }, "body": { "en": "ف ل ح is to split soil so it yields: success is pictured as land opened and worked.", "bn": "ف ل ح মানে মাটি চিরে ফলানো: সফলতা যেন চষা ও পরিচর্যা করা জমি।" } },
+        { "id": "ikhlas", "term": "الْإِخْلَاص", "root": "خ ل ص", "title": { "en": "Ikhlāṣ — to come clear", "bn": "ইখলাস — নির্মল হওয়া" }, "body": { "en": "خ ل ص is to become free of mixture: sincerity is the single motive left when everything mixed has drained out.", "bn": "خ ل ص মানে মিশ্রণমুক্ত হওয়া: সব মিশ্রণ ঝরে গেলে যে একমাত্র উদ্দেশ্য থাকে, তা-ই ইখলাস।" } }
+      ]
+    },
+    "jumuah": {
+      "name": { "en": "Friday quest", "bn": "জুমার অনুসন্ধান" },
+      "note": {
+        "en": "A weekly Friday task: read the opening of Sūrat al-Kahf (18:1–10) and catch four phrases that carry most Friday sermon Arabic.",
+        "bn": "সাপ্তাহিক শুক্রবারের কাজ: সূরা কাহফের শুরু (১৮:১–১০) পড়ুন এবং খুতবার সবচেয়ে প্রচলিত চারটি বাক্য চিনুন।"
+      },
+      "surahRef": "Al-Kahf 18:1–10",
+      "phrases": [
+        { "id": "j1", "ar": "الْحَمْدُ لِلَّهِ", "en": "Praise belongs to Allah", "bn": "সব প্রশংসা আল্লাহর" },
+        { "id": "j2", "ar": "أَمَّا بَعْدُ", "en": "To proceed; as for what follows", "bn": "এখন যা বলার" },
+        { "id": "j3", "ar": "وَالصَّلَاةُ وَالسَّلَامُ عَلَىٰ رَسُولِ اللَّهِ", "en": "And prayer and peace be upon the Messenger of Allah", "bn": "আর আল্লাহর রাসূলের উপর সালাত ও সালাম" },
+        { "id": "j4", "ar": "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ", "en": "I seek refuge in Allah from the rejected shayṭān", "bn": "বিতাড়িত শয়তান থেকে আল্লাহর কাছে আশ্রয় চাই" }
+      ]
+    },
+    "sawm": {
+      "name": { "en": "Ear training from recitation", "bn": "তিলাওয়াত থেকে শ্রবণ-শিক্ষা" },
+      "note": {
+        "en": "Listen to the device voice read one of these passages, then pick the root you hear. Requires an installed Arabic voice; otherwise the drills stay hidden.",
+        "bn": "ডিভাইসের ভয়েসে অংশটি শুনে ধাতু চিনুন। আরবি ভয়েস ইনস্টল থাকা লাগবে; না থাকলে এই অনুশীলন লুকানো থাকে।"
+      },
+      "drills": [
+        { "id": "s1", "verse": "v_kursi", "ask": { "en": "Which root do you hear inside الْحَيُّ?", "bn": "الْحَيُّ-তে কোন ধাতু শুনছেন?" }, "options": ["ح ي ي", "ح و ي", "ح ي و"], "answer": 0 },
+        { "id": "s2", "verse": "v_baqara152", "ask": { "en": "Which root carries \"remember\"?", "bn": "\"স্মরণ\" কোন ধাতুতে?" }, "options": ["ذ ك ر", "د ك ر", "ذ ك و"], "answer": 0 },
+        { "id": "s3", "verse": "v_rahman14", "ask": { "en": "Which root is inside عَلَّمَ?", "bn": "عَلَّمَ-এ কোন ধাতু?" }, "options": ["ع ل م", "ع ل ن", "ع م ل"], "answer": 0 },
+        { "id": "s4", "verse": "v_kawthar123", "ask": { "en": "Which root is inside أَعْطَيْنَا?", "bn": "أَعْطَيْنَا-তে কোন ধাতু?" }, "options": ["ع ط و", "ع ط ف", "أ ط ع"], "answer": 0 }
+      ]
+    },
+    "zakatHajj": {
+      "name": { "en": "Growth and answer", "bn": "বৃদ্ধি ও সাড়া" },
+      "note": { "en": "Two pillars read from their roots.", "bn": "দুই স্তম্ভ, ধাতু থেকে পড়া।" },
+      "items": [
+        { "id": "zakat", "term": "الزَّكَاة", "root": "ز ك و", "title": { "en": "Zakāh — pruning that grows", "bn": "যাকাত — যা ছেঁটে বাড়ায়" }, "body": { "en": "ز ك و is increase after pruning: giving away is described as growth, not loss.", "bn": "ز ك و মানে ছেঁটে দেওয়ার পর বৃদ্ধি: দান বর্ণিত হয় বৃদ্ধি হিসেবে, ক্ষতি নয়।" } },
+        { "id": "hajj", "term": "الْحَجّ", "root": "ح ج ج", "title": { "en": "Ḥajj — to set out", "bn": "হজ — বেরিয়ে পড়া" }, "body": { "en": "The root is to intend and to set out, then to argue a case — a journey made deliberately.", "bn": "ধাতু মানে সংকল্প ও যাত্রা, পরে যুক্তি উপস্থাপন — সচেতন সফর।" } },
+        { "id": "labbayk", "term": "لَبَّيْكَ", "root": "ل ب ب", "title": { "en": "Labbayk — answering again", "bn": "লাব্বাইক — বারবার সাড়া" }, "body": { "en": "لَبَّى is to answer a call; the doubled form with -ka says: I answer You, and again I answer You.", "bn": "لَبَّى মানে ডাকে সাড়া; দ্বিরুক্ত রূপ ও -ka বলে: সাড়া দিচ্ছি, আবার সাড়া দিচ্ছি।" } },
+        { "id": "ihsan", "term": "الْإِحْسَان", "root": "ح س ن", "title": { "en": "Iḥsān — doing it beautifully", "bn": "ইহসান — সুন্দর করে করা" }, "body": { "en": "From ح س ن (good, beautiful): iḥsān is to place goodness into the very doing of a thing.", "bn": "ح س ن (ভালো, সুন্দর) থেকে: ইহসান মানে কাজটির ভেতরেই সৌন্দর্য বসানো।" } }
+      ]
+    }
+  },
+  "whispers": [
+    { "id": "wh1", "root": "ر ح م", "line": { "en": "Mercy is named from the womb — the nearest tenderness there is.", "bn": "দয়ার নাম গর্ভ থেকে — সবচেয়ে নিকট কোমলতা।" } },
+    { "id": "wh2", "root": "ص ب ر", "line": { "en": "Ṣabr is binding, not waiting.", "bn": "সবর মানে বেঁধে রাখা, অপেক্ষা নয়।" } },
+    { "id": "wh3", "root": "ق ل ب", "line": { "en": "The heart is named for turning. Steady it on purpose.", "bn": "হৃদয়ের নাম ঘুরে বেড়ানো থেকে। ইচ্ছে করেই তা স্থির রাখুন।" } },
+    { "id": "wh4", "root": "د ن و", "line": { "en": "Dunyā means nearer — small because it ends, not because it is worthless.", "bn": "দুনিয়া মানে নিকটতর — ক্ষুদ্র কারণ শেষ, মূল্যহীন নয়।" } },
+    { "id": "wh5", "root": "و ض أ", "line": { "en": "Wuḍūʾ shares its root with radiance.", "bn": "উযুর ধাতুতে আছে উজ্জ্বলতা।" } },
+    { "id": "wh6", "root": "ز ك و", "line": { "en": "Zakāh is growth after pruning.", "bn": "যাকাত মানে ছেঁটে দেওয়ার পর বৃদ্ধি।" } }
+  ],
+  "loaders": [
+    { "id": "star_breath", "name": { "en": "Eight-point star breath", "bn": "আট-কোণা তারার শ্বাস" }, "seconds": 4 },
+    { "id": "root_sprout", "name": { "en": "Root sprouting", "bn": "ধাতুর অঙ্কুর" }, "seconds": 3 },
+    { "id": "mushaf_shimmer", "name": { "en": "Mushaf shimmer", "bn": "মুসহাফের ঝিলক" }, "seconds": 2 },
+    { "id": "qalam_stroke", "name": { "en": "Reed-pen stroke", "bn": "কলমের টান" }, "seconds": 3 },
+    { "id": "sky_shader", "name": { "en": "Prayer-time sky", "bn": "নামাজের সময়ের আকাশ" }, "seconds": 0 },
+    { "id": "whisper_card", "name": { "en": "Hikmah whisper", "bn": "প্রজ্ঞার ফিসফিস" }, "seconds": 2 }
+  ],
+  "halaqah": {
+    "name": { "en": "Ḥalaqah", "bn": "হালাকা" },
+    "note": {
+      "en": "Co-op streak study. This build keeps the circle entirely on your device: nominate up to four companions and the app tracks a shared lantern. Real cross-device circles need a sync service that is not part of this offline prototype.",
+      "bn": "সহপাঠী স্ট্রিক। এই সংস্করণে হালাকা সম্পূর্ণ আপনার ডিভাইসেই: চারজন সঙ্গী যোগ করা যায় এবং অ্যাপ একটি সাধারণ লণ্ঠন ট্র্যাক করে। সত্যিকারের ক্রস-ডিভাইস হালাকার জন্য সিঙ্ক সার্ভিস দরকার, যা এই অফলাইন প্রোটোটাইপে নেই।"
+    },
+    "maxMembers": 5
+  },
+  "illumination": {
+    "name": { "en": "Illumination map", "bn": "আলোর মানচিত্র" },
+    "note": {
+      "en": "Every root you master lights the verses you can already read in this app's corpus. Coverage is counted from the bundled curriculum, not from the whole Mushaf.",
+      "bn": "যে ধাতু আয়ত্ত করছেন, তা এই অ্যাপের সংকলিত আয়াতগুলো আলোকিত করে। হিসাব বান্ডল করা পাঠ্যক্রম থেকে, পুরো মুসহাফ থেকে নয়।"
+    }
+  }
+}
