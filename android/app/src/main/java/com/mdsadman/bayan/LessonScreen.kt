@@ -48,6 +48,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun LessonScreen(c: AppController) {
     val r = c.run ?: return
+    CompleteTone(c, r)
     Column(Modifier.fillMaxSize()) {
         Row(
             Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp),
@@ -76,6 +77,15 @@ fun LessonScreen(c: AppController) {
                     )
                 }
             }
+        }
+        if (r.flow.multiplier > 1) {
+            Text(
+                "${r.flow.multiplier}× " + c.t("lesson.flow"),
+                fontSize = 11.sp,
+                fontWeight = FontWeight.Bold,
+                color = Brass,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
         }
 
         Column(
@@ -120,8 +130,52 @@ fun CardView(c: AppController, r: LessonRun) {
         is Card.Mc, is Card.Mca, is Card.Root, is Card.Listen, is Card.Blank -> ChoiceView(c, r, card)
         is Card.Build -> BuildView(c, r, card)
         is Card.Match -> MatchView(c, r, card)
+        is Card.Forge -> ForgeView(c, r, card)
         is Card.Complete -> CompleteView(c, r)
         null -> {}
+    }
+}
+
+/** Sarf forge (feature 3): pick the word the mould produces from the root. */
+@Composable
+fun ForgeView(c: AppController, r: LessonRun, card: Card.Forge) {
+    val round = card.round
+    CardSurface {
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            TagChip(c.t("forge.tag"), Color(0xFFFBF4E0), Brass)
+            Spacer(Modifier.height(12.dp))
+            ArabicText(round.mould.pattern, 34)
+            Text(round.mould.role.get(c.st.lang), fontSize = 12.sp, color = InkFaint)
+            Spacer(Modifier.height(8.dp))
+            ArabicText(round.root, 26)
+            Spacer(Modifier.height(10.dp))
+            Text(c.t("forge.ask"), fontSize = 12.sp, color = InkFaint)
+            Spacer(Modifier.height(10.dp))
+            round.options.forEachIndexed { index, option ->
+                val chosen = r.selected == index
+                val frozen = r.phase == "feedback"
+                val borderColor = when {
+                    frozen && index == round.answer -> Ok
+                    frozen && chosen && index != round.answer -> Bad
+                    chosen -> Accent
+                    else -> LineC
+                }
+                Text(
+                    option,
+                    fontSize = 25.sp,
+                    fontFamily = FontFamily.Serif,
+                    color = Ink,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp)
+                        .clip(RoundedCornerShape(14.dp))
+                        .background(if (chosen && !frozen) Accent.copy(alpha = 0.08f) else CardBg)
+                        .border(2.dp, borderColor, RoundedCornerShape(14.dp))
+                        .clickable { if (r.phase == "answer") { r.selected = index; c.check() } }
+                        .padding(vertical = 10.dp)
+                )
+            }
+        }
     }
 }
 
@@ -564,11 +618,19 @@ fun ResTile(value: String, label: String, modifier: Modifier = Modifier) {
 
 /* ---------------------------------------------------------------- footer */
 
+/** Completion chirp (feature 1: the ladder's top figure), played once per lesson. */
+@Composable
+fun CompleteTone(c: AppController, r: LessonRun) {
+    LaunchedEffect(r.finalized) {
+        if (r.finalized) ToneFeedback.play("complete", 0, c.st.sound)
+    }
+}
+
 @Composable
 fun Footer(c: AppController, r: LessonRun) {
     val card = r.cur ?: return
     val graded = card is Card.Mc || card is Card.Mca || card is Card.Root ||
-        card is Card.Listen || card is Card.Blank || card is Card.Build
+        card is Card.Listen || card is Card.Blank || card is Card.Build || card is Card.Forge
     val feedback = r.phase == "feedback"
     val bg = when {
         feedback -> if (r.gradedOk == true) OkBg else BadBg
@@ -586,6 +648,7 @@ fun Footer(c: AppController, r: LessonRun) {
         }
         when {
             card is Card.Match && !feedback -> Unit
+            card is Card.Forge && !feedback -> Unit // options answer immediately
             card is Card.Complete -> PrimaryButton(c.t("lesson.continue"), true, true) { c.continueFromComplete() }
             feedback -> PrimaryButton(c.t("lesson.continue"), true, true) { c.continueCard() }
             graded -> PrimaryButton(

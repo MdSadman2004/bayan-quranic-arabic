@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
@@ -33,6 +34,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         controller = AppController(applicationContext)
         controller.initTts(this)
+        ToneFeedback.init()
         handleIntent(intent)
         setContent { BayanTheme { BayanApp(controller) } }
     }
@@ -44,6 +46,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onDestroy() {
         controller.shutdownTts()
+        ToneFeedback.release()
         super.onDestroy()
     }
 
@@ -71,6 +74,9 @@ fun BayanApp(c: AppController) {
             "onboarding" -> OnboardingScreen(c)
             "home" -> ScreensWithTabs(c) { HomeScreen(c) }
             "practice" -> ScreensWithTabs(c) { PracticeScreen(c) }
+            "rites" -> ScreensWithTabs(c) { RitesScreen(c) }
+            "circle" -> ScreensWithTabs(c) { CircleScreen(c) }
+            "boss" -> ScreensWithTabs(c) { BossClock(c) }
             "profile" -> ScreensWithTabs(c) { ProfileScreen(c) }
             "lesson" -> LessonScreen(c)
         }

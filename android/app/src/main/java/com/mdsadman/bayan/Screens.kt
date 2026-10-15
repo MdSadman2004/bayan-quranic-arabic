@@ -26,9 +26,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.AlertDialog
@@ -224,6 +226,8 @@ fun TabBar(c: AppController, modifier: Modifier = Modifier) {
         Row(Modifier.fillMaxWidth().height(58.dp)) {
             TabItem(c.t("nav.learn"), Icons.Filled.Home, c.route == "home", Modifier.weight(1f)) { c.go("home") }
             TabItem(c.t("nav.practice"), Icons.Filled.Refresh, c.route == "practice", Modifier.weight(1f)) { c.go("practice") }
+            TabItem(c.t("nav.rites"), Icons.Filled.Info, c.route == "rites", Modifier.weight(1f)) { c.go("rites") }
+            TabItem(c.t("nav.circle"), Icons.Filled.Star, c.route == "circle", Modifier.weight(1f)) { c.go("circle") }
             TabItem(c.t("nav.profile"), Icons.Filled.Person, c.route == "profile", Modifier.weight(1f)) { c.go("profile") }
         }
     }
@@ -472,6 +476,23 @@ fun PracticeScreen(c: AppController) {
                     PrimaryButton(c.t("practice.start"), true, true) { c.startReview() }
                 }
             }
+        }
+        // Whisper boss entry (feature 4)
+        Spacer(Modifier.height(12.dp))
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(18.dp))
+                .background(Ink)
+                .clickable { c.startBoss() }
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(Modifier.weight(1f)) {
+                Text(c.t("boss.title"), fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = Paper)
+                Text(c.t("boss.invite", "n" to FeaturesEngine.F.bossSeconds), fontSize = 12.sp, color = Paper.copy(alpha = 0.72f))
+            }
+            Text(c.t("boss.start"), fontSize = 13.sp, fontWeight = FontWeight.Bold, color = Accent)
         }
     }
 }

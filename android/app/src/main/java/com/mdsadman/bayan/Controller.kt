@@ -12,7 +12,13 @@ import java.util.Locale
 class AppController(private val ctx: Context) {
 
     val cur: Curriculum = Curriculum.load(ctx)
-    private val store = Store(ctx)
+    /** Game/wisdom/rite payload loaded from assets/features.json; falls back to defaults. */
+    val features: Features = try {
+        FeaturesEngine.load(ctx.assets.open("features.json").bufferedReader().use { it.readText() })
+    } catch (ignored: java.io.IOException) {
+        FeaturesEngine.load(null)
+    }
+    private val store = Store(ctx, cur)
 
     var st: AppState = store.load()
         private set
@@ -26,6 +32,10 @@ class AppController(private val ctx: Context) {
 
     var route by mutableStateOf(if (st.onboarded) "home" else "onboarding")
         private set
+    /** Ṣalāh simulator position (feature 13), remembered while the app runs. */
+    var salahIndex by mutableStateOf(0)
+    /** Whisper boss session (feature 4); null outside a battle. */
+    var bossSession by mutableStateOf<BossSession?>(null)
 
     var langPref by mutableStateOf(st.lang)
     var run: LessonRun? by mutableStateOf(null)
@@ -38,12 +48,18 @@ class AppController(private val ctx: Context) {
     var pendingAuto: Boolean = false
 
     private var tts: TextToSpeech? = null
+    private var pitchPresets: Map<Int, Pair<Int, Int>> = mapOf() // semitones -> low/high tone pairs
 
     fun t(key: String, vararg vars: Pair<String, Any>): String =
         Strings.get(key, st.lang, vars.toMap())
 
     fun refresh() {
         persist()
+        tick += 1
+    }
+
+    /** Same as refresh() without an extra save, for callers that already persisted. */
+    fun bumpTick() {
         tick += 1
     }
 
@@ -151,6 +167,60 @@ class AppController(private val ctx: Context) {
         go("home")
     }
 
+    /* ------------------------------------------------ whisper boss (feature 4) */
+
+    fun startBoss() {
+        val waves = FeaturesEngine.bossQueue(kotlin.random.Random, FeaturesEngine.F.bossWaves.size)
+        bossSession = BossSession(waves)
+        go("boss")
+    }
+
+    fun bossAnswer(index: Int) {
+        val session = bossSession ?: return
+        if (session.done) return
+        val correct = index == session.wave.answer
+        if (correct) session.hits += 1 else session.wrong += 1
+        ToneFeedback.play(if (correct) "ok" else "bad", 0, st.sound)
+        session.index += 1
+        if (session.index >= session.waves.size || session.expired()) {
+            finishBoss()
+        }
+        tick += 1
+    }
+
+    private fun finishBoss() {
+        val session = bossSession ?: return
+        session.done = true
+        val secondsLeft = maxOf(0, ((session.endsAt - System.currentTimeMillis()) / 1000).toInt())
+        val score = FeaturesEngine.bossScore(session.waves, session.hits, secondsLeft)
+        st.xp += score.xp
+        if (score.shields > 0) st.featureState.shields += score.shields
+        persist()
+        tick += 1
+    }
+
+    fun tickBoss() {
+        val session = bossSession ?: return
+        if (!session.done && session.expired()) finishBoss()
+    }
+
+    fun salahStep(delta: Int) {
+        salahIndex = maxOf(0, minOf(FeaturesEngine.F.salahSteps.size - 1, salahIndex + delta))
+    }
+
+    fun circleAdd(name: String) {
+        st.featureState.circle.add(name)
+        refresh()
+    }
+
+    fun circleShield() {
+        if (st.featureState.circle.lendShield()) {
+            st.featureState.shields += 1
+            toast = t("circle.shieldCast")
+        }
+        refresh()
+    }
+
     /* ------------------------------------------------ interaction */
 
     fun select(i: Int) {
@@ -174,6 +244,10 @@ class AppController(private val ctx: Context) {
                 val joined = r.buildSel.map { c.tiles[it] }.joinToString(" ")
                 finishAnswer(r, c.v.id, joined == c.v.ar, c.v.ar)
             }
+            is Card.Forge -> {
+                val word = c.round.options.getOrNull(r.selected ?: -1) ?: return
+                finishAnswer(r, "forge:" + c.round.mould.id, word == c.round.word, c.round.word)
+            }
             else -> {}
         }
     }
@@ -183,6 +257,7 @@ class AppController(private val ctx: Context) {
         r.gradedOk = ok
         r.gradedText = correctText
         if (r.phase != "failed") r.phase = "feedback"
+        ToneFeedback.playFor(if (ok) "ok" else "bad", r.flow, st.sound)
     }
 
     fun continueCard() {
