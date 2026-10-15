@@ -167,7 +167,7 @@ data class ResultSummary(
     val acc: Float,
     val perfect: Boolean,
     val gems: Int,
-    val unitComplete: Unit?,
+    val unitComplete: CourseUnit?,
     val newAch: List<String>
 )
 
@@ -218,7 +218,7 @@ object Engine {
         return null
     }
 
-    fun unitProgress(s: AppState, u: Unit): Pair<Int, Int> {
+    fun unitProgress(s: AppState, u: CourseUnit): Pair<Int, Int> {
         val done = u.lessons.count { lessonDone(s, it) }
         return done to u.lessons.size
     }
@@ -468,7 +468,7 @@ object Engine {
         if (perfect) xp += 5
         xp += min(3, floor(run.comboMax / 5.0).toInt()) * 2
 
-        var unitComplete: Unit? = null
+        var unitComplete: CourseUnit? = null
         if (!isReview && run.lessonId != null) {
             val lid = run.lessonId
             val rec = s.lessons.getOrPut(lid) { LessonRec() }

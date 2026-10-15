@@ -345,7 +345,7 @@ fun ReviewCard(c: AppController, due: Int, seen: Int) {
 }
 
 @Composable
-fun UnitHeader(c: AppController, u: Unit) {
+fun UnitHeader(c: AppController, u: CourseUnit) {
     val (done, total) = Engine.unitProgress(c.st, u)
     Column(
         Modifier
