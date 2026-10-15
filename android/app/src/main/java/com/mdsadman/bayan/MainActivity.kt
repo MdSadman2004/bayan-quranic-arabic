@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -51,6 +53,7 @@ class MainActivity : ComponentActivity() {
             "lesson" -> {
                 controller.pendingLesson = i.getStringExtra("lesson") ?: "u1l1"
                 controller.pendingAuto = i.getBooleanExtra("auto", false)
+                controller.processPendingIntent()
             }
             "profile" -> controller.go("profile")
             "practice" -> controller.go("practice")
@@ -61,10 +64,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun BayanApp(c: AppController) {
-    LaunchedEffect(Unit) {
-        c.processPendingIntent()
-    }
-    Box(Modifier.fillMaxSize().background(Paper)) {
+    // Cold-start deep links are handled in MainActivity.handleIntent() (before composition);
+    // warm links process there too, so no LaunchedEffect is needed here.
+    Box(Modifier.fillMaxSize().background(Paper).statusBarsPadding()) {
         when (c.route) {
             "onboarding" -> OnboardingScreen(c)
             "home" -> ScreensWithTabs(c) { HomeScreen(c) }
@@ -79,7 +81,7 @@ fun BayanApp(c: AppController) {
 @Composable
 private fun ScreensWithTabs(c: AppController, content: @Composable () -> Unit) {
     Box(Modifier.fillMaxSize()) {
-        Box(Modifier.fillMaxSize().padding(bottom = 60.dp)) { content() }
+        Box(Modifier.fillMaxSize().padding(bottom = 60.dp).navigationBarsPadding()) { content() }
         TabBar(c, Modifier.align(Alignment.BottomCenter))
     }
 }
@@ -95,7 +97,8 @@ fun ToastView(c: AppController) {
         Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .padding(bottom = 96.dp),
+            .padding(bottom = 96.dp)
+            .navigationBarsPadding(),
         contentAlignment = Alignment.BottomCenter
     ) {
         Text(

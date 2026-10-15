@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -574,7 +575,7 @@ fun Footer(c: AppController, r: LessonRun) {
         else -> Paper
     }
 
-    Column(Modifier.fillMaxWidth().background(bg).padding(horizontal = 18.dp, vertical = 14.dp)) {
+    Column(Modifier.fillMaxWidth().background(bg).navigationBarsPadding().padding(horizontal = 18.dp, vertical = 14.dp)) {
         if (feedback) {
             Text(
                 if (r.gradedOk == true) c.t("lesson.correct") else c.t("lesson.wrong") + " " + r.gradedText,

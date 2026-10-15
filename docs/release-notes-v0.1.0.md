@@ -32,10 +32,12 @@ unit bonus, "Quranic coverage" estimate. Retention: simplified SM-2 spaced repet
 - `python curriculum/build.py` — schema + token-join validation (8 units, 24 lessons, 115 items,
   27 verses, 27 context cards) and payload emission for both clients.
 - Web client driven end-to-end in a real browser: onboarding → lesson → completion → streak/XP →
-  review queue → profile; wrong-answer, out-of-hearts, retry and persistence paths exercised.
-- Android: `assembleDebug` build (Gradle 8.9, AGP 8.4.0, Kotlin 2.0.21) — APK's package, launcher
-  activity and bundled `assets/curriculum.json` verified with `aapt`/`unzip`.
-- **Not yet verified:** Android install/launch on a physical device (no device was attached at
-  build time). It's a study prototype — verify scholarly content before wider use.
+  review queue → profile; wrong-answer, out-of-hearts, retry and persistence paths exercised
+  (locally and on the deployed GitHub Pages copy).
+- Android: installed and run on a physical device (Redmi 25062RN2DA, HyperOS / Android 16):
+  cold start, warm deep-links (singleTop), scripted lesson completion — on-device state readback
+  matches the web run (26 XP, 3★, 16/16, achievements, SRS records); 0 crashes.
+- Android edge-to-edge insets handled for Android 15+ (status bar + navigation bar padding) —
+  verified by pixel probe: 0 button-colored pixels inside the bottom navigation-bar band.
 
 MIT licensed. Built by Md Sadman Bin Masud.

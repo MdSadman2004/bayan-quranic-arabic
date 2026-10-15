@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -218,9 +219,9 @@ fun Chip(text: String) {
 
 @Composable
 fun TabBar(c: AppController, modifier: Modifier = Modifier) {
-    Column(modifier.fillMaxWidth()) {
+    Column(modifier.fillMaxWidth().background(CardBg).navigationBarsPadding()) {
         HorizontalDivider(color = LineC, thickness = 1.dp)
-        Row(Modifier.fillMaxWidth().height(58.dp).background(CardBg)) {
+        Row(Modifier.fillMaxWidth().height(58.dp)) {
             TabItem(c.t("nav.learn"), Icons.Filled.Home, c.route == "home", Modifier.weight(1f)) { c.go("home") }
             TabItem(c.t("nav.practice"), Icons.Filled.Refresh, c.route == "practice", Modifier.weight(1f)) { c.go("practice") }
             TabItem(c.t("nav.profile"), Icons.Filled.Person, c.route == "profile", Modifier.weight(1f)) { c.go("profile") }
