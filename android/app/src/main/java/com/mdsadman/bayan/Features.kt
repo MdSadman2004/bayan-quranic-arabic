@@ -38,7 +38,15 @@ data class Features(
     val zakatHajj: List<RiteTerm>,
     val jumuahPhrases: List<JumuahPhrase>,
     val sawmDrills: List<SawmDrill>,
-    val whispers: List<WhisperLine>
+    val whispers: List<WhisperLine>,
+    val placement: PlacementCfg = PlacementCfg()
+)
+
+/** Placement-test tuning (features.json -> placement). Units are the tiers. */
+data class PlacementCfg(
+    val perTier: Int = 4,
+    val sampleSize: Int = 16,
+    val passRate: Float = 0.75f
 )
 
 /** Device-local feature state (loot, shields, ḥalaqah circle) — never part of the portable v1 backup. */
@@ -266,7 +274,14 @@ object FeaturesEngine {
             comboSteps, comboSemitones, combo.optInt("windowSec", 8),
             chests.optDouble("chance", 0.55).toFloat(), rarities, loot, moulds,
             boss.optInt("seconds", 45), waves, seeds, salah, waqt,
-            terms("wuduAdhan"), terms("zakatHajj"), jumuah, drills, whispers
+            terms("wuduAdhan"), terms("zakatHajj"), jumuah, drills, whispers,
+            root.optJSONObject("placement")?.let { pl ->
+                PlacementCfg(
+                    pl.optInt("perTier", 4).coerceIn(1, 6),
+                    pl.optInt("sampleSize", 16).coerceIn(4, 40),
+                    pl.optDouble("passRate", 0.75).toFloat().coerceIn(0.5f, 1f)
+                )
+            } ?: PlacementCfg()
         )
         return F
     }
@@ -441,6 +456,158 @@ object FeaturesEngine {
     }
 
     fun jumuahOpen(dayOfWeek: Int): Boolean = dayOfWeek == 5 // java.util.Calendar.FRIDAY
+    /* --------------------------------------- placement test (adaptive tiers) */
+
+    /** Adaptive tier search: units are the ladder, 0 = the first unit.
+     * A tier is judged once `perTier` questions are seen at it, passing at
+     * `passRate`. Binary search converges in ~log2(units) rounds. */
+    class PlacementSession(val tiers: Int) {
+        var lo = -1
+        var hi = tiers
+        var probe = if (tiers > 1) (tiers - 1) / 2 else 0
+        var tierCorrect = 0
+        var tierWrong = 0
+        var total = 0
+        var correct = 0
+        var done = false
+        var current: PlacementQuestion? = null
+        val asked = HashSet<String>()
+        var result: PlacementResult? = null
+    }
+
+    class PlacementQuestion(val tier: Int, val itemId: String, val options: List<String>, val answer: Int)
+
+    data class PlacementResult(val tier: Int, val correct: Int, val total: Int, val confident: Boolean) {
+        val accuracy: Int get() = if (total == 0) 0 else Math.round(100f * correct / total)
+    }
+
+    private fun paramPerTier() = F.placement.perTier
+    private fun paramBudget() = F.placement.sampleSize
+    private fun paramRate() = F.placement.passRate
+
+    /** Item ids taught in one unit, unseen ones first. */
+    fun tierItems(cur: Curriculum, tier: Int, state: AppState?): List<String> {
+        val unit = cur.units.getOrNull(tier) ?: return emptyList()
+        val ids = ArrayList<String>()
+        for (lessonId in unit.lessons) {
+            val lesson = cur.lessons[lessonId] ?: continue
+            for (item in lesson.items) if (ids.indexOf(item.id) < 0) ids.add(item.id)
+        }
+        val seen = state?.items ?: emptyMap()
+        val unseen = ids.filter { id -> (seen[id]?.seen ?: 0) == 0 }
+        return if (unseen.size >= 2) unseen else ids
+    }
+
+    fun placementStart(cur: Curriculum, state: AppState?): PlacementSession {
+        val session = PlacementSession(cur.units.size.coerceAtLeast(1))
+        return placementAdvance(session) ?: session
+    }
+
+    private fun placementAdvance(session: PlacementSession): PlacementSession? {
+        if (session.done) return null
+        if (session.total >= paramBudget() || session.hi - session.lo <= 1) {
+            session.done = true
+            session.result = placementResult(session)
+            return null
+        }
+        val probe = ((session.lo + session.hi) / 2).coerceIn(0, session.tiers - 1)
+        if (probe != session.probe) {
+            session.probe = probe
+            session.tierCorrect = 0
+            session.tierWrong = 0
+        }
+        return session
+    }
+
+    fun placementQuestion(session: PlacementSession, cur: Curriculum, state: AppState?): PlacementQuestion? {
+        if (session.done) return null
+        val pool = tierItems(cur, session.probe, state)
+        val itemId = pool.firstOrNull { !session.asked.contains(session.probe.toString() + ":" + it) }
+            ?: pool.firstOrNull()
+        if (itemId == null) {
+            session.done = true
+            session.result = placementResult(session)
+            return null
+        }
+        session.asked.add(session.probe.toString() + ":" + itemId)
+        val others = ArrayList<String>()
+        for (t in 0 until session.tiers) {
+            if (t == session.probe) continue
+            for (id in tierItems(cur, t, state)) if (others.indexOf(id) < 0) others.add(id)
+        }
+        val rand = kotlin.random.Random(seedOf("placement:" + session.probe + ":" + itemId))
+        val options = ArrayList<String>()
+        options.add(itemId)
+        val shuffled = others.shuffled(rand).take(3)
+        options.addAll(shuffled)
+        options.shuffle(rand)
+        val question = PlacementQuestion(session.probe, itemId, options, options.indexOf(itemId))
+        session.current = question
+        return question
+    }
+
+    fun placementAnswer(session: PlacementSession, ok: Boolean, cur: Curriculum, state: AppState?): PlacementSession {
+        if (session.done) return session
+        session.total += 1
+        if (ok) { session.correct += 1; session.tierCorrect += 1 } else session.tierWrong += 1
+        val need = Math.max(1, Math.ceil((paramPerTier() * paramRate()).toDouble()).toInt())
+        val miss = paramPerTier() - need + 1
+        if (session.tierCorrect >= need) session.lo = Math.max(session.lo, session.probe)
+        else if (session.tierWrong >= miss) session.hi = Math.min(session.hi, session.probe)
+        placementAdvance(session)
+        if (!session.done) placementQuestion(session, cur, state)
+        return session
+    }
+
+    fun placementResult(session: PlacementSession): PlacementResult =
+        PlacementResult(
+            Math.max(0, session.lo), session.correct, session.total,
+            session.total >= Math.min(6, paramBudget())
+        )
+
+    /** Mark the units below `tier` as placed: unlocks the path, grants no XP or
+     * stars, and never rewrites a lesson the learner finished themselves. */
+    fun applyPlacement(state: AppState, tier: Int, cur: Curriculum): Int {
+        val target = tier.coerceIn(0, cur.units.size)
+        var skipped = 0
+        for (i in 0 until target) {
+            val unit = cur.units[i]
+            for (lessonId in unit.lessons) {
+                val rec = state.lessons[lessonId]
+                if (rec != null && rec.done && !rec.placed) continue
+                if (rec == null || !rec.done) skipped += 1
+                val entry = rec ?: LessonRec()
+                entry.done = true; entry.placed = true; entry.attempts = 0; entry.stars = 0; entry.lastAt = 0L
+                state.lessons[lessonId] = entry
+            }
+            state.unitsDone.add(unit.id)
+        }
+        state.placedTier = target
+        state.placed = target > 0
+        return skipped
+    }
+
+    /** Remove exactly the lessons this feature placed. */
+    fun undoPlacement(state: AppState, cur: Curriculum): Int {
+        var removed = 0
+        for (unit in cur.units) {
+            for (lessonId in unit.lessons) {
+                val rec = state.lessons[lessonId] ?: continue
+                if (rec.placed) { state.lessons.remove(lessonId); removed += 1 }
+            }
+            val stillDone = unit.lessons.all { state.lessons[it]?.done == true }
+            if (!stillDone) state.unitsDone.remove(unit.id)
+        }
+        state.placedTier = 0
+        state.placed = false
+        return removed
+    }
+
+    private fun seedOf(seed: String): Int {
+        var h = -0x7ee3623b
+        for (c in seed) h = h * 31 + c.code
+        return h
+    }
 }
 
 /** optString() only accepts non-null defaults in Kotlin; this keeps "absent" as null. */

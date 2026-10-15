@@ -38,6 +38,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
@@ -50,6 +51,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -197,11 +200,28 @@ fun LangButton(label: String, selected: Boolean, onClick: () -> Unit) {
 @Composable
 fun TopBar(c: AppController) {
     Row(Modifier.fillMaxWidth().padding(top = 10.dp, bottom = 2.dp), verticalAlignment = Alignment.CenterVertically) {
-        Chip("🔥 ${c.st.streak}")
+        GlyphChip(c.t("profile.streak"), "star", "${c.st.streak}")
         Spacer(Modifier.weight(1f))
-        Chip("💎 ${c.st.gems}")
+        GlyphChip(c.t("profile.gems"), "seal", "${c.st.gems}")
         Spacer(Modifier.width(8.dp))
         Chip("XP ${c.st.xp}")
+    }
+}
+
+/** Chip whose mark is one of Bayan's own glyphs (never a stock icon or emoji). */
+@Composable
+fun GlyphChip(label: String, glyph: String, value: String) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .clip(RoundedCornerShape(999.dp))
+            .background(CardBg)
+            .border(1.dp, LineC, RoundedCornerShape(999.dp))
+            .padding(horizontal = 11.dp, vertical = 5.dp)
+    ) {
+        BayanGlyph(glyph, 15.dp, Accent, Modifier.semantics { contentDescription = label })
+        Spacer(Modifier.width(6.dp))
+        Text(value, fontSize = 13.sp, color = Ink)
     }
 }
 
@@ -224,29 +244,55 @@ fun TabBar(c: AppController, modifier: Modifier = Modifier) {
     Column(modifier.fillMaxWidth().background(CardBg).navigationBarsPadding()) {
         HorizontalDivider(color = LineC, thickness = 1.dp)
         Row(Modifier.fillMaxWidth().height(58.dp)) {
-            TabItem(c.t("nav.learn"), Icons.Filled.Home, c.route == "home", Modifier.weight(1f)) { c.go("home") }
-            TabItem(c.t("nav.practice"), Icons.Filled.Refresh, c.route == "practice", Modifier.weight(1f)) { c.go("practice") }
-            TabItem(c.t("nav.rites"), Icons.Filled.Info, c.route == "rites", Modifier.weight(1f)) { c.go("rites") }
-            TabItem(c.t("nav.circle"), Icons.Filled.Star, c.route == "circle", Modifier.weight(1f)) { c.go("circle") }
-            TabItem(c.t("nav.profile"), Icons.Filled.Person, c.route == "profile", Modifier.weight(1f)) { c.go("profile") }
+            TabItem(c.t("nav.learn"), "path", c.route == "home", Modifier.weight(1f)) { c.go("home") }
+            TabItem(c.t("nav.practice"), "echo", c.route == "practice", Modifier.weight(1f)) { c.go("practice") }
+            TabItem(c.t("nav.rites"), "mihrab", c.route == "rites", Modifier.weight(1f)) { c.go("rites") }
+            TabItem(c.t("nav.circle"), "ring", c.route == "circle", Modifier.weight(1f)) { c.go("circle") }
+            TabItem(c.t("nav.profile"), "nib", c.route == "profile", Modifier.weight(1f)) { c.go("profile") }
         }
     }
 }
 
 @Composable
-fun TabItem(label: String, icon: androidx.compose.ui.graphics.vector.ImageVector, active: Boolean, modifier: Modifier, onClick: () -> Unit) {
+fun TabItem(label: String, glyph: String, active: Boolean, modifier: Modifier, onClick: () -> Unit) {
     Column(
         modifier.clickable { onClick() }.padding(vertical = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Icon(icon, null, tint = if (active) Accent else InkFaint, modifier = Modifier.size(21.dp))
+        BayanGlyph(glyph, 21.dp, if (active) Accent else InkFaint)
         Spacer(Modifier.height(2.dp))
         Text(label.uppercase(), fontSize = 10.sp, fontWeight = FontWeight.Bold, color = if (active) Accent else InkFaint)
     }
 }
 
 /* ---------------------------------------------------------------- home */
+
+/** Entry point for the placement test — a drawn mark, never a stock icon. */
+@Composable
+fun PlacementBanner(c: AppController) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(18.dp))
+            .background(CardBg)
+            .border(1.dp, LineC, RoundedCornerShape(18.dp))
+            .clickable { c.startPlacement() }
+            .padding(14.dp)
+    ) {
+        BayanGlyph("star", 22.dp, Accent)
+        Spacer(Modifier.width(12.dp))
+        Column(Modifier.weight(1f)) {
+            Text(
+                if (c.st.placed) c.t("placement.existing", "n" to (c.st.placedTier + 1)) else c.t("placement.banner"),
+                fontSize = 14.5.sp, fontWeight = FontWeight.SemiBold, color = Ink
+            )
+            Text(c.t("placement.bannerCta"), fontSize = 12.5.sp, color = InkSoft)
+        }
+        Text("→", fontSize = 16.sp, color = Accent)
+    }
+}
 
 @Composable
 fun HomeScreen(c: AppController) {
@@ -264,6 +310,7 @@ fun HomeScreen(c: AppController) {
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item { TopBar(c) }
+        item { PlacementBanner(c) }
         item { GoalCard(c, daily) }
         item { ReviewCard(c, due, seen) }
         c.cur.units.forEach { u ->
@@ -449,6 +496,7 @@ fun PracticeScreen(c: AppController) {
     val seen = Engine.seenCount(c.st)
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(18.dp)) {
         Spacer(Modifier.height(8.dp))
+        AppearanceRow(c)
         Text(c.t("practice.title"), fontFamily = FontFamily.Serif, fontSize = 28.sp, fontWeight = FontWeight.SemiBold, color = Ink)
         Spacer(Modifier.height(14.dp))
         if (seen == 0) {
@@ -498,6 +546,33 @@ fun PracticeScreen(c: AppController) {
 }
 
 /* ---------------------------------------------------------------- profile */
+
+/** Appearance: auto (device), light, dark. Stored with progress. */
+@Composable
+fun AppearanceRow(c: AppController) {
+    Column(Modifier.fillMaxWidth().padding(top = 12.dp)) {
+        Text(c.t("profile.theme"), fontSize = 16.sp, fontWeight = FontWeight.SemiBold, color = Ink)
+        Text(c.t("profile.themeNote"), fontSize = 12.5.sp, color = InkFaint)
+        Spacer(Modifier.height(8.dp))
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+            listOf("auto", "light", "dark").forEach { mode ->
+                val active = (c.st.theme.ifBlank { "auto" }) == mode
+                OutlinedButton(
+                    onClick = { c.setTheme(mode) },
+                    modifier = Modifier.weight(1f),
+                    border = androidx.compose.foundation.BorderStroke(if (active) 2.dp else 1.dp, if (active) Accent else LineC)
+                ) {
+                    Text(
+                        c.t("theme." + mode),
+                        color = if (active) Accent else InkSoft,
+                        fontSize = 13.sp,
+                        fontWeight = if (active) FontWeight.SemiBold else FontWeight.Normal
+                    )
+                }
+            }
+        }
+    }
+}
 
 @Composable
 fun ProfileScreen(c: AppController) {

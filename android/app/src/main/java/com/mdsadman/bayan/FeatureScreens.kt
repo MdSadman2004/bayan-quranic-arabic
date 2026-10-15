@@ -124,7 +124,7 @@ private fun SalahSimulator(c: AppController) {
         }
         Spacer(Modifier.height(10.dp))
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            OutlinedButton(onClick = { c.salahStep(-1) }) { Text(c.t("rite.prev"), color = InkSoft) }
+            OutlinedButton(onClick = { c.salahStep(-1) }) { Text(c.t("rite.prev"), color = Ink) }
             Button(
                 onClick = { c.salahStep(1) },
                 colors = ButtonDefaults.buttonColors(containerColor = Ink, contentColor = Paper)
@@ -158,7 +158,7 @@ private fun PrimerSection(c: AppController, waqt: WaqtWindow?) {
             )
             if (c.ttsAvailable) {
                 Spacer(Modifier.height(6.dp))
-                OutlinedButton(onClick = { c.speak(verse.ar) }) { Text(c.t("lesson.play"), color = InkSoft) }
+                OutlinedButton(onClick = { c.speak(verse.ar) }) { Text(c.t("lesson.play"), color = Ink) }
             }
         }
     }
@@ -203,7 +203,7 @@ private fun JumuahSection(c: AppController, open: Boolean) {
                 Text(phrase.bi.get(c.st.lang), fontSize = 13.5.sp, color = InkSoft)
                 if (c.ttsAvailable) {
                     Spacer(Modifier.height(6.dp))
-                    OutlinedButton(onClick = { c.speak(phrase.ar) }) { Text(c.t("lesson.play"), color = InkSoft) }
+                    OutlinedButton(onClick = { c.speak(phrase.ar) }) { Text(c.t("lesson.play"), color = Ink) }
                 }
             }
         }
@@ -230,7 +230,7 @@ private fun SawmDrillCard(c: AppController, drill: SawmDrill) {
         Text(drill.ask.get(c.st.lang), fontSize = 14.sp, color = Ink)
         Spacer(Modifier.height(8.dp))
         val verse = verseFor(c, drill.verse)
-        if (verse != null) OutlinedButton(onClick = { c.speak(verse.ar) }) { Text(c.t("sawm.drill"), color = InkSoft) }
+        if (verse != null) OutlinedButton(onClick = { c.speak(verse.ar) }) { Text(c.t("sawm.drill"), color = Ink) }
         Spacer(Modifier.height(8.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
             drill.options.forEachIndexed { index, option ->
@@ -296,7 +296,7 @@ fun BossScreen(c: AppController) {
                             modifier = Modifier.fillMaxWidth()
                         ) { Text(c.t("boss.again")) }
                         OutlinedButton(onClick = { c.bossSession = null; c.go("home") }, modifier = Modifier.fillMaxWidth()) {
-                            Text(c.t("common.continue"), color = InkSoft)
+                            Text(c.t("common.continue"), color = Ink)
                         }
                     }
                 }
@@ -467,6 +467,155 @@ fun AppController.recordRite(id: String, ok: Boolean, xp: Int) {
 
 /** Boss clock: recomposes once per second while a battle is live, so the timer
  * stays honest even if no tap arrives. Renders the boss surface itself. */
+@Composable
+fun PlacementScreen(c: AppController) {
+    @Suppress("UNUSED_VARIABLE")
+    val inPlace = c.tick
+    val session = c.placementSession
+    if (session == null) { PlacementIntro(c); return }
+    if (session.done) { PlacementResultView(c, session); return }
+    val question = session.current
+    if (question == null) { PlacementResultView(c, session); return }
+    val graded = c.placementGraded
+    Column(Modifier.fillMaxSize().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Text(c.t("placement.title"), fontSize = 13.sp, color = InkFaint)
+            Text(c.t("placement.progress", "n" to (session.total + 1)), fontSize = 13.sp, color = InkFaint)
+        }
+        Panel {
+            Text(c.t("placement.question"), fontSize = 12.sp, color = InkSoft)
+            Spacer(Modifier.height(10.dp))
+            ArabicText(c.itemAr(question.itemId), 30)
+            Spacer(Modifier.height(12.dp))
+            question.options.forEachIndexed { index, id ->
+                val truthShown = graded != null && index == question.answer
+                OutlinedButton(
+                    onClick = { c.answerPlacement(index) },
+                    modifier = Modifier.fillMaxWidth(),
+                    border = androidx.compose.foundation.BorderStroke(if (truthShown) 2.dp else 1.dp, if (truthShown) Ok else LineC)
+                ) {
+                    Text(c.itemMeaning(id), color = Ink)
+                }
+            }
+            if (graded != null) {
+                Spacer(Modifier.height(10.dp))
+                Text(c.itemMeaning(question.itemId) + "  " + c.t(if (graded == true) "placement.correct" else "placement.wrong"),
+                    fontSize = 13.sp, color = if (graded == true) OkDeep else BadDeep)
+            }
+        }
+        if (graded != null) {
+            Button(
+                onClick = { c.advancePlacement() },
+                colors = ButtonDefaults.buttonColors(containerColor = Ink, contentColor = Paper),
+                modifier = Modifier.fillMaxWidth()
+            ) { Text(c.t("common.continue")) }
+        } else {
+            OutlinedButton(onClick = { c.closePlacement() }, modifier = Modifier.fillMaxWidth()) {
+                Text(c.t("placement.keep"), color = Ink)
+            }
+        }
+    }
+}
+
+@Composable
+private fun PlacementIntro(c: AppController) {
+    val placed = c.st.placed
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(start = 18.dp, end = 18.dp, top = 2.dp, bottom = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        item { Text(c.t("placement.title"), fontSize = 30.sp, fontWeight = FontWeight.Bold, color = Ink) }
+        item { Text(c.t("placement.note"), fontSize = 13.5.sp, color = InkSoft) }
+        item {
+            Panel {
+                Text(c.t("placement.why"), fontSize = 13.sp, color = InkSoft)
+                if (placed) {
+                    Spacer(Modifier.height(8.dp))
+                    Text(c.t("placement.existing", "n" to (c.st.placedTier + 1)), fontSize = 13.sp, color = Accent)
+                }
+            }
+        }
+        item {
+            Button(
+                onClick = { c.startPlacement() },
+                colors = ButtonDefaults.buttonColors(containerColor = Accent, contentColor = Paper),
+                modifier = Modifier.fillMaxWidth()
+            ) { Text(c.t("placement.start")) }
+        }
+        if (placed) {
+            item {
+                OutlinedButton(onClick = { c.undoPlacementNow() }, modifier = Modifier.fillMaxWidth()) {
+                    Text(c.t("placement.undo"), color = Ink)
+                }
+            }
+        }
+        item {
+            OutlinedButton(onClick = { c.closePlacement() }, modifier = Modifier.fillMaxWidth()) {
+                Text(c.t("placement.keep"), color = Ink)
+            }
+        }
+    }
+}
+
+@Composable
+private fun PlacementResultView(c: AppController, session: FeaturesEngine.PlacementSession) {
+    val result = session.result ?: FeaturesEngine.placementResult(session)
+    val unit = c.cur.units.getOrNull(result.tier)
+    var below = 0
+    for (i in 0 until result.tier.coerceIn(0, c.cur.units.size)) below += c.cur.units[i].lessons.size
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(start = 18.dp, end = 18.dp, top = 2.dp, bottom = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        item { Text(c.t("placement.result"), fontSize = 30.sp, fontWeight = FontWeight.Bold, color = Ink) }
+        item {
+            Panel {
+                Text(c.t("placement.tierLabel", "n" to (result.tier + 1)), fontSize = 22.sp, fontWeight = FontWeight.Bold, color = Accent)
+                Text(unit?.title?.get(c.st.lang) ?: "", fontSize = 14.sp, color = InkSoft)
+                Spacer(Modifier.height(8.dp))
+                Text(c.t("placement.score", "ok" to result.correct, "n" to result.total), fontSize = 13.5.sp, color = Ink)
+                Spacer(Modifier.height(4.dp))
+                Text(
+                    if (below > 0) c.t("placement.placed", "n" to below) else c.t("placement.nothing"),
+                    fontSize = 13.sp, color = InkSoft
+                )
+                if (!result.confident) {
+                    Spacer(Modifier.height(4.dp))
+                    Text(c.t("placement.unsure"), fontSize = 12.5.sp, color = InkFaint)
+                }
+                Spacer(Modifier.height(10.dp))
+                Text(c.t("placement.why"), fontSize = 12.5.sp, color = InkFaint)
+            }
+        }
+        item {
+            Button(
+                onClick = { c.applyPlacementNow() },
+                colors = ButtonDefaults.buttonColors(containerColor = Accent, contentColor = Paper),
+                modifier = Modifier.fillMaxWidth()
+            ) { Text(c.t("placement.apply")) }
+        }
+        item {
+            OutlinedButton(onClick = { c.startPlacement() }, modifier = Modifier.fillMaxWidth()) {
+                Text(c.t("placement.retake"), color = Ink)
+            }
+        }
+        if (c.st.placed) {
+            item {
+                OutlinedButton(onClick = { c.undoPlacementNow() }, modifier = Modifier.fillMaxWidth()) {
+                    Text(c.t("placement.undo"), color = Ink)
+                }
+            }
+        }
+        item {
+            OutlinedButton(onClick = { c.closePlacement() }, modifier = Modifier.fillMaxWidth()) {
+                Text(c.t("placement.keep"), color = Ink)
+            }
+        }
+    }
+}
+
 @Composable
 fun BossClock(c: AppController) {
     LaunchedEffect(c.bossSession?.startedAt) {

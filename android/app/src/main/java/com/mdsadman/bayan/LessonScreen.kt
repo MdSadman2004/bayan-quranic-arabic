@@ -588,15 +588,21 @@ fun CompleteView(c: AppController, r: LessonRun) {
         res?.newAch?.forEach { id ->
             val a = Engine.ACHIEVEMENTS.firstOrNull { it.id == id } ?: return@forEach
             Spacer(Modifier.height(8.dp))
-            Text(
-                "${a.icon} ${a.name.get(c.st.lang)} — ${a.desc.get(c.st.lang)}",
-                color = AccentDeep, fontSize = 13.sp,
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(12.dp))
                     .background(AccentTint)
                     .padding(11.dp)
-            )
+            ) {
+                BayanGlyph(achGlyph(a.id), 18.dp, AccentDeep)
+                Spacer(Modifier.width(9.dp))
+                Text(
+                    "${a.name.get(c.st.lang)} — ${a.desc.get(c.st.lang)}",
+                    color = AccentDeep, fontSize = 13.sp
+                )
+            }
         }
     }
 }

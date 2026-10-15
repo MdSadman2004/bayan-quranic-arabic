@@ -64,7 +64,7 @@ fun <T> shuffled(src: List<T>, rng: Rng): List<T> {
 
 /* ---------------------------------------------------------------- state */
 
-class LessonRec { var done = false; var attempts = 0; var stars = 0; var lastAt = 0L }
+class LessonRec { var done = false; var attempts = 0; var stars = 0; var lastAt = 0L; var placed = false }
 class SrsRec { var lvl = 0; var seen = 0; var ok = 0; var bad = 0; var dueAt = 0L; var flag = false }
 class Stats {
     var answered = 0; var correct = 0; var lessons = 0; var reviews = 0
@@ -93,6 +93,11 @@ class AppState {
     var dailyGoal = 30
     val lessons = LinkedHashMap<String, LessonRec>()
     val unitsDone = LinkedHashSet<String>()
+    /** Placement test: the unit index the learner was placed at (0 = none skipped). */
+    var placedTier = 0
+    var placed = false
+    /** Appearance: "auto" follows the device, otherwise "light" / "dark". */
+    var theme = "auto"
     val items = LinkedHashMap<String, SrsRec>()
     val achievements = LinkedHashMap<String, Long>()
     val stats = Stats()
@@ -108,10 +113,14 @@ class AppState {
         o.put("dailyXp", dailyXp); o.put("dailyGoal", dailyGoal)
         val lj = JSONObject()
         for ((k, r) in lessons) {
-            lj.put(k, JSONObject().put("done", r.done).put("attempts", r.attempts).put("stars", r.stars).put("lastAt", r.lastAt))
+            val entry = JSONObject().put("done", r.done).put("attempts", r.attempts)
+                .put("stars", r.stars).put("lastAt", r.lastAt)
+            if (r.placed) entry.put("placed", true)
+            lj.put(k, entry)
         }
         o.put("lessons", lj)
         o.put("unitsDone", JSONArray(unitsDone.toList()))
+        o.put("placedTier", placedTier); o.put("placed", placed); o.put("theme", theme)
         val ij = JSONObject()
         for ((k, r) in items) {
             ij.put(k, JSONObject().put("lvl", r.lvl).put("seen", r.seen).put("ok", r.ok).put("bad", r.bad).put("dueAt", r.dueAt).put("flag", r.flag))

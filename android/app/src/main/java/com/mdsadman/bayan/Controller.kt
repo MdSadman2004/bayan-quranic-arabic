@@ -36,6 +36,12 @@ class AppController(private val ctx: Context) {
     var salahIndex by mutableStateOf(0)
     /** Whisper boss session (feature 4); null outside a battle. */
     var bossSession by mutableStateOf<BossSession?>(null)
+    /** Placement-test session (feature 25); null outside a run. */
+    var placementSession by mutableStateOf<FeaturesEngine.PlacementSession?>(null)
+        private set
+    /** Result of the question currently on screen (null = not answered yet). */
+    var placementGraded by mutableStateOf<Boolean?>(null)
+        private set
 
     var langPref by mutableStateOf(st.lang)
     var run: LessonRun? by mutableStateOf(null)
@@ -52,6 +58,12 @@ class AppController(private val ctx: Context) {
 
     fun t(key: String, vararg vars: Pair<String, Any>): String =
         Strings.get(key, st.lang, vars.toMap())
+
+    /** Arabic headword for an item id (placement questions and word lists). */
+    fun itemAr(id: String): String = cur.items[id]?.ar ?: ""
+
+    /** Meaning of an item id in the current language. */
+    fun itemMeaning(id: String): String = cur.items[id]?.bi?.get(st.lang) ?: ""
 
     fun refresh() {
         persist()
@@ -105,11 +117,77 @@ class AppController(private val ctx: Context) {
         }
     }
 
+    /* ------------------------------------- placement test (feature 25) */
+
+    fun startPlacement() {
+        val session = FeaturesEngine.placementStart(cur, st)
+        FeaturesEngine.placementQuestion(session, cur, st)
+        placementSession = session
+        placementGraded = null
+        go("placement")
+    }
+
+    fun answerPlacement(index: Int) {
+        val session = placementSession ?: return
+        val question = session.current ?: return
+        if (placementGraded != null) return
+        val ok = index == question.answer
+        placementGraded = ok
+        ToneFeedback.playFor(if (ok) "ok" else "bad", FlowState(), st.sound)
+        bumpTick()
+    }
+
+    /** Commit the answer and move the search on; marks the session done at the end. */
+    fun advancePlacement() {
+        val session = placementSession ?: return
+        val graded = placementGraded ?: return
+        placementGraded = null
+        FeaturesEngine.placementAnswer(session, graded, cur, st)
+        if (session.done) session.result = FeaturesEngine.placementResult(session)
+        bumpTick()
+    }
+
+    fun applyPlacementNow() {
+        val tier = placementSession?.result?.tier ?: 0
+        val skipped = FeaturesEngine.applyPlacement(st, tier, cur)
+        persist()
+        placementSession = null
+        placementGraded = null
+        toast = if (skipped > 0) t("placement.applied") else t("placement.nothing")
+        go("home")
+        bumpTick()
+    }
+
+    fun undoPlacementNow() {
+        FeaturesEngine.undoPlacement(st, cur)
+        persist()
+        placementSession = null
+        placementGraded = null
+        toast = t("placement.undone")
+        go("home")
+        bumpTick()
+    }
+
+    fun closePlacement() {
+        placementSession = null
+        placementGraded = null
+        go("home")
+        bumpTick()
+    }
+
     fun onboard(lang: String) {
         st.onboarded = true
         st.lang = lang
         refresh()
         go("home")
+    }
+
+    /** Appearance setting; Palette.dark is applied by the root composable. */
+    fun setTheme(mode: String) {
+        if (mode != "auto" && mode != "light" && mode != "dark") return
+        st.theme = mode
+        persist()
+        bumpTick()
     }
 
     fun setLang(lang: String) {

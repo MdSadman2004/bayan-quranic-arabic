@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -35,8 +37,18 @@ class MainActivity : ComponentActivity() {
         controller = AppController(applicationContext)
         controller.initTts(this)
         ToneFeedback.init()
+        BayanFeedback.init(this)
         handleIntent(intent)
-        setContent { BayanTheme { BayanApp(controller) } }
+        setContent {
+            // "Auto" follows the device; the choice is stored with progress.
+            val systemDark = androidx.compose.foundation.isSystemInDarkTheme()
+            BayanPalette.dark = when (controller.st.theme) {
+                "dark" -> true
+                "light" -> false
+                else -> systemDark
+            }
+            BayanTheme { BayanApp(controller) }
+        }
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -52,6 +64,8 @@ class MainActivity : ComponentActivity() {
 
     private fun handleIntent(intent: Intent?) {
         val i = intent ?: return
+        // Appearance can be set directly (also handy for scripted verification).
+        i.getStringExtra("theme")?.let { controller.setTheme(it) }
         when (i.getStringExtra("screen")) {
             "lesson" -> {
                 controller.pendingLesson = i.getStringExtra("lesson") ?: "u1l1"
@@ -61,6 +75,10 @@ class MainActivity : ComponentActivity() {
             "profile" -> controller.go("profile")
             "practice" -> controller.go("practice")
             "home" -> controller.go("home")
+            "rites" -> controller.go("rites")
+            "circle" -> controller.go("circle")
+            "boss" -> controller.startBoss()
+            "placement" -> controller.startPlacement()
         }
     }
 }
@@ -69,7 +87,23 @@ class MainActivity : ComponentActivity() {
 fun BayanApp(c: AppController) {
     // Cold-start deep links are handled in MainActivity.handleIntent() (before composition);
     // warm links process there too, so no LaunchedEffect is needed here.
-    Box(Modifier.fillMaxSize().background(Paper).statusBarsPadding()) {
+    Box(
+        Modifier
+            .fillMaxSize()
+            .background(Paper)
+            .statusBarsPadding()
+            // One press = one click + tick, whatever the learner touches.
+            .pointerInput(Unit) {
+                awaitPointerEventScope {
+                    while (true) {
+                        val event = awaitPointerEvent(PointerEventPass.Initial)
+                        if (event.changes.any { it.pressed && !it.previousPressed }) {
+                            BayanFeedback.press(c.st.sound)
+                        }
+                    }
+                }
+            }
+    ) {
         when (c.route) {
             "onboarding" -> OnboardingScreen(c)
             "home" -> ScreensWithTabs(c) { HomeScreen(c) }
@@ -77,6 +111,7 @@ fun BayanApp(c: AppController) {
             "rites" -> ScreensWithTabs(c) { RitesScreen(c) }
             "circle" -> ScreensWithTabs(c) { CircleScreen(c) }
             "boss" -> ScreensWithTabs(c) { BossClock(c) }
+            "placement" -> ScreensWithTabs(c) { PlacementScreen(c) }
             "profile" -> ScreensWithTabs(c) { ProfileScreen(c) }
             "lesson" -> LessonScreen(c)
         }

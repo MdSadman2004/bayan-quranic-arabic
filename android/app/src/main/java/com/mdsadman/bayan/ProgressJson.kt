@@ -36,8 +36,14 @@ object ProgressJson {
                     s.lessons[id] = LessonRec().apply {
                         done = bool(e, "done", false); attempts = count(e, "attempts")
                         stars = number(e, "stars", 0, 0, 3).toInt(); lastAt = time(e, "lastAt")
+                        placed = bool(e, "placed", false)
                     }
                 }
+            }
+            s.placedTier = number(o, "placedTier", 0, 0, 200).toInt()
+            s.placed = bool(o, "placed", false) && s.placedTier > 0
+            s.theme = string(o, "theme", "auto").also {
+                require(it in setOf("auto", "light", "dark")) { "Unsupported appearance setting" }
             }
             val units = if (o.has("unitsDone")) o.getJSONArray("unitsDone") else JSONArray()
             for (i in 0 until units.length()) {
