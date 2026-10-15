@@ -1,0 +1,146 @@
+{
+ "version": "2c8326d67b40",
+ "cache": "bayan-app-2c8326d67b40",
+ "files": [
+  {
+   "url": "css/style.css",
+   "integrity": "98709d8aad85d82fc64307dbd7ffb138d22471b61cece4844c11b3ba8fa02231"
+  },
+  {
+   "url": "fonts/f1.woff2",
+   "integrity": "9abf8a10b4a2f27b698740522c9beec9ded7728aeef0738ac0d6e175bf6249d7"
+  },
+  {
+   "url": "fonts/f10.woff2",
+   "integrity": "f18853f63a870ebef013e30e789d8d544f102e4acd94988e57c223d9c796ddf4"
+  },
+  {
+   "url": "fonts/f11.woff2",
+   "integrity": "a2930b27d13a228bd9ab6a49269b5f800237892ad560cb9dd7fab01b1620f88e"
+  },
+  {
+   "url": "fonts/f12.woff2",
+   "integrity": "7234ed860a9cc83045413c4faee63c960a8f2d1917adcf728119307d56e0d783"
+  },
+  {
+   "url": "fonts/f13.woff2",
+   "integrity": "8ae8a8ce3e7a0c1511b418919f49afc7f28532286acb57cd4158d245754d0170"
+  },
+  {
+   "url": "fonts/f14.woff2",
+   "integrity": "b400a793b275ed48b672b2994f26e80becd84c44d7424074e3ead668221acdb5"
+  },
+  {
+   "url": "fonts/f15.woff2",
+   "integrity": "6b52f9bb0776f54a0d655e56e218f153e939bea7ed4ea875a5974bd16e9c34a2"
+  },
+  {
+   "url": "fonts/f16.woff2",
+   "integrity": "8ae8a8ce3e7a0c1511b418919f49afc7f28532286acb57cd4158d245754d0170"
+  },
+  {
+   "url": "fonts/f17.woff2",
+   "integrity": "b400a793b275ed48b672b2994f26e80becd84c44d7424074e3ead668221acdb5"
+  },
+  {
+   "url": "fonts/f18.woff2",
+   "integrity": "6b52f9bb0776f54a0d655e56e218f153e939bea7ed4ea875a5974bd16e9c34a2"
+  },
+  {
+   "url": "fonts/f2.woff2",
+   "integrity": "199be132b6fbb2fef143b30bae2eb04c63268758d29c03ff057b52cbee91636e"
+  },
+  {
+   "url": "fonts/f3.woff2",
+   "integrity": "d600850a2b0f3d862559d0bb040bca877e0f75cf9ee71a893bbd5089a224e3cd"
+  },
+  {
+   "url": "fonts/f4.woff2",
+   "integrity": "c775d9f8c3a7cf0d0c2bb5246dd699e8c09bf6f8758e1be0b98939331b18bcce"
+  },
+  {
+   "url": "fonts/f5.woff2",
+   "integrity": "caca5182eb8536799ec861cbf33c14ed6f5213f3abcd99fffd61adadbc9c66d0"
+  },
+  {
+   "url": "fonts/f6.woff2",
+   "integrity": "f53eb332acb23ec7e09e2487909c56cf841d649c970084d6a74d82aa9534f737"
+  },
+  {
+   "url": "fonts/f7.woff2",
+   "integrity": "f18853f63a870ebef013e30e789d8d544f102e4acd94988e57c223d9c796ddf4"
+  },
+  {
+   "url": "fonts/f8.woff2",
+   "integrity": "a2930b27d13a228bd9ab6a49269b5f800237892ad560cb9dd7fab01b1620f88e"
+  },
+  {
+   "url": "fonts/f9.woff2",
+   "integrity": "7234ed860a9cc83045413c4faee63c960a8f2d1917adcf728119307d56e0d783"
+  },
+  {
+   "url": "fonts/fonts.css",
+   "integrity": "572165e79c50eccfb1930ceab316702c1c266e945ed4f1aeccceb5ef43b88547"
+  },
+  {
+   "url": "icon-192.png",
+   "integrity": "6255f9ad425bddfc591d71d0997fc8d0f5b50458dc1112ae20c9004475c1b965"
+  },
+  {
+   "url": "icon-512.png",
+   "integrity": "a468bcce692ac3816c6b06989c8c2f921ea6e901078f2fbb5aae3d0971170bc1"
+  },
+  {
+   "url": "icon.svg",
+   "integrity": "1f4c3e927b45aab7e279cd1656ddd0b68ee73fd8201fe8a95c1d422704f610c7"
+  },
+  {
+   "url": "index.html",
+   "integrity": "c913ceaf6e4efafcd0d92db9ec0d9201c96cf0457e53b01a808553e437286fcb"
+  },
+  {
+   "url": "js/app.js",
+   "integrity": "d7cd52220bc4dd71e1b5752f0d338074a8ca4929044a3a891f56bf1ff8adb449"
+  },
+  {
+   "url": "js/audio.js",
+   "integrity": "9273686b0196089a9f9949967a9ea3c74ce2587d44fc9961134bb983e6f985e8"
+  },
+  {
+   "url": "js/data.js",
+   "integrity": "70c125fca552868b1f07c219bca726cb1c6a6e2c1f7b3ca881298d88b64e493b"
+  },
+  {
+   "url": "js/engine.js",
+   "integrity": "6e5d6c5970aa3f36088ac70381f6e1e1471b81595a1e1b2432f1cc05176bac70"
+  },
+  {
+   "url": "js/features-ui.js",
+   "integrity": "f5c2cca2ca2bef3cec58b561f20622af0672b31b9e91e766c4e58031c9915e71"
+  },
+  {
+   "url": "js/features.js",
+   "integrity": "b29dc43948cf5feaa31929190681dc59c6be8ccd069bf857f7bddbb7522d85e7"
+  },
+  {
+   "url": "js/i18n.js",
+   "integrity": "85a6063dc3be317717a5530be521d89c38cd1cc127ae0390aca523a928fff881"
+  },
+  {
+   "url": "js/loaders.js",
+   "integrity": "af6b8c8bcbd9a775d557c117dd03c366285fec58b0fb8e6d054cf1e0ea267a2e"
+  },
+  {
+   "url": "js/offline.js",
+   "integrity": "33a963181e7fbde21129fac35cdc2b638f5449987764e9acc181ea17345ef020"
+  },
+  {
+   "url": "js/storage.js",
+   "integrity": "b70109c1f355d7283f6b266aa1af9fb511ead91dbe42940031baac3ce8870ccb"
+  },
+  {
+   "url": "manifest.webmanifest",
+   "integrity": "939b6285ddc1230f0586f4ac5ed22ba4c9a3b50462693db5c3180b0e910eb8b5"
+  }
+ ]
+}

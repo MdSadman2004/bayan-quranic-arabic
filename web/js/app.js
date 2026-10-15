@@ -3,6 +3,7 @@
   "use strict";
   const E = window.Bayan.E, A = window.Bayan.audio, CUR = window.Bayan.CUR;
   const STR = window.Bayan.STR, TAGLINE = window.Bayan.TAGLINE;
+  const F = window.Bayan.F, L = window.Bayan.Loaders;
   const $ = (s, r) => (r || document).querySelector(s);
 
   let st = E.load();
@@ -10,6 +11,7 @@
   let run = null;
   let lastResult = null;
   let toastTimer = null;
+  let previousFocus = null;
 
   const t = (key, vars) => STR(key, st.lang, vars);
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -33,12 +35,17 @@
   /* ================================================================ shell */
   function renderTabs() {
     const tabs = $("#tabs");
-    const show = ["home", "practice", "profile"].indexOf(view.name) >= 0;
+    const show = ["home", "practice", "rites", "circle", "profile"].indexOf(view.name) >= 0;
     tabs.className = "tabs" + (show ? "" : " hidden");
     if (!show) { tabs.innerHTML = ""; return; }
     const item = (name, label, icon) =>
       `<button class="tab ${view.name === name ? "active" : ""}" data-nav="${name}">${icon}<span>${esc(label)}</span></button>`;
-    tabs.innerHTML = item("home", t("nav.learn"), ICON.play) + item("practice", t("nav.practice"), ICON.review) + item("profile", t("nav.profile"), ICON.lock.replace("<path", '<path fill="none" stroke="currentColor" stroke-width="2" d="M12 4a5 5 0 0 1 5 5v1"') + "");
+    tabs.innerHTML =
+      item("home", t("nav.learn"), ICON.play) +
+      item("practice", t("nav.practice"), ICON.review) +
+      item("rites", t("nav.rites"), '<svg viewBox="0 0 24 24" class="i"><path d="M12 3c3 4 6 6.2 6 10a6 6 0 0 1-12 0c0-3.8 3-6 6-10z"/></svg>') +
+      item("circle", t("nav.circle"), '<svg viewBox="0 0 24 24" class="i"><path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm8 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 20c0-3 2.7-5 6-5s6 2 6 5zm12.5-4.6c2.6.3 4.5 2 4.5 4.6h-5"/></svg>') +
+      item("profile", t("nav.profile"), '<svg viewBox="0 0 24 24" class="i"><path d="M12 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM3 22v-3a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v3z"/></svg>');
     tabs.querySelectorAll("[data-nav]").forEach(b => b.addEventListener("click", () => go(b.dataset.nav)));
   }
   function renderTopbar() {
@@ -47,7 +54,7 @@
     bar.className = "topbar" + (show ? "" : " hidden");
     if (!show) { bar.innerHTML = ""; return; }
     bar.innerHTML =
-      `<div class="chip streak" title="${esc(t("profile.streak"))}">${ICON.flame}<b>${st.streak}</b></div>` +
+      `<div class="chip streak" title="${esc(t("profile.streak"))}">${ICON.flame}<b>${E.activeStreak(st)}</b></div>` +
       `<div class="chip"><span class="gem">${ICON.gem}</span><b>${st.gems}</b></div>` +
       `<div class="chip"><span class="xp">XP</span><b>${st.xp}</b></div>`;
   }
@@ -60,23 +67,81 @@
   }
   function overlay(html) {
     const el = $("#overlay");
-    el.innerHTML = `<div class="overlay-inner">${html}</div>`;
+    previousFocus = document.activeElement;
+    el.innerHTML = `<div class="overlay-inner" role="dialog" aria-modal="true" aria-label="${esc(t("common.continue"))}">${html}</div>`;
     el.className = "overlay";
+    const first = el.querySelector("button");
+    if (first) first.focus();
   }
-  function closeOverlay() { $("#overlay").className = "overlay hidden"; $("#overlay").innerHTML = ""; }
+  function closeOverlay() {
+    $("#overlay").className = "overlay hidden"; $("#overlay").innerHTML = "";
+    if (previousFocus && previousFocus.isConnected) previousFocus.focus();
+  }
+  function persist() {
+    const ok = E.save(st);
+    if (!ok) toast(t("backup.failed"));
+    return ok;
+  }
+
+  /* -------------------------------------------------- feature bridge (FUI) */
+  const bayanApi = {
+    lang: () => st.lang,
+    state: () => st,
+    render: () => render(),
+    go: (name) => go(name),
+    toast: (message) => toast(message),
+    save: () => persist(),
+    canListen: () => A.canListen(),
+    speak: (text) => { if (text) A.speak(text); },
+    currentView: () => view.name,
+    currentCard: () => cur(),
+    record: (id, ok) => {
+      if (!run) return;
+      run.total += 1;
+      if (ok) { run.correct += 1; touch(id, true); } else { run.mistakes += 1; touch(id, false); }
+    },
+    award: (xp, shields, source) => {
+      if (xp > 0) st.xp += xp;
+      if (shields > 0) st.shields = (st.shields || 0) + shields;
+      if (st.day !== todayKey()) { st.day = todayKey(); st.dailyXp = 0; }
+      st.dailyXp += xp || 0;
+      persist();
+    },
+    openVerse: (verse) => {
+      overlay(`<div class="ar ar-verse" dir="rtl" lang="ar">${esc(verse.ar)}</div>
+        <p class="muted">${esc(verse[st.lang] || verse.en)}</p>
+        <div class="ref">${esc(verse.ref)}</div>
+        ${A.canListen() ? `<button class="btn btn-ghost btn-sm" id="ov-say">${esc(t("lesson.play"))}</button>` : ""}
+        <div class="row"><button class="btn btn-ink" id="ov-no">${esc(t("common.continue"))}</button></div>`);
+      const say = $("#ov-say");
+      if (say) say.addEventListener("click", () => A.speak(verse.ar));
+      $("#ov-no").addEventListener("click", closeOverlay);
+    }
+  };
+  function viewRites() { return window.Bayan.FUI.ritesView(bayanApi); }
+  function viewCircle() { return window.Bayan.FUI.circleView(bayanApi, st); }
+  function viewBoss() { return window.Bayan.FUI.bossView(bayanApi); }
 
   function render() {
     document.documentElement.lang = st.lang;
-    document.body.className = st.lang === "bn" ? "lang-bn" : "";
+    document.body.className = (st.lang === "bn" ? "lang-bn " : "") + (F && F.skyClass ? F.skyClass(new Date()) : "");
     const screen = $("#screen");
     if (view.name === "onboarding") screen.innerHTML = viewOnboarding();
     else if (view.name === "home") screen.innerHTML = viewHome();
     else if (view.name === "practice") screen.innerHTML = viewPractice();
+    else if (view.name === "rites") screen.innerHTML = viewRites();
+    else if (view.name === "circle") screen.innerHTML = viewCircle();
+    else if (view.name === "boss") screen.innerHTML = viewBoss();
     else if (view.name === "profile") screen.innerHTML = viewProfile();
     else if (view.name === "lesson") screen.innerHTML = viewLesson();
     bind();
     renderTabs();
     renderTopbar();
+    const error = window.Bayan.Store.error;
+    let warning = $("#storage-warning");
+    if (!warning) { warning = document.createElement("p"); warning.id = "storage-warning"; warning.className = "storage-warning"; warning.setAttribute("role", "alert"); $("#app").prepend(warning); }
+    warning.textContent = error ? t("backup.failed") : "";
+    warning.hidden = !error;
     window.scrollTo(0, 0);
   }
   function go(name) {
@@ -121,13 +186,13 @@
 
     let html = `<div class="home">
       <div class="goal-card">
-        <div class="ring-wrap" id="goal-ring" title="${esc(t("home.goal"))}">
+        <button class="ring-wrap" id="goal-ring" aria-label="${esc(t("goal.change"))}">
           <svg viewBox="0 0 64 64" class="ring">
             <circle cx="32" cy="32" r="${R}" class="ring-bg"/>
             <circle cx="32" cy="32" r="${R}" class="ring-fg" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${(C * (1 - pct)).toFixed(1)}"/>
           </svg>
           <div class="ring-txt"><b>${dx}</b><span>/${goal}</span></div>
-        </div>
+        </button>
         <div class="goal-info">
           <div class="goal-title">${esc(t("home.goal"))}</div>
           <div class="goal-sub">${esc(t("home.goalXp", { n: dx }))}</div>
@@ -172,34 +237,45 @@
       });
       html += `</div></section>`;
     }
+    if (F && window.Bayan.FUI) html += window.Bayan.FUI.homeExtras(bayanApi, st);
     html += `</div>`;
     return html;
   }
 
   /* ================================================================ practice */
   function viewPractice() {
-    const q = E.reviewQueue(st, Date.now());
     const due = E.dueIds(st, Date.now()).length;
     const seen = E.seenCount(st);
-    if (seen === 0) {
-      return `<div class="pane">
-        <h1 class="display">${esc(t("practice.title"))}</h1>
-        <div class="empty-card">
-          <p class="big-ico">${ICON.review}</p>
-          <h3>${esc(t("practice.empty"))}</h3>
-          <p class="muted">${esc(t("practice.emptyHint"))}</p>
-        </div>
-      </div>`;
-    }
+    const mistakes = E.mistakeIds(st).length;
     return `<div class="pane">
       <h1 class="display">${esc(t("practice.title"))}</h1>
       <div class="review-big">
         <p class="big-ico">${ICON.review}</p>
-        <h3>${esc(due > 0 ? t("practice.due", { n: due }) : t("home.practiceWeak"))}</h3>
-        <p class="muted">${esc(t("practice.note"))}</p>
-        <button class="btn btn-accent btn-block" id="start-review">${esc(t("practice.start"))}</button>
+        <h3>${esc(seen === 0 ? t("practice.empty") : due > 0 ? t("practice.due", { n: due }) : t("home.practiceWeak"))}</h3>
+        <p class="muted">${esc(t(seen === 0 ? "practice.emptyHint" : "practice.note"))}</p>
+        ${seen ? `<button class="btn btn-accent btn-block" id="start-review">${esc(t("practice.start"))}</button>` : ""}
+        ${mistakes ? `<button class="btn btn-ghost btn-block" id="review-mistakes">${esc(t("library.review"))} (${mistakes})</button>` : ""}
       </div>
+      ${F ? window.Bayan.FUI.practiceExtras(bayanApi, st) : ""}
+      <section class="library">
+        <h2 class="sect">${esc(t("library.title"))}</h2>
+        <p class="muted">${esc(t("library.note"))}</p>
+        <label class="search-label" for="word-search">${esc(t("library.search"))}</label>
+        <input id="word-search" type="search" maxlength="100" value="${esc(view.search || "")}" autocomplete="off">
+        <div class="library-filters" role="group" aria-label="${esc(t("library.title"))}">
+          ${["all", "seen", "mistakes"].map(f => `<button class="seg-btn ${(view.filter || "all") === f ? "sel" : ""}" data-filter="${f}" aria-pressed="${(view.filter || "all") === f}">${esc(t("library." + f))}</button>`).join("")}
+        </div>
+        <div id="word-results">${wordResults()}</div>
+      </section>
     </div>`;
+  }
+  function wordResults() {
+    const items = E.searchItems(st, view.search, view.filter);
+    return `<p class="muted word-count" role="status">${esc(t("library.count", { n: items.length }))}</p>` + (items.length ? items.map(it => {
+      const r = st.items[it.id];
+      const status = !r || !r.seen ? t("library.new") : r.dueAt <= Date.now() ? t("library.due") : t("library.level", { n: r.lvl });
+      return `<article class="word-row"><div class="word-ar"><span class="ar" dir="rtl" lang="ar">${esc(it.ar)}</span>${it.root ? `<small class="ar" dir="rtl" lang="ar">${esc(it.root)}</small>` : ""}</div><div class="word-meaning"><b>${esc(E.meaning(it, st.lang))}</b><small>${esc(status)}</small></div></article>`;
+    }).join("") : `<p class="muted empty-results">${esc(t("library.empty"))}</p>`);
   }
 
   /* ================================================================ profile */
@@ -207,7 +283,7 @@
     const s = st, stats = s.stats;
     const acc = stats.answered ? Math.round((stats.correct / stats.answered) * 100) : 0;
     const tiles = [
-      [t("profile.xp"), s.xp], [t("profile.streak"), s.streak], [t("profile.gems"), s.gems],
+      [t("profile.xp"), s.xp], [t("profile.streak"), E.activeStreak(s)], [t("profile.gems"), s.gems],
       [t("profile.words"), E.learnedCount(s)], [t("profile.mastered"), E.masteredCount(s)],
       [t("profile.accuracy"), acc + "%"], [t("profile.lessons"), stats.lessons], [t("profile.perfects"), stats.perfects]
     ];
@@ -237,12 +313,20 @@
           </div>
         </div>
         <div class="set-row"><span>${esc(t("profile.sound"))}</span>
-          <button class="toggle ${st.sound ? "on" : ""}" id="tg-sound"><span></span></button>
+          <button class="toggle ${st.sound ? "on" : ""}" id="tg-sound" role="switch" aria-checked="${st.sound}" aria-label="${esc(t("profile.sound"))}"><span></span></button>
         </div>
         <div class="set-row"><span>${esc(t("profile.about"))}</span></div>
         <p class="muted small">${A.canListen() ? esc(t("profile.ttsOn")) : esc(t("profile.ttsOff"))}</p>
         <p class="muted small">${esc(t("profile.aboutText"))}</p>
         <div class="set-row"><span></span><button class="btn btn-ghost" id="reset-progress">${esc(t("profile.reset"))}</button></div>
+      </div>
+      <h2 class="sect">${esc(t("backup.title"))}</h2>
+      <div class="settings backup-settings">
+        <p class="muted">${esc(t("backup.note"))}</p>
+        <div class="backup-actions"><button class="btn btn-ghost" id="export-backup">${esc(t("backup.export"))}</button><button class="btn btn-ghost" id="import-backup">${esc(t("backup.import"))}</button></div>
+        <input type="file" id="backup-file" accept="application/json,.json" class="hidden">
+        <p class="offline-status" role="status">${esc(t(window.Bayan.offline && window.Bayan.offline.ready ? "offline.ready" : "offline.pending"))}</p>
+        <p class="muted small">${esc(t("offline.note"))}</p>
       </div>
     </div>`;
     return html;
@@ -251,6 +335,8 @@
   /* ================================================================ lesson */
   function cur() { return run ? run.cards[run.i] : null; }
   function startLesson(id) {
+    if (!E.isUnlocked(st, id)) { toast(t("home.locked")); return; }
+    const lesson = E.lessonObject(id);
     run = {
       mode: "lesson", lessonId: id,
       cards: E.compileLesson(id, st, { tts: () => A.canListen() }),
@@ -258,13 +344,19 @@
       touches: {}, startedAt: Date.now(), phase: "answer", selected: null, graded: null,
       buildSel: [], match: { done: [], selLeft: null, flash: null }, failed: false, finalized: false
     };
+    run.flow = { streak: 0, lastAt: 0, multiplier: 1, semitones: 0 };
+    if (F && window.Bayan.FUI) {
+      window.Bayan.FUI.injectForge(run.cards, lesson, E.rng("forge:" + id + ":" + Date.now()));
+      const screen = $("#screen");
+      if (screen && lesson) L.show(screen, window.Bayan.FUI.lessonLoader(lesson), 620);
+    }
     go("lesson");
   }
-  function startReview() {
-    const q = E.reviewQueue(st, Date.now());
-    if (q.length < 4) { toast(t("practice.empty")); return; }
+  function startReview(ids) {
+    const q = Array.isArray(ids) ? ids.slice(0, E.REVIEW_SIZE) : E.reviewQueue(st, Date.now());
+    if (q.length === 0) { toast(t("practice.empty")); return; }
     run = {
-      mode: "review", lessonId: null,
+      mode: "review", lessonId: null, reviewIds: q,
       cards: E.compileReview(st, q, { tts: () => A.canListen() }),
       i: 0, hearts: E.MAX_HEARTS, combo: 0, maxCombo: 0, correct: 0, total: 0, mistakes: 0,
       touches: {}, startedAt: Date.now(), phase: "answer", selected: null, graded: null,
@@ -289,17 +381,19 @@
       if (!isMatchTap) run.graded = run.graded || {};
       if (run.hearts <= 0) run.failed = true;
     }
-    if (st.sound) A.beep(ok ? "ok" : "bad");
+    if (F && F.comboTick) run.flow = F.comboTick(run.flow, ok, Date.now());
+    if (st.sound) A.beep(ok ? "ok" : "bad", run.flow ? run.flow.semitones : 0);
   }
 
   function gradeChoice(idx) {
     const card = cur();
+    if (!run || run.failed || run.phase !== "answer" || !card.options || !Number.isInteger(idx) || idx < 0 || idx >= card.options.length) return;
     run.selected = idx;
     render();
   }
   function doCheck() {
     const card = cur();
-    if (!card) return;
+    if (!card || run.failed || run.phase !== "answer") return;
     if (card.t === "build") {
       if (!run.buildSel.length) return;
       const joined = run.buildSel.map(i => card.tiles[i]).join(" ");
@@ -318,7 +412,12 @@
     render();
   }
   function doContinue() {
-    if (run.failed) { render(); return; }
+    if (!run || run.failed) return;
+    const card = cur();
+    if (!card) return;
+    if (card.t === "complete") { run = null; go("home"); return; }
+    const forgeGraded = card.t === "forge" && card.graded;
+    if (!["teach", "context", "read"].includes(card.t) && !forgeGraded && run.phase !== "feedback") return;
     run.phase = "answer"; run.selected = null; run.graded = null; run.buildSel = [];
     run.match = { done: [], selLeft: null, flash: null };
     run.i++;
@@ -329,8 +428,25 @@
     if (run.finalized) return;
     run.finalized = true;
     run.secs = Math.round((Date.now() - run.startedAt) / 1000);
+    const rootsBefore = F ? F.knownRoots(st) : new Set();
     lastResult = E.applyLessonResult(st, run);
-    E.save(st);
+    if (F) {
+      const flowMult = F.flowMultiplier(run.maxCombo);
+      const flowTotal = F.flowXp(lastResult.xp, run.maxCombo);
+      const flowExtra = flowTotal - lastResult.xp;
+      st.xp += flowExtra;
+      lastResult.xp = flowTotal;
+      lastResult.flow = flowMult;
+      if (st.day !== todayKey()) { st.day = todayKey(); st.dailyXp = 0; }
+      st.dailyXp += flowExtra;
+      const chest = F.rollChest(run, Math.random);
+      if (chest) { F.applyLoot(st, chest); lastResult.chest = chest; }
+      const fresh = [];
+      F.knownRoots(st).forEach((root) => { if (!rootsBefore.has(root)) fresh.push(root); });
+      lastResult.seeds = fresh.length ? F.seedsForRoots(fresh) : [];
+      st.circle = F.circleTick(st.circle || F.newCircle(), true);
+    }
+    persist();
     if (st.sound) A.beep("complete");
   }
 
@@ -435,12 +551,16 @@
           <div class="match"><div class="mcol">${left}</div><div class="mcol">${right}</div></div>
         </div>`;
       }
+      case "forge": {
+        return window.Bayan.FUI.forgeCard(card, bayanApi);
+      }
       case "complete": {
         const r = lastResult || { xp: 0, acc: 0, perfect: false, newAch: [] };
         const ach = (r.newAch || []).map(id => {
           const a = E.ACHIEVEMENTS.find(x => x.id === id);
           return a ? `<div class="ach-toast">${a.icon} <b>${esc(a.name[st.lang] || a.name.en)}</b> — ${esc(a.desc[st.lang] || a.desc.en)}</div>` : "";
         }).join("");
+        const extras = F ? window.Bayan.FUI.completedExtras(bayanApi, st, r) : "";
         return `<div class="card card-complete">
           <div class="done-badge">${ICON.star}</div>
           <h2 class="display">${r.perfect ? esc(t("lesson.perfect")) : esc(t("lesson.again"))}</h2>
@@ -451,6 +571,7 @@
           </div>
           ${r.unitComplete ? `<div class="unit-done">${esc(t("lesson.unitDone"))}</div>` : ""}
           ${ach}
+          ${extras}
         </div>`;
       }
       default: return "";
@@ -459,7 +580,19 @@
 
   function footHtml() {
     const card = cur();
-    if (!card || card.t === "complete" || card.t === "match" && run.phase !== "feedback") {
+    if (card && card.t === "forge") {
+      if (card.graded) {
+        return `<div class="foot feedback ${card.graded.ok ? "ok" : "bad"}">
+          <div class="fb-msg">${esc(card.graded.ok ? t("lesson.correct") : (card.round.word + " — " + card.round.meaning[st.lang]))}</div>
+          ${footAction("continue", t("lesson.continue"), false)}
+        </div>`;
+      }
+      return `<div class="foot"><p class="muted match-instruction">${esc(t("forge.ask"))}</p></div>`;
+    }
+    if (card && card.t === "match" && run.phase !== "feedback") {
+      return `<div class="foot"><p class="muted match-instruction">${esc(t("lesson.matchTitle"))}</p></div>`;
+    }
+    if (!card || card.t === "complete") {
       return `<div class="foot">${footAction("continue", t("lesson.continue"), false)}</div>`;
     }
     if (card.t === "teach" || card.t === "context" || card.t === "read" || card.t === "complete") {
@@ -510,13 +643,14 @@
         <div class="hearts">${hearts}</div>
       </div>
       <div class="card-wrap">${renderCard()}</div>
-      <div class="combo-chip ${run.combo >= 3 ? "show" : ""}">×${run.combo}</div>
+      ${F ? window.Bayan.FUI.flowChip(run) : `<div class="combo-chip ${run.combo >= 3 ? "show" : ""}">×${run.combo}</div>`}
       ${footHtml()}
     </div>`;
   }
 
   /* ================================================================ bindings */
   function bind() {
+    if (window.Bayan.FUI) window.Bayan.FUI.bind(bayanApi);
     if (view.name === "onboarding") {
       document.querySelectorAll("[data-lang]").forEach(b =>
         b.addEventListener("click", () => { view.langPref = b.dataset.lang; render(); }));
@@ -662,6 +796,11 @@
           }
           render();
         }));
+      const c = $("#do-continue");
+      if (c) c.addEventListener("click", doContinue);
+      return;
+    }
+    if (card.t === "forge") {
       const c = $("#do-continue");
       if (c) c.addEventListener("click", doContinue);
       return;

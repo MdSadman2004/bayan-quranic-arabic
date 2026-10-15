@@ -79,14 +79,10 @@
     };
   }
   function load() {
-    try {
-      const raw = localStorage.getItem("bayan.v1");
-      if (raw) return Object.assign(newState(), JSON.parse(raw));
-    } catch (e) { /* fall through to a fresh state */ }
-    return newState();
+    return window.Bayan.Store.load();
   }
   function save(s) {
-    try { localStorage.setItem("bayan.v1", JSON.stringify(s)); } catch (e) { /* storage may be unavailable */ }
+    return window.Bayan.Store.save(s);
   }
   function dayKey(ts) {
     const d = new Date(ts);
@@ -96,6 +92,7 @@
   /* ------------------------------------------------- progress */
   const lessonDone = (s, id) => !!(s.lessons[id] && s.lessons[id].done);
   function isUnlocked(s, lessonId) {
+    if (!LESSONS[lessonId]) return false;
     const uid = unitOfLesson(lessonId), u = unitObject(uid), i = u.lessons.indexOf(lessonId);
     if (i === 0) {
       const ui = ALL_UNIT_IDS.indexOf(uid);
@@ -125,7 +122,7 @@
   const isSeen = (s, id) => !!(s.items[id] && s.items[id].seen > 0);
   function seenCount(s) {
     let n = 0;
-    for (const id in s.items) if (s.items[id].seen > 0) n++;
+    for (const id of ITEMS_ORDER) if (s.items[id] && s.items[id].seen > 0) n++;
     return n;
   }
   function learnedCount(s) {
@@ -147,19 +144,19 @@
     });
   }
   function dueIds(s, now) {
-    now = now || Date.now();
+    now = now == null ? Date.now() : now;
     const out = [];
     for (const id in s.items) {
       const r = s.items[id];
-      if (r.seen > 0 && r.dueAt <= now) out.push(id);
+      if (ITEMS[id] && r.seen > 0 && r.dueAt <= now) out.push(id);
     }
     return sortByNeed(s, out);
   }
   function reviewQueue(s, now) {
-    now = now || Date.now();
+    now = now == null ? Date.now() : now;
     let q = dueIds(s, now).slice(0, REVIEW_SIZE);
     if (q.length < 6) {
-      const seen = Object.keys(s.items).filter(id => s.items[id].seen > 0 && q.indexOf(id) < 0);
+      const seen = ITEMS_ORDER.filter(id => isSeen(s, id) && q.indexOf(id) < 0);
       q = q.concat(sortByNeed(s, seen).slice(0, 6 - q.length));
     }
     return q;
@@ -303,7 +300,7 @@
     const canListen = !!(opts.tts && opts.tts());
     const cards = [];
     const tools = makeTools(cards, s.lang, rand, pools, canListen);
-    const pool = ids.map(id => ITEMS[id]).filter(Boolean);
+    const pool = [...new Set(ids)].map(id => ITEMS[id]).filter(Boolean);
     tools.addMc(pool[0]);
     tools.addMc(pool[1]);
     tools.addMatch(pool.slice(0, 4));
@@ -333,6 +330,7 @@
   /* ------------------------------------------------- results */
   function applyLessonResult(s, run) {
     const now = Date.now();
+    if (run.mode !== "review" && !LESSONS[run.lessonId]) throw new Error("Unknown lesson result");
     const acc = run.total ? run.correct / run.total : 1;
     const perfect = run.total > 0 && run.mistakes === 0;
     const isReview = run.mode === "review";
@@ -362,8 +360,9 @@
 
     const dk = dayKey(now);
     if (s.day !== dk) {
-      if (!s.day) s.streak = 1;
-      else s.streak += 1;
+      const yesterday = new Date(now);
+      yesterday.setDate(yesterday.getDate() - 1);
+      s.streak = s.day === dayKey(yesterday.getTime()) ? s.streak + 1 : 1;
       s.day = dk;
       s.dailyXp = 0;
     }
@@ -378,23 +377,47 @@
     s.stats.timeSpentSec += run.secs || 0;
 
     for (const id in run.touches) {
+      // Verse-building grades count toward accuracy, not vocabulary mastery.
+      if (!ITEMS[id]) continue;
       const tou = run.touches[id];
       const r = s.items[id] = s.items[id] || { lvl: 0, seen: 0, ok: 0, bad: 0, dueAt: 0, flag: false };
+      const advance = r.seen === 0 || r.dueAt <= now;
       r.seen += 1;
+      r.ok += tou.ok;
+      r.bad += tou.bad;
       if (tou.bad > 0) {
-        r.bad += tou.bad;
         r.lvl = Math.max(0, r.lvl - 1);
         r.flag = true;
-      } else {
-        r.ok += tou.ok;
+        r.dueAt = now;
+      } else if (advance) {
         r.lvl = Math.min(5, r.lvl + 1);
         r.flag = false;
+        r.dueAt = now + INTERVALS[r.lvl] * DAY;
       }
-      r.dueAt = now + INTERVALS[r.lvl] * DAY;
     }
 
     const newAch = evaluateAchievements(s);
     return { xp: xp, acc: acc, perfect: perfect, gems: gems, unitComplete: unitComplete, newAch: newAch };
+  }
+
+  function activeStreak(s, now) {
+    now = now == null ? Date.now() : now;
+    const yesterday = new Date(now);
+    yesterday.setDate(yesterday.getDate() - 1);
+    return s.day === dayKey(now) || s.day === dayKey(yesterday.getTime()) ? s.streak : 0;
+  }
+  function mistakeIds(s) {
+    return sortByNeed(s, ITEMS_ORDER.filter(id => isSeen(s, id) && s.items[id].flag));
+  }
+  function searchItems(s, query, filter) {
+    const normalize = text => String(text).normalize("NFD").replace(/[\u064B-\u065F\u0670\u0640\s]/g, "").toLowerCase();
+    const q = normalize(query || "");
+    return allItems().filter(it => {
+      const r = s.items[it.id];
+      if (filter === "seen" && !isSeen(s, it.id)) return false;
+      if (filter === "mistakes" && !(r && r.flag)) return false;
+      return !q || [it.ar, it.en, it.bn, it.root || ""].some(v => normalize(v).includes(q));
+    });
   }
 
   /* ------------------------------------------------- achievements */
@@ -431,7 +454,7 @@
     allItems, itemObject, lessonObject, unitObject, unitOfLesson, unitItems, meaning,
     newState, load, save, dayKey,
     lessonDone, isUnlocked, nextLessonId, unitProgress, doneLessons,
-    isSeen, seenCount, learnedCount, masteredCount, dueIds, reviewQueue, coverage,
+    isSeen, seenCount, learnedCount, masteredCount, dueIds, reviewQueue, coverage, activeStreak, mistakeIds, searchItems,
     compileLesson, compileReview, check, applyLessonResult,
     ACHIEVEMENTS, evaluateAchievements,
     MAX_HEARTS, REVIEW_SIZE, INTERVALS, rng, shuffle

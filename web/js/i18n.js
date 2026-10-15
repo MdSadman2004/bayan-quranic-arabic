@@ -4,6 +4,7 @@
   const S = {
     en: {
       "nav.learn": "Learn", "nav.practice": "Practice", "nav.profile": "Profile",
+    "nav.rites": "Rites", "nav.circle": "Circle",
       "onb.p1": "Micro-lessons, 3–5 minutes each",
       "onb.p2": "Real Quranic verses only — each with its context",
       "onb.p3": "Spaced review so the words actually stick",
@@ -36,7 +37,7 @@
       "profile.reviews": "Reviews", "profile.coverage": "≈{p}% of Quranic word usage covered (estimate)",
       "profile.achievements": "Achievements", "profile.settings": "Settings",
       "profile.language": "Language", "profile.sound": "Sound effects",
-      "profile.ttsOn": "Arabic audio available", "profile.ttsOff": "No Arabic voice found on this device — listen exercises are hidden",
+      "profile.ttsOn": "Offline Arabic device voice available (speech synthesis, not recitation)", "profile.ttsOff": "No offline Arabic voice installed — reading works; listening exercises are hidden",
       "profile.reset": "Reset all progress", "profile.resetAsk": "Erase everything and start over?",
       "profile.about": "About",
       "profile.aboutText": "Bayan — a Quranic Arabic micro-learning prototype. Frequency-ordered vocabulary, the root system, real verses with context, spaced review. Word order follows Quranic Arabic Corpus frequency data; context notes summarize classical asbāb al-nuzūl collections and well-attested hadith. Study aid — verify scholarly content before wider use.",
@@ -45,6 +46,7 @@
     },
     bn: {
       "nav.learn": "শেখা", "nav.practice": "অনুশীলন", "nav.profile": "প্রোফাইল",
+      "nav.rites": "ইবাদত", "nav.circle": "হালাকা",
       "onb.p1": "মাইক্রো-পাঠ — প্রতিটি ৩–৫ মিনিট",
       "onb.p2": "শুধুই প্রকৃত কুরআনি আয়াত — প্রেক্ষাপটসহ",
       "onb.p3": "স্পেসড রিভিউ — শব্দগুলো সত্যিই মনে থাকে",
@@ -77,7 +79,7 @@
       "profile.reviews": "রিভিউ", "profile.coverage": "কুরআনের শব্দ-ব্যবহারের প্রায় {p}% শেখা হয়েছে (আনুমানিক)",
       "profile.achievements": "অর্জন", "profile.settings": "সেটিংস",
       "profile.language": "ভাষা", "profile.sound": "সাউন্ড ইফেক্ট",
-      "profile.ttsOn": "আরবি অডিও পাওয়া গেছে", "profile.ttsOff": "এই ডিভাইসে আরবি ভয়েস নেই — শোনার অনুশীলন লুকানো হয়েছে",
+      "profile.ttsOn": "অফলাইন আরবি ভয়েস আছে (কৃত্রিম উচ্চারণ, তিলাওয়াত নয়)", "profile.ttsOff": "অফলাইন আরবি ভয়েস নেই — পড়া যাবে; শোনার অনুশীলন লুকানো হয়েছে",
       "profile.reset": "সব অগ্রগতি মুছুন", "profile.resetAsk": "সব মুছে নতুন করে শুরু করবেন?",
       "profile.about": "সম্পর্কে",
       "profile.aboutText": "বয়ান — কুরআনি আরবি শেখার একটি মাইক্রো-লার্নিং প্রোটোটাইপ। ফ্রিকোয়েন্সি-ক্রমে শব্দ, ধাতু-ব্যবস্থা, প্রেক্ষাপটসহ প্রকৃত আয়াত, স্পেসড রিভিউ। শব্দক্রম কুরআনিক আরবিক কর্পাসের ফ্রিকোয়েন্সি-তথ্য অনুসারে; প্রেক্ষাপট ধ্রুপদী আসবাব-আন-নুযুল সংকলন ও সহিহ হাদিসের সারাংশ। পড়াশোনার সহায়িকা — ব্যাপক ব্যবহারের আগে বিষয়বস্তু যাচাই করে নিন।",
@@ -85,6 +87,88 @@
       "common.start": "শুরু", "common.locked": "বন্ধ", "common.min": "মিনিট"
     }
   };
+  Object.assign(S.en, {
+    "library.title": "Word library", "library.search": "Search Arabic, English, বাংলা or roots",
+    "library.all": "All words", "library.seen": "My words", "library.mistakes": "Mistakes",
+    "library.empty": "No words match. Try another spelling or filter.", "library.count": "{n} words",
+    "library.new": "Not studied", "library.due": "Ready to review", "library.level": "Level {n}/5",
+    "library.review": "Review mistakes", "library.note": "Explore freely. Browsing does not change your mastery.",
+    "backup.title": "Your progress", "backup.note": "Stored only on this device. Export a backup to move between web and Android. Import replaces progress, it does not merge.",
+    "backup.export": "Export backup", "backup.import": "Import backup", "backup.confirm": "Replace this device's progress with the selected backup?",
+    "backup.cancel": "Cancel", "backup.replace": "Replace progress", "backup.success": "Progress restored",
+    "backup.invalid": "This backup is invalid or unsupported. Your progress was not changed.",
+    "backup.large": "Backup must be smaller than 2 MB.", "backup.failed": "Progress could not be saved. Export a backup before closing this page.",
+    "backup.recovered": "A saved backup was recovered after a storage problem.",
+    "offline.ready": "Ready offline", "offline.pending": "Offline copy not ready — open online and wait before going offline.",
+    "offline.note": "Lessons, fonts and word library stay on this device after the offline copy is ready. No account needed.",
+    "goal.change": "Change daily XP goal", "lesson.tryAgain": "Mistakes are part of learning. Try again when you are ready."
+  });
+  Object.assign(S.bn, {
+    "library.title": "শব্দভান্ডার", "library.search": "আরবি, English, বাংলা বা ধাতু খুঁজুন",
+    "library.all": "সব শব্দ", "library.seen": "আমার শব্দ", "library.mistakes": "ভুলগুলো",
+    "library.empty": "কোনো শব্দ মেলেনি। বানান বা ফিল্টার বদলান।", "library.count": "{n}টি শব্দ",
+    "library.new": "এখনো শেখা হয়নি", "library.due": "রিভিউর সময় হয়েছে", "library.level": "স্তর {n}/৫",
+    "library.review": "ভুলগুলো অনুশীলন", "library.note": "শব্দ দেখুন স্বাধীনভাবে। দেখলেই আয়ত্তের স্তর বাড়ে না।",
+    "backup.title": "আপনার অগ্রগতি", "backup.note": "শুধু এই ডিভাইসে সংরক্ষিত। ওয়েব ও অ্যান্ড্রয়েডের মধ্যে নিতে ব্যাকআপ রাখুন। ইমপোর্ট বর্তমান অগ্রগতি প্রতিস্থাপন করে।",
+    "backup.export": "ব্যাকআপ রাখুন", "backup.import": "ব্যাকআপ আনুন", "backup.confirm": "নির্বাচিত ব্যাকআপ দিয়ে এই ডিভাইসের অগ্রগতি প্রতিস্থাপন করবেন?",
+    "backup.cancel": "বাতিল", "backup.replace": "প্রতিস্থাপন", "backup.success": "অগ্রগতি ফিরিয়ে আনা হয়েছে",
+    "backup.invalid": "ব্যাকআপটি সঠিক নয় বা সমর্থিত নয়। আপনার অগ্রগতি বদলায়নি।",
+    "backup.large": "ব্যাকআপ ২ MB-এর ছোট হতে হবে।", "backup.failed": "অগ্রগতি সংরক্ষণ হয়নি। পাতা বন্ধ করার আগে ব্যাকআপ রাখুন।",
+    "backup.recovered": "সংরক্ষণের সমস্যা হওয়ায় আগের ব্যাকআপ ফিরিয়ে আনা হয়েছে।",
+    "offline.ready": "অফলাইনে প্রস্তুত", "offline.pending": "অফলাইন কপি প্রস্তুত নয় — অনলাইনে খুলে কিছুক্ষণ অপেক্ষা করুন।",
+    "offline.note": "অফলাইন কপি প্রস্তুত হলে পাঠ, ফন্ট ও শব্দভান্ডার এই ডিভাইসেই থাকবে। অ্যাকাউন্ট লাগে না।",
+    "goal.change": "দৈনিক XP লক্ষ্য বদলান", "lesson.tryAgain": "ভুল করেই শেখা হয়। প্রস্তুত হলে আবার চেষ্টা করুন।"
+  });
+  Object.assign(S.en, {
+    "forge.tag": "Root-Craft", "forge.ask": "Which word does this mould forge?",
+    "chest.relic": "Root relic", "chest.scroll": "Study scroll", "chest.shield": "Streak shield",
+    "seed.etymology": "Etymology", "seed.agency": "Divine agency", "seed.permanence": "Permanence",
+    "seed.pairs": "Pair", "seed.silence": "Rhetorical silence", "seed.tazkiyah": "Reflection",
+    "seed.done": "I reflected on this",
+    "boss.trap": "Whisper detected", "boss.hits": "whispers shattered", "boss.resultXp": "You earned {n} XP.",
+    "boss.shieldWon": "A streak shield dropped with the victory.", "boss.again": "Fight again",
+    "boss.start": "Enter the battle", "boss.invite": "{n} seconds. Tap the truth before each whisper lands.",
+    "rites.title": "Rites", "rites.note": "What you already recite, read closely.",
+    "rite.prev": "Back", "rite.next": "Next posture",
+    "waqt.approx": "Approximate by hour of day — a reminder, not a prayer timetable.",
+    "jumuah.open": "It is Friday — the quest is open.", "jumuah.closed": "The Jumuʿah quest opens on Friday.",
+    "sawm.drill": "Play, then choose the root", "sawm.correct": "Correct root.", "sawm.wrong": "Not that one — listen again.",
+    "sawm.needsVoice": "No Arabic voice is installed, so the listening drills stay hidden. Reading and review are unaffected.",
+    "map.summary": "{lit} of {total} bundled verses lit by {roots} mastered roots",
+    "circle.title": "Circle", "circle.note": "Study companions kept on this device.",
+    "circle.light": "Shared lantern", "circle.empty": "No companions yet.", "circle.name": "Companion name",
+    "circle.add": "Add", "circle.shield": "Send duʿāʾ shield", "circle.shields": "{n} streak shields held",
+    "circle.shieldCast": "Shield sent — the lantern brightens.",
+    "collection.title": "Relics and scrolls", "collection.empty": "Chests from finished lessons appear here.",
+    "home.primer": "Primer for {name}", "home.jumuah": "Friday quest", "home.circle": "{n} in your circle",
+    "loader.skip": "Skip", "lesson.flow": "flow multiplier",
+    "lesson.openVerse": "Open the passage", "wrong.retry": "Tap the option again"
+  });
+  Object.assign(S.bn, {
+    "forge.tag": "ধাতু-গড়া", "forge.ask": "এই ছাঁচে কোন শব্দ গড়া হয়?",
+    "chest.relic": "ধাতু-স্মারক", "chest.scroll": "পাঠ-স্ক্রল", "chest.shield": "স্ট্রিক ঢাল",
+    "seed.etymology": "ব্যুৎপত্তি", "seed.agency": "ঐশী কর্তৃত্ব", "seed.permanence": "স্থায়িত্ব",
+    "seed.pairs": "জোড়া", "seed.silence": "অলংকারিক নীরবতা", "seed.tazkiyah": "ভাবনা",
+    "seed.done": "এটি নিয়ে ভাবলাম",
+    "boss.trap": "কুমন্ত্রণা ধরা পড়েছে", "boss.hits": "কুমন্ত্রণা ভেঙেছে", "boss.resultXp": "পেয়েছেন {n} XP।",
+    "boss.shieldWon": "জয়ের সাথে একটি স্ট্রিক ঢাল পাওয়া গেছে।", "boss.again": "আবার লড়ুন",
+    "boss.start": "লড়াইয়ে নামুন", "boss.invite": "{n} সেকেন্ড। প্রতিটি কুমন্ত্রণা আঘাত করার আগে সত্যে ট্যাপ করুন।",
+    "rites.title": "ইবাদত", "rites.note": "যা আপনি প্রতিদিন পড়েন, তা নিবিড়ভাবে।",
+    "rite.prev": "পিছনে", "rite.next": "পরের ধাপ",
+    "waqt.approx": "ঘণ্টা অনুসারে আনুমানিক — এটি স্মারক, নামাজের সময়সূচি নয়।",
+    "jumuah.open": "আজ শুক্রবার — অনুসন্ধান খোলা।", "jumuah.closed": "জুমার অনুসন্ধান শুক্রবার খোলে।",
+    "sawm.drill": "শুনে ধাতু বাছুন", "sawm.correct": "সঠিক ধাতু।", "sawm.wrong": "এটি নয় — আবার শুনুন।",
+    "sawm.needsVoice": "আরবি ভয়েস ইনস্টল নেই, তাই শ্রবণ-অনুশীলন লুকানো থাকছে। পড়া ও রিভিউ স্বাভাবিক।",
+    "map.summary": "{roots}টি ধাতু আয়ত্তে {total}টি সংকলিত আয়াতের {lit}টি আলোকিত",
+    "circle.title": "হালাকা", "circle.note": "সহপাঠীরা এই ডিভাইসেই সংরক্ষিত।",
+    "circle.light": "সাধারণ লণ্ঠন", "circle.empty": "এখনো কোনো সঙ্গী নেই।", "circle.name": "সঙ্গীর নাম",
+    "circle.add": "যোগ করুন", "circle.shield": "দুআ-ঢাল পাঠান", "circle.shields": "{n}টি স্ট্রিক ঢাল আছে",
+    "circle.shieldCast": "ঢাল পাঠানো হলো — লণ্ঠন উজ্জ্বল হলো।",
+    "collection.title": "স্মারক ও স্ক্রল", "collection.empty": "শেষ করা পাঠের বুক এখানে জমা হবে।",
+    "home.primer": "{name} এর প্রস্তুতি", "home.jumuah": "শুক্রবারের অনুসন্ধান", "home.circle": "হালাকায় {n} জন",
+    "loader.skip": "এড়িয়ে যান", "lesson.flow": "ফ্লো গুণক",
+    "lesson.openVerse": "আয়াতটি খুলুন", "wrong.retry": "আবার বিকল্পে ট্যাপ করুন"
+  });
   window.Bayan = window.Bayan || {};
   window.Bayan.STR = function (key, lang, vars) {
     const dict = S[lang] || S.en;

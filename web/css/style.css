@@ -367,3 +367,268 @@ b, strong { font-weight: 700; }
   .ar-xl { font-size: 40px; }
   .combo-chip { transform: translateX(120px); }
 }
+
+/* ================================================================ five tabs */
+.tabs { grid-template-columns: repeat(5, 1fr); }
+
+/* ============================================== prayer-time sky (feature 23) */
+body { transition: background 1.2s ease; }
+body.sky-dawn { background: linear-gradient(180deg, #F3D9C6, var(--paper-deep) 42%); }
+body.sky-morning { background: linear-gradient(180deg, #F6EEDC, var(--paper-deep) 40%); }
+body.sky-noon { background: linear-gradient(180deg, #E9F0E4, var(--paper-deep) 40%); }
+body.sky-afternoon { background: linear-gradient(180deg, #F2E4CE, var(--paper-deep) 40%); }
+body.sky-dusk { background: linear-gradient(180deg, #EFD2BC, var(--paper-deep) 42%); }
+body.sky-night { background: linear-gradient(180deg, #D9D6D0, var(--paper-deep) 44%); }
+.sky { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.sky .sky-lantern {
+  position: absolute; top: 18px; right: 26px; width: 14px; height: 18px; border-radius: 4px;
+  background: radial-gradient(circle at 50% 34%, #F6C56B, var(--accent) 72%); opacity: 0.5;
+  box-shadow: 0 0 34px 12px rgba(194, 84, 43, 0.18);
+}
+.sky-night .sky-stars, .sky-dusk .sky-stars {
+  position: absolute; inset: 0; opacity: 0.35;
+  background-image: radial-gradient(1.4px 1.4px at 22% 12%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 68% 22%, #fff, transparent),
+    radial-gradient(1.6px 1.6px at 42% 6%, #fff, transparent);
+}
+#app { position: relative; z-index: 1; }
+
+/* ================================================= loaders (features 19–24) */
+.loader-layer {
+  position: fixed; inset: 0; z-index: 55; display: grid; place-content: center; gap: 12px;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(2px); transition: opacity 0.28s ease;
+}
+.loader-layer.ld-out { opacity: 0; pointer-events: none; }
+.ld-label { color: var(--ink-soft); font-size: 13.5px; text-align: center; }
+
+.ld-star { width: 96px; height: 96px; display: block; margin: 0 auto; }
+.ld-star rect { fill: var(--accent); opacity: 0.86; transform-origin: 60px 60px; }
+.ld-star-core { fill: var(--paper); }
+.ld-star-g { animation: ldBreath 4s ease-in-out infinite; transform-origin: 60px 60px; }
+.ld-star-core { animation: ldCore 4s ease-in-out infinite; }
+@keyframes ldBreath {
+  0%, 100% { transform: scale(0.86) rotate(0deg); opacity: 0.75; }
+  50% { transform: scale(1.06) rotate(22.5deg); opacity: 1; }
+}
+@keyframes ldCore { 0%, 100% { r: 13; } 50% { r: 17; } }
+
+.ld-sprout { position: relative; width: 220px; }
+.ld-soil { height: 3px; background: var(--line); border-radius: 2px; margin-top: 64px; }
+.ld-roots { display: flex; gap: 10px; justify-content: center; margin-bottom: -6px; }
+.ld-root-letter {
+  font-family: var(--font-ar); font-size: 34px; color: var(--brass);
+  animation: ldSink 1.6s cubic-bezier(.22,1,.36,1) infinite; animation-delay: calc(var(--i) * 0.12s);
+}
+@keyframes ldSink { 0% { transform: translateY(-16px); opacity: 0.3; } 60%, 100% { transform: none; opacity: 1; } }
+.ld-branches { display: flex; gap: 12px; justify-content: center; margin-top: 10px; }
+.ld-branch {
+  font-family: var(--font-ar); font-size: 22px; color: var(--accent);
+  animation: ldGrow 2.2s ease-out infinite; animation-delay: calc(var(--i) * 0.18s);
+}
+@keyframes ldGrow { 0% { transform: translateY(8px) scale(0.8); opacity: 0; } 55%, 100% { transform: none; opacity: 1; } }
+
+.ld-mushaf { width: 260px; display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+.ld-line {
+  height: 13px; border-radius: 7px; width: calc(100% - var(--i) * 12px);
+  background: linear-gradient(270deg, var(--paper-deep) 0%, #FCF3DF 45%, var(--paper-deep) 70%);
+  background-size: 220% 100%; animation: ldShimmer 1.5s linear infinite;
+  animation-delay: calc(var(--i) * 0.08s);
+}
+@keyframes ldShimmer { from { background-position: 120% 0; } to { background-position: -120% 0; } }
+
+.ld-qalam { position: relative; display: block; }
+.ld-qalam-ink { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ld-qalam-ink path {
+  fill: none; stroke: var(--brass); stroke-width: 2.5; stroke-linecap: round;
+  stroke-dasharray: 1; stroke-dashoffset: 1; animation: ldDraw 1.4s cubic-bezier(.22,1,.36,1) forwards;
+}
+@keyframes ldDraw { to { stroke-dashoffset: 0; } }
+.ar-verse .ld-qalam-text { animation: ldInk 1.1s ease 0.7s both; }
+@keyframes ldInk { from { opacity: 0; filter: blur(2px); } to { opacity: 1; filter: none; } }
+
+.ld-whisper {
+  display: grid; gap: 6px; justify-items: center; text-align: center;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 16px 18px; margin: 8px 0 14px; animation: cardIn 0.35s cubic-bezier(.22,1,.36,1);
+}
+.ld-whisper-root { font-family: var(--font-ar); font-size: 24px; color: var(--brass); }
+.ld-whisper-line { font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); unicode-bidi: plaintext; }
+.ld-skip {
+  background: none; border: 0; color: var(--ink-faint); font-size: 12px;
+  text-decoration: underline dashed; text-underline-offset: 4px; padding: 4px 8px;
+}
+.loader-layer .ld-whisper { margin: 0; }
+
+/* ============================================== flow combo (feature 1) */
+.flow-chip {
+  position: fixed; top: 66px; left: 50%; transform: translateX(150px);
+  background: var(--brass); color: #FFF9E8; font-weight: 800; font-size: 13px;
+  border-radius: 999px; padding: 5px 12px; opacity: 0; pointer-events: none;
+  transition: opacity 0.2s, transform 0.25s cubic-bezier(.22,1,.36,1);
+}
+.flow-chip.show { opacity: 1; animation: pop 0.3s ease; }
+
+/* ============================================== Sarf forge (feature 3) */
+.card-forge { text-align: center; }
+.card-tag.forge { background: #FBF4E0; color: var(--brass); }
+.forge-mould { display: flex; align-items: baseline; justify-content: center; gap: 10px; margin-bottom: 6px; }
+.forge-pattern { font-family: var(--font-ar); font-size: 34px; color: var(--accent); }
+.forge-role { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); font-weight: 700; }
+.forge-root { font-family: var(--font-ar); font-size: 26px; color: var(--brass); margin-bottom: 14px; }
+.forge-options { display: grid; gap: 10px; margin-top: 12px; }
+.forge-option {
+  font-family: var(--font-ar); font-size: 25px; background: var(--card);
+  border: 2px solid var(--line); border-bottom-width: 4px; border-radius: 14px; padding: 10px 14px;
+  transition: transform 0.1s, border-color 0.12s, background 0.12s;
+}
+.forge-option:active { transform: translateY(2px); }
+.forge-answer { margin-top: 12px; font-size: 14px; color: var(--ok-deep); font-weight: 600; }
+
+/* ============================================== Barakah chest (feature 2) */
+.chest-reveal {
+  margin-top: 16px; padding: 14px 16px; border-radius: var(--radius);
+  background: var(--paper); border: 1px solid var(--line); text-align: left;
+  animation: cardIn 0.4s cubic-bezier(.22,1,.36,1);
+}
+.chest-reveal.rarity-fine { border-color: var(--brass); background: #FFFBEF; }
+.chest-reveal.rarity-rare { border-color: var(--accent); background: var(--accent-tint); }
+.chest-box { position: relative; width: 46px; height: 38px; margin: 0 auto 10px; }
+.chest-lid {
+  position: absolute; left: 0; top: 0; width: 46px; height: 12px; border-radius: 6px 6px 2px 2px;
+  background: var(--accent); transform-origin: 8px 12px; animation: chestOpen 0.9s cubic-bezier(.22,1,.36,1) forwards;
+}
+.chest-body { position: absolute; left: 3px; top: 13px; width: 40px; height: 24px; border-radius: 3px 3px 6px 6px; background: var(--ink); }
+@keyframes chestOpen { from { transform: rotate(0deg); } to { transform: rotate(-38deg) translateY(-3px); } }
+.chest-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.chest-meta small { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); font-weight: 700; }
+.chest-body { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 6px; unicode-bidi: plaintext; }
+.res-grid + .chest-reveal { margin-top: 18px; }
+
+/* ============================================== wisdom seeds (features 7–12) */
+.seed-stack { display: grid; gap: 10px; margin-top: 14px; }
+.seed-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; text-align: left; }
+.seed-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.seed-kind { font-size: 10.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
+.seed-word { font-family: var(--font-ar); font-size: 22px; color: var(--accent); }
+.seed-card p { font-size: 13.5px; line-height: 1.6; color: var(--ink-soft); margin: 6px 0 0; unicode-bidi: plaintext; }
+.seed-card.kind-tazkiyah { border-color: var(--brass); background: #FFFBEF; }
+.seed-card.kind-silence { border-color: var(--accent); }
+.seed-card .btn { margin-top: 10px; }
+
+/* ============================================== whisper boss (feature 4) */
+.boss .boss-hud { display: flex; align-items: center; justify-content: space-between; margin: 6px 0 12px; }
+.boss-clock { font-family: var(--font-display); font-size: 26px; color: var(--accent); font-variant-numeric: tabular-nums; }
+.boss-progress { font-size: 12.5px; color: var(--ink-faint); font-weight: 700; letter-spacing: 0.08em; }
+.boss-trap { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 16px; text-align: center; }
+.boss-whisper { font-size: 16px; line-height: 1.6; color: var(--ink-soft); unicode-bidi: plaintext; }
+.boss-opt { text-align: left; }
+.boss-result { display: grid; justify-items: center; gap: 4px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; margin: 12px 0; }
+.boss-result b { font-family: var(--font-display); font-size: 34px; }
+.boss-result span { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); font-weight: 700; }
+.boss-entry {
+  display: flex; align-items: center; gap: 12px; background: var(--ink); color: var(--paper);
+  border-radius: var(--radius); padding: 14px 16px; margin: 10px 0 16px;
+}
+.boss-invite { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.boss-invite b { font-size: 15px; }
+.boss-invite small { font-size: 12px; opacity: 0.72; }
+.boss-entry .btn { border-bottom-color: var(--accent-deep); }
+
+/* ============================================== rites (features 13–18) */
+.rites .rite { margin-bottom: 26px; }
+.salah-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 18px; text-align: center; }
+.salah-posture { font-size: 11.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.salah-meaning { font-size: 16px; font-weight: 600; margin-top: 6px; }
+.salah-grammar { font-size: 13.5px; line-height: 1.6; color: var(--ink-soft); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); unicode-bidi: plaintext; }
+.rite-dots { display: flex; gap: 8px; justify-content: center; margin: 12px 0; }
+.rite-dot { width: 10px; height: 10px; border-radius: 50%; border: 0; background: var(--line); padding: 0; }
+.rite-dot.on { background: var(--accent); transform: scale(1.25); }
+.rite-nav { justify-content: space-between; }
+.waqt-list { display: grid; gap: 8px; margin-top: 12px; }
+.waqt-row {
+  display: grid; gap: 2px; text-align: left; background: var(--card);
+  border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px;
+}
+.waqt-row.on { border-color: var(--accent); background: var(--accent-tint); }
+.waqt-name { font-weight: 700; font-size: 14.5px; }
+.waqt-focus { font-size: 12.5px; color: var(--ink-soft); unicode-bidi: plaintext; }
+.term-grid { display: grid; gap: 10px; margin-top: 12px; }
+.term-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+.term-card b { font-size: 14.5px; display: block; margin-bottom: 4px; }
+.term-card p { font-size: 13.5px; line-height: 1.6; color: var(--ink-soft); unicode-bidi: plaintext; }
+.term-card small { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); font-weight: 700; }
+.term-card .ar { font-family: var(--font-ar); font-size: 24px; text-align: right; margin-bottom: 6px; }
+.term-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.term-word { font-family: var(--font-ar); font-size: 26px; color: var(--accent); }
+.term-root { font-family: var(--font-ar); font-size: 18px; color: var(--brass); }
+.jumuah-state { margin: 8px 0; font-size: 13.5px; font-weight: 700; }
+.jumuah-state.open { color: var(--ok-deep); }
+.jumuah-state.closed { color: var(--ink-faint); }
+.sawm-options { display: grid; gap: 8px; margin-top: 10px; }
+.sawm-options .opt { font-family: var(--font-ar); font-size: 22px; text-align: right; }
+
+/* ============================================== illumination map (feature 6) */
+.map-summary { display: flex; align-items: baseline; gap: 10px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; margin: 12px 0; }
+.map-summary b { font-family: var(--font-display); font-size: 28px; color: var(--accent); }
+.map-summary span { font-size: 12.5px; color: var(--ink-soft); }
+.map-units { display: grid; gap: 10px; }
+.map-unit { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+.map-unit-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.map-unit-name { font-size: 13.5px; font-weight: 700; }
+.map-unit-count { font-size: 12px; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.map-verse-row { display: flex; flex-wrap: wrap; gap: 6px; direction: rtl; }
+.map-dot {
+  width: 18px; height: 18px; border-radius: 50%; background: var(--paper-deep);
+  border: 1px solid var(--line); position: relative; overflow: hidden;
+}
+.map-dot.lit { border-color: var(--brass); }
+.map-dot.lit::after {
+  content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--brass), var(--accent));
+  transform: scaleX(var(--fill)); transform-origin: right; border-radius: 50%;
+}
+.map-roots { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.root-chip { font-family: var(--font-ar); font-size: 17px; background: var(--paper-deep); border-radius: 999px; padding: 3px 10px; }
+
+/* ============================================== ḥalaqah circle (feature 5) */
+.lantern-card { display: flex; gap: 16px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.lantern { width: 54px; height: 74px; border-radius: 10px; background: var(--paper-deep); position: relative; overflow: hidden; flex: none; }
+.lantern span {
+  position: absolute; inset: auto 0 0 0; height: var(--light, 0%); background: linear-gradient(180deg, #F6C56B, var(--accent));
+  transition: height 0.6s cubic-bezier(.22,1,.36,1);
+}
+.lantern-body { flex: 1; display: grid; gap: 6px; }
+.lantern-body b { font-family: var(--font-display); font-size: 22px; }
+.members { display: flex; flex-wrap: wrap; gap: 6px; }
+.member-chip { background: var(--accent-tint); color: var(--accent-deep); border-radius: 999px; padding: 3px 10px; font-size: 12.5px; font-weight: 600; }
+.circle-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.circle-actions input {
+  flex: 1; min-width: 120px; font-family: inherit; font-size: 14px; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px;
+}
+
+/* ============================================== home extras */
+.home-extras { display: grid; gap: 8px; margin: 0 0 16px; }
+.extras-card {
+  display: flex; align-items: center; gap: 12px; text-align: left; width: 100%;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px;
+  transition: transform 0.1s, border-color 0.12s;
+}
+.extras-card:active { transform: translateY(2px); }
+.extras-card.jumuah { border-color: var(--brass); background: #FFFBEF; }
+.extras-icon .i { width: 22px; height: 22px; fill: var(--accent); display: block; }
+.extras-body { display: grid; gap: 2px; }
+.extras-body b { font-size: 14px; }
+.extras-body small { font-size: 12px; color: var(--ink-soft); unicode-bidi: plaintext; }
+.flow-res { background: var(--accent-tint); border-color: var(--accent); }
+.match-instruction { text-align: center; margin: 0; }
+
+/* ============================================== focus + selection surfaces */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+::selection { background: var(--accent-tint); color: var(--ink); }
+input[type="search"], input[type="text"] { caret-color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ld-star-g, .ld-star-core, .ld-line, .ld-branch, .ld-root-letter, .chest-lid, .ld-qalam-ink path { animation: none; }
+  .ld-qalam-ink path { stroke-dashoffset: 0; }
+}

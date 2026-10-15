@@ -13,7 +13,7 @@
   function arabicVoice() {
     if (!ttsSupported()) return null;
     const vs = window.speechSynthesis.getVoices() || [];
-    return vs.find(v => /^ar\b/i.test(v.lang) || /^ar[-_]/i.test(v.lang)) || null;
+    return vs.find(v => v.localService === true && /^ar(?:\b|[-_])/i.test(v.lang)) || null;
   }
   A.refresh = function () {
     checked = true;
@@ -27,10 +27,11 @@
   };
   A.speak = function (text) {
     if (!ttsSupported() || !text) return;
+    const v = arabicVoice();
+    if (!v) return;
     try {
       const u = new window.SpeechSynthesisUtterance(text);
-      const v = arabicVoice();
-      if (v) u.voice = v;
+      u.voice = v;
       u.lang = (v && v.lang) || "ar-SA";
       u.rate = 0.82;
       u.pitch = 1;
@@ -55,12 +56,15 @@
     ctx = new C();
     return ctx;
   }
-  A.beep = function (kind) {
-    const c = audioCtx();
-    if (!c) return;
+  /* semitones lifts the whole figure along the musical ladder so a flow streak
+   * is heard as rising pitch, not just a longer streak. */
+  A.beep = function (kind, semitones) {
     try {
+      const c = audioCtx();
+      if (!c) return;
       if (c.state === "suspended") c.resume();
       const now = c.currentTime;
+      const shift = Math.pow(2, (Number.isFinite(semitones) ? semitones : 0) / 12);
       const g = c.createGain();
       g.connect(c.destination);
       g.gain.value = 0.05;
@@ -70,7 +74,7 @@
       for (const [f, t] of seq) {
         const o = c.createOscillator();
         o.type = kind === "bad" ? "square" : "sine";
-        o.frequency.value = f;
+        o.frequency.value = f * shift;
         o.connect(g);
         o.start(now + t);
         o.stop(now + t + 0.11);
